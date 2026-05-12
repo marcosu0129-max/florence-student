@@ -60,18 +60,33 @@ export default function ProgramDetail() {
         {/* Stats */}
         <section className="relative z-10">
           <div className="bg-canvas border border-surface-container rounded-2xl p-4 md:p-8 shadow-float rotate-1">
-            <div className="grid grid-cols-3 gap-3 md:gap-6 text-center">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-6 text-center">
               <div>
-                <div className="font-data-display text-data-display text-ink leading-none mb-2">{loading ? '...' : courses.length}</div>
-                <div className="font-body-main text-body-main text-text-muted uppercase tracking-widest text-[11px]">Insegnamenti</div>
+                <div
+                  className="font-data-display text-ink leading-none mb-1 sm:mb-2"
+                  style={{ fontSize: 'clamp(28px, 7vw, var(--text-data-display))' }}
+                >
+                  {loading ? '...' : courses.length}
+                </div>
+                <div className="font-body-main text-[9px] sm:text-[10px] md:text-[11px] text-text-muted uppercase tracking-widest">Insegnamenti</div>
               </div>
               <div className="border-l border-r border-outline-variant/20">
-                <div className="font-data-display text-data-display text-ink leading-none mb-2">{loading ? '...' : requiredCourses.length}</div>
-                <div className="font-body-main text-body-main text-text-muted uppercase tracking-widest text-[11px]">Obbligatori</div>
+                <div
+                  className="font-data-display text-ink leading-none mb-1 sm:mb-2"
+                  style={{ fontSize: 'clamp(28px, 7vw, var(--text-data-display))' }}
+                >
+                  {loading ? '...' : requiredCourses.length}
+                </div>
+                <div className="font-body-main text-[9px] sm:text-[10px] md:text-[11px] text-text-muted uppercase tracking-widest">Obbligatori</div>
               </div>
               <div>
-                <div className="font-data-display text-data-display text-ink leading-none mb-2">{loading ? '...' : program.totalCredits}</div>
-                <div className="font-body-main text-body-main text-text-muted uppercase tracking-widest text-[11px]">CFU Totali</div>
+                <div
+                  className="font-data-display text-ink leading-none mb-1 sm:mb-2"
+                  style={{ fontSize: 'clamp(28px, 7vw, var(--text-data-display))' }}
+                >
+                  {loading ? '...' : program.totalCredits}
+                </div>
+                <div className="font-body-main text-[9px] sm:text-[10px] md:text-[11px] text-text-muted uppercase tracking-widest">CFU Totali</div>
               </div>
             </div>
           </div>
@@ -80,7 +95,7 @@ export default function ProgramDetail() {
         {/* Required Courses */}
         {!loading && requiredCourses.length > 0 && (
           <section className="relative z-10">
-            <h2 className="font-h2-section text-h2-section text-ink mb-8">Obbligatori</h2>
+            <h2 className="font-h2-section text-base sm:text-lg md:text-h2-section text-ink mb-6 md:mb-8">Obbligatori</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {requiredCourses.map((course, i) => (
                 <CourseCard
@@ -108,7 +123,7 @@ export default function ProgramDetail() {
         {/* Elective Courses */}
         {!loading && electiveCourses.length > 0 && (
           <section className="relative z-10">
-            <h2 className="font-h2-section text-h2-section text-ink mb-8">A Scelta</h2>
+            <h2 className="font-h2-section text-base sm:text-lg md:text-h2-section text-ink mb-6 md:mb-8">A Scelta</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {electiveCourses.map((course, i) => (
                 <CourseCard
