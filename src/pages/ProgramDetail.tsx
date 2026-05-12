@@ -68,7 +68,7 @@ export default function ProgramDetail() {
                 >
                   {loading ? '...' : courses.length}
                 </div>
-                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase tracking-widest">Insegnamenti</div>
+                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase">Insegn.</div>
               </div>
               <div className="border-l border-r border-outline-variant/20">
                 <div
@@ -77,7 +77,7 @@ export default function ProgramDetail() {
                 >
                   {loading ? '...' : requiredCourses.length}
                 </div>
-                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase tracking-widest">Obbligatori</div>
+                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase">Oblig.</div>
               </div>
               <div>
                 <div
@@ -86,7 +86,7 @@ export default function ProgramDetail() {
                 >
                   {loading ? '...' : program.totalCredits}
                 </div>
-                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase tracking-widest">CFU Totali</div>
+                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase">CFU</div>
               </div>
             </div>
           </div>
