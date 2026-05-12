@@ -80,7 +80,7 @@ export default function CourseCard({
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2
         cursor-pointer
         overflow-hidden
-        ${compact ? 'p-5' : 'p-card-padding'}
+        ${compact ? 'p-4 sm:p-5' : 'p-4 sm:p-card-padding'}
         rounded-xl
         ${rotateClass}
         transition-all duration-300

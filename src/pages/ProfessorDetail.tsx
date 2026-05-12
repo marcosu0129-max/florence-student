@@ -8,13 +8,13 @@ import { fetchProfessorById, fetchCoursesByProfessor, fetchReviewsByProfessor, g
 function RatingBar({ value, color, label }: { value: number; color: string; label: string }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <span className="font-body-main text-body-main text-text-muted uppercase tracking-widest mb-2">{label}</span>
-      <div className="font-data-display text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
-      <div className="mt-4 flex gap-1">
+      <span className="font-body-main text-[11px] md:text-body-main text-text-muted uppercase tracking-widest mb-1 md:mb-2">{label}</span>
+      <div className="font-data-display text-xl md:text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
+      <div className="mt-2 md:mt-4 flex gap-0.5 md:gap-1">
         {[1, 2, 3, 4, 5].map((i) => (
           <span
             key={i}
-            className="w-8 h-2 rounded-full"
+            className="w-5 h-1.5 md:w-8 md:h-2 rounded-full"
             style={{ backgroundColor: i <= Math.round(value) ? color : '#e5e2e1' }}
           />
         ))}
@@ -96,30 +96,30 @@ export default function ProfessorDetail() {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-16 md:gap-24 pb-32">
+      <div className="flex flex-col gap-8 md:gap-20 pb-32">
 
         {/* Editorial Header */}
         <section className="relative z-10">
           <div className="max-w-4xl">
-            <p className="font-card-title text-card-title text-text-muted mb-4 tracking-tight">
+            <p className="font-card-title text-[12px] md:text-card-title text-text-muted mb-2 md:mb-4 tracking-tight">
               {professor.department}
             </p>
-            <h1 className="font-h1-editorial text-h1-editorial md:font-hero-display md:text-hero-display text-ink leading-none mb-6 -ml-1">
+            <h1 className="font-h1-editorial text-2xl sm:text-3xl md:font-h1-editorial md:text-h1-editorial lg:font-hero-display lg:text-hero-display text-ink leading-tight md:leading-none mb-3 md:mb-6">
               {professor.name}
             </h1>
-            <div className="flex items-center gap-4 mt-4">
-              <div className="flex items-center bg-card-base px-4 py-2 rounded-full border border-border-card shadow-card rotate-1">
-                <span className="material-symbols-outlined text-pop-yellow mr-2" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                <span className="font-card-title text-card-title text-ink">{professor.rating.toFixed(1)}</span>
-                <span className="font-body-main text-body-main text-text-muted ml-2">/ 5.0 ({stats.count} recensioni)</span>
+            <div className="flex items-center gap-3 md:gap-4 mt-2 md:mt-4">
+              <div className="flex items-center bg-card-base px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-border-card shadow-card rotate-1">
+                <span className="material-symbols-outlined text-pop-yellow mr-1.5 md:mr-2 text-base md:text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                <span className="font-card-title text-[13px] md:text-card-title text-ink">{professor.rating.toFixed(1)}</span>
+                <span className="font-body-main text-[11px] md:text-body-main text-text-muted ml-1.5 md:ml-2">/ 5.0 ({stats.count})</span>
               </div>
             </div>
           </div>
 
           {/* Bio */}
           {professor.bio && (
-            <div className="mt-12 max-w-2xl bg-canvas p-6 md:p-8 rounded-xl border border-surface-container shadow-card -rotate-1 relative z-20">
-              <p className="font-body-main text-body-main text-text leading-relaxed">
+            <div className="mt-6 md:mt-12 max-w-2xl bg-canvas p-4 md:p-6 lg:p-8 rounded-xl border border-surface-container shadow-card -rotate-1 relative z-20">
+              <p className="font-body-main text-[13px] md:text-body-main text-text leading-relaxed">
                 {professor.bio}
               </p>
             </div>
@@ -128,8 +128,8 @@ export default function ProfessorDetail() {
 
         {/* Rating Dashboard */}
         <section className="relative z-10">
-          <h2 className="font-h2-section text-h2-section text-ink mb-8">Valutazioni Medie</h2>
-          <div className="bg-canvas border border-surface-container rounded-2xl p-8 md:p-12 shadow-float rotate-1 flex flex-col md:flex-row justify-around items-center gap-12 md:gap-8">
+          <h2 className="font-h2-section text-lg md:text-h2-section text-ink mb-4 md:mb-8">Valutazioni Medie</h2>
+          <div className="bg-canvas border border-surface-container rounded-2xl p-4 md:p-6 lg:p-12 shadow-float rotate-1 flex flex-col md:flex-row justify-around items-center gap-6 md:gap-8">
             <RatingBar value={stats.chiarezza} color="#4F8BFF" label="Chiarezza" />
             <div className="hidden md:block w-px h-24 bg-surface-container" />
             <div className="md:hidden w-full h-px bg-surface-container" />
@@ -143,8 +143,8 @@ export default function ProfessorDetail() {
         {/* Courses */}
         {courses.length > 0 && (
           <section className="relative z-10">
-            <h2 className="font-h2-section text-h2-section text-ink mb-8">Insegnamenti</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 className="font-h2-section text-lg md:text-h2-section text-ink mb-4 md:mb-8">Insegnamenti</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {courses.map((course, i) => (
                 <CourseCard
                   key={course.id}
@@ -170,17 +170,17 @@ export default function ProfessorDetail() {
 
         {/* Reviews */}
         <section className="relative z-10">
-          <div className="flex justify-between items-end mb-8">
-            <h2 className="font-h2-section text-h2-section text-ink">Recensioni Recenti</h2>
-            <span className="font-nav-link text-nav-link text-text-muted">{reviews.length} totali</span>
+          <div className="flex justify-between items-end mb-4 md:mb-8">
+            <h2 className="font-h2-section text-lg md:text-h2-section text-ink">Recensioni Recenti</h2>
+            <span className="font-nav-link text-[11px] md:text-nav-link text-text-muted">{reviews.length} totali</span>
           </div>
           {reviews.length === 0 ? (
-            <div className="text-center py-12 bg-card-base rounded-xl border border-border-card">
-              <p className="text-[14px] text-text-muted">Nessuna recensione</p>
+            <div className="text-center py-10 md:py-12 bg-card-base rounded-xl border border-border-card">
+              <p className="text-[13px] md:text-[14px] text-text-muted">Nessuna recensione</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-              <div className="md:col-span-8 space-y-6">
+              <div className="md:col-span-8 space-y-4 md:space-y-6">
                 {reviews.map((review, i) => (
                   <div key={review.id} className={i % 2 === 0 ? 'rotate-1' : '-rotate-1'}>
                     <ReviewCard
@@ -204,10 +204,10 @@ export default function ProfessorDetail() {
       {/* FAB */}
       <Link
         to={`/professors/${id}/review`}
-        className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 bg-ink text-canvas px-6 py-4 rounded-full shadow-float flex items-center gap-3 transition-transform hover:scale-105 font-nav-link font-semibold border border-ink/10 group"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-8 z-50 bg-ink/75 text-canvas w-10 h-10 rounded-full shadow-float flex items-center justify-center transition-transform hover:scale-105 hover:bg-ink group"
+        aria-label="Valuta docente"
       >
-        <span className="material-symbols-outlined text-canvas group-hover:-rotate-12 transition-transform">edit</span>
-        Valuta docente
+        <span className="material-symbols-outlined text-sm text-canvas group-hover:-rotate-12 transition-transform">edit</span>
       </Link>
     </Layout>
   );

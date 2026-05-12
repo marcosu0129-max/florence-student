@@ -45,14 +45,14 @@ export default function Profile() {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-16 md:gap-20">
+      <div className="flex flex-col gap-8 md:gap-16">
 
         {/* User Header */}
         <section className="flex flex-col items-center text-center -rotate-1">
           <div className="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-4 shadow-card">
             <span className="text-4xl font-black text-ink">{editName.charAt(0).toUpperCase()}</span>
           </div>
-          <h1 className="font-h1-editorial text-h1-editorial text-ink mb-2">{editName}</h1>
+          <h1 className="font-h1-editorial text-2xl sm:text-3xl md:font-h1-editorial md:text-h1-editorial lg:font-hero-display lg:text-hero-display text-ink leading-tight md:leading-none mb-2">{editName}</h1>
           <p className="font-body-main text-body-main text-text-muted mb-1">{editFaculty}</p>
           <p className="font-body-main text-body-main text-text-muted mb-6">Iscritto {editYear}</p>
           <button
@@ -85,7 +85,7 @@ export default function Profile() {
         <section className="flex flex-col gap-10">
           {/* Impostazioni */}
           <div className="text-center">
-            <h2 className="font-h2-section text-h2-section text-ink mb-5">Impostazioni</h2>
+            <h2 className="font-h2-section text-lg md:text-h2-section text-ink mb-3 md:mb-5">Impostazioni</h2>
             <div className="inline-flex flex-wrap justify-center gap-3">
               <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-card-base rounded-full border border-outline-variant shadow-card hover:shadow-float hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer">
                 <span className="material-symbols-outlined text-base text-text-muted" style={{ fontVariationSettings: "'FILL' 0" }}>translate</span>
@@ -101,7 +101,7 @@ export default function Profile() {
 
           {/* Info */}
           <div className="text-center">
-            <h2 className="font-h2-section text-h2-section text-ink mb-5">Info</h2>
+            <h2 className="font-h2-section text-lg md:text-h2-section text-ink mb-3 md:mb-5">Info</h2>
             <div className="inline-flex flex-wrap justify-center gap-3">
               <Link
                 to="/profile/about"

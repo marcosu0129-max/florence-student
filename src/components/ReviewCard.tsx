@@ -44,7 +44,7 @@ export default function ReviewCard({
 }: ReviewCardProps) {
   return (
     <motion.article
-      className="bg-card-base border border-border-card p-card-padding shadow-card hover:shadow-float transition-all duration-300 rounded-xl -rotate-1"
+      className="bg-card-base border border-border-card p-4 sm:p-card-padding shadow-card hover:shadow-float transition-all duration-300 rounded-xl -rotate-1"
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-3">

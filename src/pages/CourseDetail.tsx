@@ -11,13 +11,13 @@ type Tab = 'reviews' | 'info';
 function RatingBar({ value, color, label }: { value: number; color: string; label: string }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <span className="font-body-main text-body-main text-text-muted uppercase tracking-widest mb-2">{label}</span>
-      <div className="font-data-display text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
-      <div className="mt-4 flex gap-1">
+      <span className="font-body-main text-[11px] md:text-body-main text-text-muted uppercase tracking-widest mb-1 md:mb-2">{label}</span>
+      <div className="font-data-display text-xl md:text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
+      <div className="mt-2 md:mt-4 flex gap-0.5 md:gap-1">
         {[1, 2, 3, 4, 5].map((i) => (
           <span
             key={i}
-            className="w-8 h-2 rounded-full"
+            className="w-5 h-1.5 md:w-8 md:h-2 rounded-full"
             style={{ backgroundColor: i <= Math.round(value) ? color : '#e5e2e1' }}
           />
         ))}
@@ -95,21 +95,21 @@ export default function CourseDetail() {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-16 md:gap-24 pb-32">
+      <div className="flex flex-col gap-8 md:gap-20 pb-32">
 
         {/* Editorial Header */}
         <section className="relative z-10">
-          <div className="flex justify-between items-start gap-4 mb-6">
-            <div>
+          <div className="flex justify-between items-start gap-3 mb-4 md:mb-6">
+            <div className="flex-1 min-w-0">
               {course.programCode && (
-                <span className="inline-block mb-3 text-[11px] font-semibold tracking-wider text-on-surface-variant uppercase bg-card-tinted border border-border-card px-3 py-1 rounded-sm shadow-sm">
+                <span className="inline-block mb-2 md:mb-3 text-[10px] md:text-[11px] font-semibold tracking-wider text-on-surface-variant uppercase bg-card-tinted border border-border-card px-2.5 py-0.5 md:px-3 md:py-1 rounded-sm shadow-sm">
                   {course.programCode}
                 </span>
               )}
-              <h1 className="font-h1-editorial text-h1-editorial md:font-hero-display md:text-hero-display text-ink leading-none mb-4 -ml-1">
+              <h1 className="font-h1-editorial text-2xl sm:text-3xl md:font-h1-editorial md:text-h1-editorial lg:font-hero-display lg:text-hero-display text-ink leading-tight md:leading-none mb-3 md:mb-4">
                 {course.name}
               </h1>
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-body-main text-body-main text-on-surface-variant">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-body-main text-[12px] md:text-body-main text-on-surface-variant">
                 {(course.professorNames || []).map((name: string, i: number) => {
                   const realId = (course.professorRealIds || [])[i];
                   const displayName = name.replace(/^(Prof\.?|Prof\.ssa)\s*/i, '');
@@ -142,10 +142,10 @@ export default function CourseDetail() {
             </div>
             <button
               onClick={handleToggleSave}
-              className="w-12 h-12 rounded-full bg-canvas border border-border-card shadow-card flex items-center justify-center text-text-muted hover:text-pop-red transition-colors shrink-0"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-canvas border border-border-card shadow-card flex items-center justify-center text-text-muted hover:text-pop-red transition-colors shrink-0"
               aria-label={isSaved ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti'}
             >
-              <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: `'FILL' ${isSaved ? 1 : 0}` }}>
+              <span className="material-symbols-outlined text-xl md:text-2xl" style={{ fontVariationSettings: `'FILL' ${isSaved ? 1 : 0}` }}>
                 bookmark
               </span>
             </button>
@@ -153,16 +153,16 @@ export default function CourseDetail() {
 
           {/* Bio / description */}
           {course.description && (
-            <div className="max-w-2xl bg-canvas p-6 md:p-8 rounded-xl border border-surface-container shadow-card -rotate-1 relative z-20">
-              <p className="font-body-main text-body-main text-text leading-relaxed">{course.description}</p>
+            <div className="max-w-2xl bg-canvas p-4 md:p-6 lg:p-8 rounded-xl border border-surface-container shadow-card -rotate-1 relative z-20">
+              <p className="font-body-main text-[13px] md:text-body-main text-text leading-relaxed">{course.description}</p>
             </div>
           )}
         </section>
 
         {/* Rating Dashboard */}
         <section className="relative z-10">
-          <h2 className="font-h2-section text-h2-section text-ink mb-8">Valutazioni Medie</h2>
-          <div className="bg-canvas border border-surface-container rounded-2xl p-8 md:p-12 shadow-float rotate-1 flex flex-col md:flex-row justify-around items-center gap-12 md:gap-8">
+          <h2 className="font-h2-section text-lg md:text-h2-section text-ink mb-4 md:mb-8">Valutazioni Medie</h2>
+          <div className="bg-canvas border border-surface-container rounded-2xl p-4 md:p-6 lg:p-12 shadow-float rotate-1 flex flex-col md:flex-row justify-around items-center gap-6 md:gap-8">
             <RatingBar value={stats.difficulty} color="#FF6B35" label="Difficolta" />
             <div className="hidden md:block w-px h-24 bg-surface-container" />
             <div className="md:hidden w-full h-px bg-surface-container" />
@@ -171,17 +171,17 @@ export default function CourseDetail() {
             <div className="md:hidden w-full h-px bg-surface-container" />
             <RatingBar value={stats.grading} color="#4ADE80" label="Voto Medio" />
           </div>
-          <p className="text-center font-caption text-caption text-text-muted mt-4">
+          <p className="text-center font-caption text-[11px] md:text-caption text-text-muted mt-3 md:mt-4">
             Basata su {stats.count} recension{stats.count === 1 ? 'e' : 'i'}
           </p>
         </section>
 
         {/* Tabs */}
         <section className="relative z-10">
-          <div className="flex gap-1 bg-card-base p-1 rounded-lg inline-flex items-center shadow-inner mb-8">
+          <div className="flex gap-1 bg-card-base p-1 rounded-lg inline-flex items-center shadow-inner mb-6 md:mb-8">
             <button
               onClick={() => setActiveTab('reviews')}
-              className={`px-6 py-2 rounded-md font-nav-link text-nav-link font-semibold transition-all ${
+              className={`px-4 py-1.5 md:px-6 md:py-2 rounded-md font-nav-link text-[12px] md:text-nav-link font-semibold transition-all ${
                 activeTab === 'reviews' ? 'bg-canvas text-ink shadow-sm' : 'text-text-muted hover:text-ink'
               }`}
             >
@@ -189,7 +189,7 @@ export default function CourseDetail() {
             </button>
             <button
               onClick={() => setActiveTab('info')}
-              className={`px-6 py-2 rounded-md font-nav-link text-nav-link font-semibold transition-all ${
+              className={`px-4 py-1.5 md:px-6 md:py-2 rounded-md font-nav-link text-[12px] md:text-nav-link font-semibold transition-all ${
                 activeTab === 'info' ? 'bg-canvas text-ink shadow-sm' : 'text-text-muted hover:text-ink'
               }`}
             >
@@ -200,18 +200,18 @@ export default function CourseDetail() {
           {activeTab === 'reviews' ? (
             reviews.length === 0 ? (
               <div className="text-center py-12">
-                <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mx-auto mb-4">
-                  <span className="material-symbols-outlined text-3xl text-text-muted">rate_review</span>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-surface-container flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <span className="material-symbols-outlined text-2xl md:text-3xl text-text-muted">rate_review</span>
                 </div>
-                <h3 className="font-semibold text-[16px] text-ink mb-2">Nessuna recensione</h3>
-                <p className="text-[13px] text-text-muted mb-2">Sii il primo a lasciare una recensione!</p>
-                <Link to={`/courses/${id}/review`} className="text-ink font-semibold text-[14px] hover:underline">
+                <h3 className="font-semibold text-[15px] md:text-[16px] text-ink mb-2">Nessuna recensione</h3>
+                <p className="text-[12px] md:text-[13px] text-text-muted mb-2">Sii il primo a lasciare una recensione!</p>
+                <Link to={`/courses/${id}/review`} className="text-ink font-semibold text-[13px] md:text-[14px] hover:underline">
                   Scrivi la prima &#8594;
                 </Link>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-                <div className="md:col-span-8 space-y-6">
+                <div className="md:col-span-8 space-y-4 md:space-y-6">
                   {reviews.map((review, i) => (
                     <div key={review.id} className={i % 2 === 0 ? '-rotate-1' : 'rotate-1'}>
                       <ReviewCard
@@ -231,11 +231,11 @@ export default function CourseDetail() {
               </div>
             )
           ) : (
-            <div className="flex flex-col gap-4 max-w-2xl">
+            <div className="flex flex-col gap-3 md:gap-4 max-w-2xl">
               {course.description && (
-                <div className="mb-2">
-                  <h3 className="font-h2-section text-h2-section text-ink mb-3">Descrizione</h3>
-                  <p className="font-body-main text-body-main text-text leading-relaxed">{course.description}</p>
+                <div className="mb-1 md:mb-2">
+                  <h3 className="font-h2-section text-lg md:text-h2-section text-ink mb-2 md:mb-3">Descrizione</h3>
+                  <p className="font-body-main text-[13px] md:text-body-main text-text leading-relaxed">{course.description}</p>
                 </div>
               )}
 

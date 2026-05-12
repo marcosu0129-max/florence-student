@@ -42,14 +42,14 @@ export default function ProgramDetail() {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-16 md:gap-24">
+      <div className="flex flex-col gap-8 md:gap-16">
 
         {/* Header */}
         <section className="relative z-10">
           <span className="inline-block mb-4 text-[11px] font-bold tracking-wider text-on-surface-variant uppercase bg-card-tinted border border-border-card px-3 py-1 rounded-sm shadow-sm">
             {program.code}
           </span>
-          <h1 className="font-h1-editorial text-h1-editorial md:font-hero-display md:text-hero-display text-ink leading-none mb-4 -ml-1">
+          <h1 className="font-h1-editorial text-h1-editorial md:font-h1-editorial lg:font-hero-display lg:text-hero-display text-ink leading-tight md:leading-none mb-3 md:mb-4">
             {program.name}
           </h1>
           <p className="font-body-main text-body-main text-text-muted">
@@ -59,8 +59,8 @@ export default function ProgramDetail() {
 
         {/* Stats */}
         <section className="relative z-10">
-          <div className="bg-canvas border border-surface-container rounded-2xl p-8 shadow-float rotate-1">
-            <div className="grid grid-cols-3 gap-6 text-center">
+          <div className="bg-canvas border border-surface-container rounded-2xl p-4 md:p-8 shadow-float rotate-1">
+            <div className="grid grid-cols-3 gap-3 md:gap-6 text-center">
               <div>
                 <div className="font-data-display text-data-display text-ink leading-none mb-2">{loading ? '...' : courses.length}</div>
                 <div className="font-body-main text-body-main text-text-muted uppercase tracking-widest text-[11px]">Insegnamenti</div>

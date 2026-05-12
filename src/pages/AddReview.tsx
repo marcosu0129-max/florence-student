@@ -91,7 +91,7 @@ export default function AddReview() {
       <div className="w-full max-w-lg relative z-10">
         <div className="bg-card-base rounded-xl p-card-padding shadow-card -rotate-1">
           <div className="text-center mb-8">
-            <h1 className="font-h1-editorial text-[36px] md:text-[48px] text-ink mb-2">La tua<br/>recensione</h1>
+            <h1 className="font-h1-editorial text-3xl sm:text-4xl md:text-5xl text-ink mb-2">La tua<br/>recensione</h1>
             {course && (
               <p className="font-body-main text-body-main text-text-muted mt-2">
                 per <span className="font-semibold text-ink">{course.name}</span>
