@@ -60,33 +60,33 @@ export default function ProgramDetail() {
         {/* Stats */}
         <section className="relative z-10">
           <div className="bg-canvas border border-surface-container rounded-2xl p-4 md:p-8 shadow-float rotate-1">
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-6 text-center">
+            <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-6 text-center">
               <div>
                 <div
-                  className="font-data-display text-ink leading-none mb-1 sm:mb-2"
-                  style={{ fontSize: 'clamp(28px, 7vw, var(--text-data-display))' }}
+                  className="font-data-display text-ink leading-none mb-0.5 sm:mb-1 md:mb-2"
+                  style={{ fontSize: 'clamp(20px, 5.5vw, var(--text-data-display))' }}
                 >
                   {loading ? '...' : courses.length}
                 </div>
-                <div className="font-body-main text-[9px] sm:text-[10px] md:text-[11px] text-text-muted uppercase tracking-widest">Insegnamenti</div>
+                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase tracking-widest">Insegnamenti</div>
               </div>
               <div className="border-l border-r border-outline-variant/20">
                 <div
-                  className="font-data-display text-ink leading-none mb-1 sm:mb-2"
-                  style={{ fontSize: 'clamp(28px, 7vw, var(--text-data-display))' }}
+                  className="font-data-display text-ink leading-none mb-0.5 sm:mb-1 md:mb-2"
+                  style={{ fontSize: 'clamp(20px, 5.5vw, var(--text-data-display))' }}
                 >
                   {loading ? '...' : requiredCourses.length}
                 </div>
-                <div className="font-body-main text-[9px] sm:text-[10px] md:text-[11px] text-text-muted uppercase tracking-widest">Obbligatori</div>
+                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase tracking-widest">Obbligatori</div>
               </div>
               <div>
                 <div
-                  className="font-data-display text-ink leading-none mb-1 sm:mb-2"
-                  style={{ fontSize: 'clamp(28px, 7vw, var(--text-data-display))' }}
+                  className="font-data-display text-ink leading-none mb-0.5 sm:mb-1 md:mb-2"
+                  style={{ fontSize: 'clamp(20px, 5.5vw, var(--text-data-display))' }}
                 >
                   {loading ? '...' : program.totalCredits}
                 </div>
-                <div className="font-body-main text-[9px] sm:text-[10px] md:text-[11px] text-text-muted uppercase tracking-widest">CFU Totali</div>
+                <div className="font-body-main text-[8px] sm:text-[9px] md:text-[11px] text-text-muted uppercase tracking-widest">CFU Totali</div>
               </div>
             </div>
           </div>
