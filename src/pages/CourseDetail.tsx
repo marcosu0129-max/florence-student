@@ -10,14 +10,14 @@ type Tab = 'reviews' | 'info';
 
 function RatingBar({ value, color, label }: { value: number; color: string; label: string }) {
   return (
-    <div className="flex flex-col items-center text-center">
-      <span className="font-body-main text-[11px] md:text-body-main text-text-muted uppercase tracking-widest mb-1 md:mb-2">{label}</span>
-      <div className="font-data-display text-xl md:text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
-      <div className="mt-2 md:mt-4 flex gap-0.5 md:gap-1">
+    <div className="flex flex-col items-center text-center min-w-0 px-2">
+      <span className="font-body-main text-[10px] sm:text-[11px] text-text-muted uppercase tracking-widest mb-1">{label}</span>
+      <div className="font-data-display text-lg sm:text-xl md:text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
+      <div className="mt-2 flex gap-0.5 md:gap-1">
         {[1, 2, 3, 4, 5].map((i) => (
           <span
             key={i}
-            className="w-5 h-1.5 md:w-8 md:h-2 rounded-full"
+            className="w-4 h-1.5 md:w-8 md:h-2 rounded-full"
             style={{ backgroundColor: i <= Math.round(value) ? color : '#e5e2e1' }}
           />
         ))}
@@ -109,7 +109,7 @@ export default function CourseDetail() {
               <h1 className="font-h1-editorial text-h1-editorial md:font-h1-editorial md:text-h1-editorial lg:font-hero-display lg:text-hero-display text-ink leading-tight md:leading-none mb-3 md:mb-4">
                 {course.name}
               </h1>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-body-main text-[12px] md:text-body-main text-on-surface-variant">
+              <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-body-main text-[11px] sm:text-[12px] text-on-surface-variant">
                 {(course.professorNames || []).map((name: string, i: number) => {
                   const realId = (course.professorRealIds || [])[i];
                   const displayName = name.replace(/^(Prof\.?|Prof\.ssa)\s*/i, '');
@@ -161,8 +161,8 @@ export default function CourseDetail() {
 
         {/* Rating Dashboard */}
         <section className="relative z-10">
-          <h2 className="font-h2-section text-lg md:text-h2-section text-ink mb-4 md:mb-8">Valutazioni Medie</h2>
-          <div className="bg-canvas border border-surface-container rounded-2xl p-4 md:p-6 lg:p-12 shadow-float rotate-1 flex flex-col md:flex-row justify-around items-center gap-6 md:gap-8">
+          <h2 className="font-h2-section text-base sm:text-lg md:text-h2-section text-ink mb-4 md:mb-8">Valutazioni Medie</h2>
+          <div className="bg-canvas border border-surface-container rounded-2xl p-4 sm:p-5 md:p-6 lg:p-12 shadow-float rotate-1 flex flex-col md:flex-row justify-around items-center gap-5 md:gap-8 overflow-x-auto">
             <RatingBar value={stats.difficulty} color="#FF6B35" label="Difficolta" />
             <div className="hidden md:block w-px h-24 bg-surface-container" />
             <div className="md:hidden w-full h-px bg-surface-container" />
