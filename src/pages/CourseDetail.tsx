@@ -283,10 +283,10 @@ export default function CourseDetail() {
       {/* FAB */}
       <Link
         to={`/courses/${id}/review`}
-        className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 bg-ink text-canvas px-6 py-4 rounded-full shadow-float flex items-center gap-3 transition-transform hover:scale-105 font-nav-link font-semibold border border-ink/10 group"
+        className="fixed bottom-4 left-4 md:bottom-6 md:left-8 z-50 bg-ink text-canvas px-4 py-2.5 rounded-full shadow-float flex items-center gap-2 transition-transform hover:scale-105 font-nav-link font-semibold border border-ink/10 group"
       >
-        <span className="material-symbols-outlined text-canvas group-hover:-rotate-12 transition-transform">edit</span>
-        Scrivi recensione
+        <span className="material-symbols-outlined text-sm text-canvas group-hover:-rotate-12 transition-transform">edit</span>
+        <span className="text-xs">Scrivi recensione</span>
       </Link>
     </Layout>
   );
