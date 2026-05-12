@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+@import "tailwindcss";
+
+/* ==============================
+   DESIGN TOKENS — Florence Student v3
+   Minimal / Editorial / Swiss
+   ============================== */
+@theme {
+  /* --- Background & Surface --- */
+  --color-canvas: #FFFFFF;
+  --color-canvas-soft: #FAFAFA;
+  --color-canvas-cool: #F4F6FA;
+  --color-surface-dim: #ddd9d8;
+  --color-surface: #fdf8f8;
+  --color-surface-bright: #fdf8f8;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f3f2;
+  --color-surface-container: #f1edec;
+  --color-surface-container-high: #ebe7e6;
+  --color-surface-container-highest: #e5e2e1;
+  --color-surface-variant: #e5e2e1;
+  --color-surface-tint: #5f5e5e;
+
+  /* --- Primary --- */
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+
+  /* --- Secondary --- */
+  --color-secondary: #5d5e60;
+  --color-on-secondary: #ffffff;
+
+  /* --- Tertiary --- */
+  --color-tertiary: #000000;
+  --color-tertiary-container: #1d1b1a;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #868381;
+  --color-tertiary-fixed: #e6e1df;
+  --color-tertiary-fixed-dim: #cac6c3;
+  --color-on-tertiary-fixed: #1d1b1a;
+  --color-on-tertiary-fixed-variant: #484645;
+
+  /* --- Primary Fixed (MD3 style) --- */
+  --color-primary-fixed: #e5e2e1;
+  --color-primary-fixed-dim: #c9c6c5;
+  --color-on-primary-fixed: #1c1b1b;
+  --color-on-primary-fixed-variant: #474646;
+
+  /* --- Secondary Fixed --- */
+  --color-secondary-fixed: #e2e2e4;
+  --color-secondary-fixed-dim: #c6c6c8;
+  --color-on-secondary-fixed: #1a1c1d;
+  --color-on-secondary-fixed-variant: #454749;
+
+  /* --- Inverse (Dark surfaces) --- */
+  --color-inverse-surface: #313030;
+  --color-inverse-on-surface: #f4f0ef;
+  --color-inverse-primary: #c9c6c5;
+
+  /* --- Primary Container --- */
+  --color-primary-container: #1c1b1b;
+  --color-on-primary-container: #858383;
+
+  /* --- Secondary Container --- */
+  --color-secondary-container: #dfdfe1;
+  --color-on-secondary-container: #616365;
+
+  /* --- Error --- */
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+
+  /* --- Outline --- */
+  --color-outline: #747878;
+  --color-outline-variant: #c4c7c7;
+
+  /* --- Text Semantic --- */
+  --color-ink: #0A0A0A;
+  --color-ink-soft: #1F1F1F;
+  --color-text: #4A4A4A;
+  --color-text-muted: #8A8A8A;
+  --color-text-faint: #B8B8B8;
+  --color-on-surface: #1c1b1b;
+  --color-on-background: #1c1b1b;
+  --color-on-surface-variant: #444748;
+
+  /* --- Card & Border --- */
+  --color-card-base: #F5F5F7;
+  --color-card-tinted: #EEF1F8;
+  --color-border-card: rgba(0, 0, 0, 0.04);
+
+  /* --- Rating / Semantic Pop --- */
+  --color-pop-yellow: #FFE25C;
+  --color-pop-green: #4ADE80;
+  --color-pop-red: #FF4757;
+  --color-pop-blue: #4F8BFF;
+  --color-pop-orange: #FF6B35;
+  --color-rating-teaching: #4F8BFF;
+  --color-rating-difficulty: #FF6B35;
+  --color-rating-grading: #4ADE80;
+
+  /* --- Background (alias) --- */
+  --color-background: #fdf8f8;
+
+  /* --- Spacing --- */
+  --spacing-unit: 4px;
+  --spacing-nav-height-mobile: 56px;
+  --spacing-nav-height-desktop: 64px;
+  --spacing-card-padding: 24px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 16px;
+  --spacing-gutter: 24px;
+
+  /* --- Border Radius --- */
+  --radius-sm: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* --- Box Shadows --- */
+  --shadow-card: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  --shadow-float: 0 12px 24px 0 rgba(0, 0, 0, 0.06);
+  --shadow-object: 0 12px 24px 0 rgba(0, 0, 0, 0.12);
+
+  /* --- Font Families --- */
+  --font-top-nav: "Montserrat", system-ui, sans-serif;
+  --font-nav-link: "Montserrat", system-ui, sans-serif;
+  --font-data-display: "Montserrat", system-ui, sans-serif;
+  --font-hero-display: "Montserrat", system-ui, sans-serif;
+  --font-h2-section: "Montserrat", system-ui, sans-serif;
+  --font-card-title: "Montserrat", system-ui, sans-serif;
+  --font-handwritten-note: "Caveat", cursive;
+  --font-h1-editorial: "Montserrat", system-ui, sans-serif;
+  --font-caption: "Montserrat", system-ui, sans-serif;
+  --font-hero-display-mobile: "Montserrat", system-ui, sans-serif;
+  --font-body-main: "Montserrat", system-ui, sans-serif;
+
+  /* --- Font Sizes --- */
+  --text-nav-link: 15px;
+  --text-data-display: 72px;
+  --text-hero-display: 128px;
+  --text-h2-section: 32px;
+  --text-card-title: 18px;
+  --text-handwritten-note: 20px;
+  --text-h1-editorial: 64px;
+  --text-caption: 12px;
+  --text-hero-display-mobile: 56px;
+  --text-body-main: 15px;
+}
+
+/* ==============================
+   BASE STYLES
+   ============================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body-main);
+  font-weight: 400;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-h2-section);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+/* ==============================
+   FONT UTILITY CLASSES
+   ============================== */
+/* Top nav — Montserrat Bold Geometric */
+.font-top-nav {
+  font-family: var(--font-top-nav);
+  font-size: var(--text-nav-link);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+/* Editorial hero — desktop giant */
+.font-h1-editorial {
+  font-family: var(--font-h1-editorial);
+  font-size: var(--text-h1-editorial);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+
+/* Hero display — oversized */
+.font-hero-display {
+  font-family: var(--font-hero-display);
+  font-size: var(--text-hero-display);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+.font-hero-display-mobile {
+  font-family: var(--font-hero-display-mobile);
+  font-size: var(--text-hero-display-mobile);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+
+/* Section heading */
+.font-h2-section {
+  font-family: var(--font-h2-section);
+  font-size: var(--text-h2-section);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Card title */
+.font-card-title {
+  font-family: var(--font-card-title);
+  font-size: var(--text-card-title);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* Data display — giant stats */
+.font-data-display {
+  font-family: var(--font-data-display);
+  font-size: var(--text-data-display);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Nav link */
+.font-nav-link {
+  font-family: var(--font-nav-link);
+  font-size: var(--text-nav-link);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* Body main */
+.font-body-main {
+  font-family: var(--font-body-main);
+  font-size: var(--text-body-main);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+/* Caption */
+.font-caption {
+  font-family: var(--font-caption);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+/* Handwritten note */
+.font-handwritten-note {
+  font-family: var(--font-handwritten-note);
+  font-size: var(--text-handwritten-note);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* ==============================
+   UTILITY CLASSES
+   ============================== */
+/* Spacing aliases */
+.px-margin-mobile { padding-left: var(--spacing-margin-mobile); padding-right: var(--spacing-margin-mobile); }
+.px-margin-desktop { padding-left: var(--spacing-margin-desktop); padding-right: var(--spacing-margin-desktop); }
+.p-card-padding { padding: var(--spacing-card-padding); }
+.gap-gutter { gap: var(--spacing-gutter); }
+
+/* Height aliases */
+.h-nav-mobile { height: var(--spacing-nav-height-mobile); }
+.h-nav-desktop { height: var(--spacing-nav-height-desktop); }
+
+/* Shadow aliases */
+.shadow-card { box-shadow: var(--shadow-card); }
+.shadow-float { box-shadow: var(--shadow-float); }
+.shadow-object { box-shadow: var(--shadow-object); }
+
+/* Rotate transforms for editorial tilt */
+.rotate-1 { transform: rotate(1deg); }
+.-rotate-1 { transform: rotate(-1deg); }
+.rotate-2 { transform: rotate(2deg); }
+.-rotate-2 { transform: rotate(-2deg); }
+.rotate-object { transform: rotate(-12deg); }
+.-rotate-object { transform: rotate(12deg); }
+
+/* ==============================
+   MATERIAL SYMBOLS
+   ============================== */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  line-height: 1;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ==============================
+   SCROLLBAR
+   ============================== */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==============================
+   SELECTION
+   ============================== */
+::selection {
+  background-color: var(--color-surface-container-highest);
+  color: var(--color-ink);
+}
+
+/* ==============================
+   FOCUS
+   ============================== */
+/* Global focus-visible styles removed to prevent unwanted outlines on components */
+
+/* ==============================
+   LINE CLAMP
+   ============================== */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ==============================
+   iOS SAFE AREA
+   ============================== */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

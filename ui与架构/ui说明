@@ -1,0 +1,2707 @@
+<!-- Dettaglio Docente — Florence Student -->
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Florence - Professor Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Caveat:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#1a1c1d",
+                      "surface-container-highest": "#e5e2e1",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c4c7c7",
+                      "on-primary-container": "#858383",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "inverse-on-surface": "#f4f0ef",
+                      "text-faint": "#B8B8B8",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#ebe7e6",
+                      "surface-container-low": "#f7f3f2",
+                      "surface-tint": "#5f5e5e",
+                      "on-secondary-container": "#616365",
+                      "on-background": "#1c1b1b",
+                      "canvas": "#FFFFFF",
+                      "primary-fixed": "#e5e2e1",
+                      "surface-container": "#f1edec",
+                      "secondary-fixed": "#e2e2e4",
+                      "on-error-container": "#93000a",
+                      "text-muted": "#8A8A8A",
+                      "rating-teaching": "#4F8BFF",
+                      "surface-bright": "#fdf8f8",
+                      "tertiary-container": "#1d1b1a",
+                      "rating-difficulty": "#FF6B35",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#c9c6c5",
+                      "error-container": "#ffdad6",
+                      "pop-yellow": "#FFE25C",
+                      "surface": "#fdf8f8",
+                      "on-surface": "#1c1b1b",
+                      "ink-soft": "#1F1F1F",
+                      "canvas-soft": "#FAFAFA",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#1c1b1b",
+                      "secondary-fixed-dim": "#c6c6c8",
+                      "primary": "#000000",
+                      "ink": "#0A0A0A",
+                      "surface-dim": "#ddd9d8",
+                      "primary-fixed-dim": "#c9c6c5",
+                      "rating-grading": "#4ADE80",
+                      "secondary": "#5d5e60",
+                      "inverse-surface": "#313030",
+                      "pop-red": "#FF4757",
+                      "pop-green": "#4ADE80",
+                      "on-error": "#ffffff",
+                      "background": "#fdf8f8",
+                      "outline": "#747878",
+                      "tertiary-fixed": "#e6e1df",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "pop-blue": "#4F8BFF",
+                      "on-primary-fixed-variant": "#474646",
+                      "canvas-cool": "#F4F6FA",
+                      "card-tinted": "#EEF1F8",
+                      "text": "#4A4A4A",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#dfdfe1",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "on-tertiary-container": "#868381",
+                      "border-card": "rgba(0, 0, 0, 0.04)",
+                      "on-secondary-fixed-variant": "#454749",
+                      "pop-orange": "#FF6B35",
+                      "primary-container": "#1c1b1b",
+                      "on-surface-variant": "#444748",
+                      "tertiary": "#000000",
+                      "card-base": "#F5F5F7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "nav-height-mobile": "56px",
+                      "card-padding": "24px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "nav-height-desktop": "64px"
+              },
+              "fontFamily": {
+                      "nav-link": ["Inter"],
+                      "data-display": ["Inter"],
+                      "hero-display": ["Inter"],
+                      "h2-section": ["Inter"],
+                      "card-title": ["Inter"],
+                      "handwritten-note": ["Caveat"],
+                      "h1-editorial": ["Inter"],
+                      "caption": ["Inter"],
+                      "hero-display-mobile": ["Inter"],
+                      "body-main": ["Inter"]
+              },
+              "fontSize": {
+                      "nav-link": ["15px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                      "data-display": ["72px", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                      "hero-display": ["128px", { "lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                      "h2-section": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "card-title": ["18px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                      "handwritten-note": ["20px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                      "h1-editorial": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.035em", "fontWeight": "800" }],
+                      "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400" }],
+                      "hero-display-mobile": ["56px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                      "body-main": ["15px", { "lineHeight": "1.5", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+              },
+              "boxShadow": {
+                  "card": "0 4px 8px 0 rgba(0, 0, 0, 0.04)",
+                  "float": "0 24px 48px 0 rgba(0, 0, 0, 0.06)",
+                  "object": "0 12px 24px 0 rgba(0, 0, 0, 0.12)"
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+        }
+        
+        .transform-rotate-1 { transform: rotate(1deg); }
+        .transform-rotate-minus-1 { transform: rotate(-1deg); }
+        .transform-rotate-2 { transform: rotate(2deg); }
+        .transform-rotate-minus-2 { transform: rotate(-2deg); }
+        .transform-rotate-object { transform: rotate(-12deg); }
+    </style>
+</head>
+<body class="bg-canvas text-ink font-body-main min-h-screen flex flex-col relative overflow-x-hidden selection:bg-surface-container-highest">
+<!-- Top Navigation (Web) -->
+<header class="hidden md:flex justify-between items-center w-full px-margin-desktop max-w-7xl mx-auto h-[nav-height-desktop] bg-canvas sticky top-0 z-40">
+<a aria-label="Home" class="font-hero-display-mobile text-h2-section text-primary" href="#">Florence</a>
+<nav class="flex gap-8">
+<a class="font-card-title text-card-title text-text-muted hover:text-ink transition-colors" href="#">Corsi</a>
+<a class="font-card-title text-card-title text-ink font-semibold" href="#">Docenti</a>
+<a class="font-card-title text-card-title text-text-muted hover:text-ink transition-colors" href="#">Profilo</a>
+</nav>
+</header>
+<!-- Mobile Header (Minimal) -->
+<header class="md:hidden flex items-center justify-between px-margin-mobile h-[nav-height-mobile] bg-canvas sticky top-0 z-40">
+<a aria-label="Go back" class="flex items-center text-ink p-2 -ml-2" href="#">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</a>
+<span class="font-card-title text-card-title">Docente</span>
+<div class="w-8"></div> <!-- Spacer for centering -->
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pb-32 pt-8 md:pt-16">
+<!-- Editorial Header Section -->
+<section class="mb-16 md:mb-24 relative z-10">
+<div class="max-w-4xl">
+<p class="font-card-title text-card-title text-text-muted mb-4 tracking-tight">Dipartimento di Informatica</p>
+<h1 class="font-h1-editorial text-h1-editorial md:font-hero-display md:text-hero-display text-ink leading-none mb-6 -ml-1">Mario Rossi</h1>
+<div class="flex items-center gap-4 mt-8">
+<div class="flex items-center bg-card-base px-4 py-2 rounded-full border border-border-card shadow-card transform-rotate-1">
+<span class="material-symbols-outlined text-pop-yellow mr-2" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-card-title text-card-title text-ink">4.8</span>
+<span class="font-body-main text-body-main text-text-muted ml-2">/ 5.0 (124 recensioni)</span>
+</div>
+</div>
+</div>
+<!-- Bio Section -->
+<div class="mt-12 max-w-2xl bg-canvas p-6 md:p-8 rounded-xl border border-surface-container shadow-card transform-rotate-minus-1 relative z-20">
+<p class="font-body-main text-body-main text-text leading-relaxed">
+                    Docente di Algoritmi e Strutture Dati presso l'Università degli Studi di Firenze. La sua ricerca si concentra sull'ottimizzazione combinatoria e l'analisi della complessità. Noto per la sua chiarezza espositiva ma anche per la severità agli esami scritti.
+                </p>
+</div>
+</section>
+<!-- Bento Showcase Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Rating Dashboard -->
+<section class="md:col-span-12 mb-16 relative z-10">
+<h2 class="font-h2-section text-h2-section text-ink mb-8">Valutazioni Medie</h2>
+<div class="bg-canvas border border-surface-container rounded-2xl p-8 md:p-12 shadow-float transform-rotate-1 flex flex-col md:flex-row justify-around items-center gap-12 md:gap-8">
+<div class="flex flex-col items-center text-center">
+<span class="font-body-main text-body-main text-text-muted uppercase tracking-widest mb-2">Chiarezza</span>
+<div class="font-data-display text-data-display text-ink leading-none">4.9</div>
+<div class="mt-4 flex gap-1">
+<span class="w-12 h-2 rounded-full bg-rating-teaching"></span>
+<span class="w-12 h-2 rounded-full bg-rating-teaching"></span>
+<span class="w-12 h-2 rounded-full bg-rating-teaching"></span>
+<span class="w-12 h-2 rounded-full bg-rating-teaching"></span>
+<span class="w-12 h-2 rounded-full bg-surface-container"></span>
+</div>
+</div>
+<div class="hidden md:block w-px h-24 bg-surface-container"></div>
+<div class="md:hidden w-full h-px bg-surface-container"></div>
+<div class="flex flex-col items-center text-center">
+<span class="font-body-main text-body-main text-text-muted uppercase tracking-widest mb-2">Disponibilità</span>
+<div class="font-data-display text-data-display text-ink leading-none">4.5</div>
+<div class="mt-4 flex gap-1">
+<span class="w-12 h-2 rounded-full bg-pop-green"></span>
+<span class="w-12 h-2 rounded-full bg-pop-green"></span>
+<span class="w-12 h-2 rounded-full bg-pop-green"></span>
+<span class="w-12 h-2 rounded-full bg-pop-green"></span>
+<span class="w-12 h-2 rounded-full bg-surface-container"></span>
+</div>
+</div>
+<div class="hidden md:block w-px h-24 bg-surface-container"></div>
+<div class="md:hidden w-full h-px bg-surface-container"></div>
+<div class="flex flex-col items-center text-center">
+<span class="font-body-main text-body-main text-text-muted uppercase tracking-widest mb-2">Equità</span>
+<div class="font-data-display text-data-display text-ink leading-none">3.8</div>
+<div class="mt-4 flex gap-1">
+<span class="w-12 h-2 rounded-full bg-pop-orange"></span>
+<span class="w-12 h-2 rounded-full bg-pop-orange"></span>
+<span class="w-12 h-2 rounded-full bg-pop-orange"></span>
+<span class="w-12 h-2 rounded-full bg-surface-container"></span>
+<span class="w-12 h-2 rounded-full bg-surface-container"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Insegnamenti (Courses Grid) -->
+<section class="md:col-span-12 mb-16 relative z-10">
+<h2 class="font-h2-section text-h2-section text-ink mb-8">Insegnamenti</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Course Card 1 -->
+<div class="bg-card-base p-card-padding rounded-xl border border-border-card shadow-card hover:-translate-y-1 hover:shadow-float transition-all duration-300 transform-rotate-minus-1">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-canvas text-ink px-3 py-1 rounded-full text-caption font-nav-link border border-surface-container shadow-sm">Triennale</span>
+<span class="material-symbols-outlined text-text-muted" data-icon="book">book</span>
+</div>
+<h3 class="font-card-title text-card-title text-ink mb-2">Algoritmi e Strutture Dati</h3>
+<p class="font-body-main text-body-main text-text-muted mb-6">9 CFU • 1° Semestre</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-card-title text-sm text-ink">4.7</span>
+<span class="text-caption text-text-muted ml-auto">Visualizza corso →</span>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-card-base p-card-padding rounded-xl border border-border-card shadow-card hover:-translate-y-1 hover:shadow-float transition-all duration-300 transform-rotate-1">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-canvas text-ink px-3 py-1 rounded-full text-caption font-nav-link border border-surface-container shadow-sm">Magistrale</span>
+<span class="material-symbols-outlined text-text-muted" data-icon="school">school</span>
+</div>
+<h3 class="font-card-title text-card-title text-ink mb-2">Algoritmi Avanzati</h3>
+<p class="font-body-main text-body-main text-text-muted mb-6">6 CFU • 2° Semestre</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-card-title text-sm text-ink">4.9</span>
+<span class="text-caption text-text-muted ml-auto">Visualizza corso →</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recensioni (Reviews List) -->
+<section class="md:col-span-8 md:col-start-3 relative z-10">
+<div class="flex justify-between items-end mb-8">
+<h2 class="font-h2-section text-h2-section text-ink">Recensioni Recenti</h2>
+<a class="font-nav-link text-nav-link text-text-muted hover:text-ink transition-colors" href="#">Vedi tutte</a>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Review Card 1 -->
+<div class="bg-canvas p-6 rounded-xl border border-surface-container shadow-card transform-rotate-1">
+<div class="flex justify-between items-center mb-4">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-caption text-caption text-text-muted">12 Ott 2023</span>
+</div>
+<p class="font-body-main text-body-main text-ink mb-4">"Spiega divinamente. Gli appunti presi a lezione bastano per superare l'esame con ottimi voti. L'esame è difficile ma se hai studiato si passa tranquillamente."</p>
+<div class="flex gap-4">
+<span class="bg-card-base px-2 py-1 rounded text-caption text-text-muted">Chiarezza: 5</span>
+<span class="bg-card-base px-2 py-1 rounded text-caption text-text-muted">Equità: 4</span>
+</div>
+</div>
+<!-- Review Card 2 -->
+<div class="bg-canvas p-6 rounded-xl border border-surface-container shadow-card transform-rotate-minus-1">
+<div class="flex justify-between items-center mb-4">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-container text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-caption text-caption text-text-muted">5 Set 2023</span>
+</div>
+<p class="font-body-main text-body-main text-ink mb-4">"Professore molto preparato e disponibile a fine lezione per chiarimenti. Attenzione allo scritto, corregge in modo molto severo."</p>
+<div class="flex gap-4">
+<span class="bg-card-base px-2 py-1 rounded text-caption text-text-muted">Disponibilità: 5</span>
+<span class="bg-card-base px-2 py-1 rounded text-caption text-text-muted">Equità: 3</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-8 right-8 z-50 bg-ink text-on-primary px-6 py-4 rounded-full font-nav-link text-nav-link font-semibold shadow-float hover:-translate-y-1 transition-transform flex items-center gap-2 group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="edit">edit</span>
+        Valuta docente
+    </button>
+</body></html>
+
+<!-- Login — Florence Student -->
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Accedi - Florence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#5f5e5e",
+                        "text-faint": "#B8B8B8",
+                        "surface-container-low": "#f7f3f2",
+                        "surface-container-high": "#ebe7e6",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#e5e2e1",
+                        "canvas": "#FFFFFF",
+                        "surface-container": "#f1edec",
+                        "on-background": "#1c1b1b",
+                        "on-secondary-container": "#616365",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-fixed": "#1a1c1d",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "outline-variant": "#c4c7c7",
+                        "on-primary-container": "#858383",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "rating-difficulty": "#FF6B35",
+                        "inverse-primary": "#c9c6c5",
+                        "rating-teaching": "#4F8BFF",
+                        "text-muted": "#8A8A8A",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#e2e2e4",
+                        "tertiary-container": "#1d1b1a",
+                        "surface-bright": "#fdf8f8",
+                        "ink": "#0A0A0A",
+                        "surface-dim": "#ddd9d8",
+                        "primary": "#000000",
+                        "secondary-fixed-dim": "#c6c6c8",
+                        "on-primary-fixed": "#1c1b1b",
+                        "outline": "#747878",
+                        "background": "#fdf8f8",
+                        "secondary": "#5d5e60",
+                        "rating-grading": "#4ADE80",
+                        "inverse-surface": "#313030",
+                        "pop-red": "#FF4757",
+                        "pop-green": "#4ADE80",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "error-container": "#ffdad6",
+                        "canvas-soft": "#FAFAFA",
+                        "on-secondary": "#ffffff",
+                        "ink-soft": "#1F1F1F",
+                        "surface": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "pop-yellow": "#FFE25C",
+                        "on-surface-variant": "#444748",
+                        "pop-orange": "#FF6B35",
+                        "primary-container": "#1c1b1b",
+                        "card-base": "#F5F5F7",
+                        "tertiary": "#000000",
+                        "text": "#4A4A4A",
+                        "card-tinted": "#EEF1F8",
+                        "on-primary-fixed-variant": "#474646",
+                        "canvas-cool": "#F4F6FA",
+                        "pop-blue": "#4F8BFF",
+                        "tertiary-fixed": "#e6e1df",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "on-secondary-fixed-variant": "#454749",
+                        "on-tertiary-container": "#868381",
+                        "border-card": "rgba(0, 0, 0, 0.04)",
+                        "secondary-container": "#dfdfe1",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "nav-height-mobile": "56px",
+                        "margin-mobile": "16px",
+                        "nav-height-desktop": "64px",
+                        "card-padding": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "nav-link": ["Inter"],
+                        "data-display": ["Inter"],
+                        "hero-display": ["Inter"],
+                        "h2-section": ["Inter"],
+                        "card-title": ["Inter"],
+                        "handwritten-note": ["Caveat"],
+                        "h1-editorial": ["Inter"],
+                        "caption": ["Inter"],
+                        "hero-display-mobile": ["Inter"],
+                        "body-main": ["Inter"]
+                    },
+                    "fontSize": {
+                        "nav-link": ["15px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "data-display": ["72px", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "hero-display": ["128px", { "lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "h2-section": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "card-title": ["18px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "handwritten-note": ["20px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h1-editorial": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.035em", "fontWeight": "800" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400" }],
+                        "hero-display-mobile": ["56px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-main": ["15px", { "lineHeight": "1.5", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+                    },
+                    "boxShadow": {
+                        "card": "0 4px 8px rgba(0, 0, 0, 0.04)",
+                        "float": "0 12px 48px rgba(0, 0, 0, 0.06)",
+                        "object": "0 20px 40px rgba(0, 0, 0, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-on-surface min-h-screen flex items-center justify-center p-6 relative overflow-hidden font-body-main antialiased selection:bg-surface-dim selection:text-ink">
+<!-- Subtle Floating 3D Object -->
+<div class="absolute top-[15%] left-[20%] md:left-[30%] -rotate-[8deg] drop-shadow-[0_20px_40px_rgba(0,0,0,0.12)] text-[64px] select-none pointer-events-none opacity-90 z-10 hidden sm:block">
+        🎓
+    </div>
+<div class="absolute bottom-[20%] right-[15%] md:right-[25%] rotate-[12deg] drop-shadow-[0_20px_40px_rgba(0,0,0,0.12)] text-[56px] select-none pointer-events-none opacity-80 z-10 hidden sm:block">
+        📝
+    </div>
+<!-- Main Container -->
+<div class="w-full max-w-[440px] relative z-20">
+<!-- Header -->
+<div class="mb-10 text-center relative">
+<h1 class="font-h1-editorial text-h1-editorial text-ink mb-2 -rotate-[1deg]">Bentornato<br/>su Florence</h1>
+<p class="font-body-main text-body-main text-text-muted mt-4">Accedi per continuare la tua esperienza.</p>
+</div>
+<!-- Login Card -->
+<div class="bg-card-base rounded-xl p-card-padding shadow-card rotate-[1deg] hover:-translate-y-[2px] transition-transform duration-300 relative">
+<form action="#" class="space-y-6" method="POST">
+<!-- Email Input -->
+<div>
+<label class="sr-only" for="email">Email</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-3 bg-canvas border border-outline-variant rounded-full text-ink placeholder:text-text-faint focus:ring-2 focus:ring-ink focus:border-ink transition-colors font-body-main text-body-main shadow-sm" id="email" name="email" placeholder="Email universitaria" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div>
+<label class="sr-only" for="password">Password</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]">lock</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-3 bg-canvas border border-outline-variant rounded-full text-ink placeholder:text-text-faint focus:ring-2 focus:ring-ink focus:border-ink transition-colors font-body-main text-body-main shadow-sm" id="password" name="password" placeholder="Password" required="" type="password"/>
+</div>
+<div class="mt-2 text-right">
+<a class="font-nav-link text-caption text-text-muted hover:text-ink transition-colors" href="#">Hai dimenticato la password?</a>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-2 space-y-4">
+<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm font-card-title text-card-title text-canvas bg-ink hover:bg-ink-soft focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ink transition-colors" type="submit">
+                        Accedi
+                    </button>
+<div class="relative flex items-center justify-center my-4">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative bg-card-base px-4 font-caption text-caption text-text-muted uppercase tracking-wider">
+                            Oppure
+                        </div>
+</div>
+<button class="w-full flex items-center justify-center py-3 px-4 border border-outline-variant rounded-full shadow-sm font-card-title text-card-title text-ink bg-canvas hover:bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ink transition-colors" type="button">
+<img alt="Google logo" class="w-5 h-5 mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1dkvEjDCaB8ID4Sad_6zZaQC9qmjnIgdtA7JosIw7avWfJpS9RhL2tFl06kSp65SDvNd_X5Ys6waMQAjFSTn-ZoFdXuHsg7wLql5qvh_W7kibI-lNwTdL3O2by5LfHNKnqsyOMVACqWTOCRLFdCUHeRmKk0I1xXodskvupFNaQkLozt1N_fwHFrKwHqW732MQA4pdoDgynQqbST2WbgIgsKrPynoPEGY-ff6gdBpCw2XnTmvsgBw0mMWCr4QkS1tRVON1BZY1cQ"/>
+                        Accedi con Google
+                    </button>
+</div>
+</form>
+<!-- Registration Link -->
+<div class="mt-8 text-center">
+<p class="font-body-main text-body-main text-text-muted">
+                    Non hai un account? 
+                    <a class="font-nav-link text-nav-link text-ink hover:underline decoration-2 underline-offset-4" href="#">Registrati</a>
+</p>
+</div>
+</div>
+</div>
+</body></html>
+
+<!-- Dettaglio Corso — Florence Student -->
+<!DOCTYPE html>
+
+<html class="light" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Detail - Florence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Caveat:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#1a1c1d",
+                      "surface-container-highest": "#e5e2e1",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c4c7c7",
+                      "on-primary-container": "#858383",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "inverse-on-surface": "#f4f0ef",
+                      "text-faint": "#B8B8B8",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#ebe7e6",
+                      "surface-container-low": "#f7f3f2",
+                      "surface-tint": "#5f5e5e",
+                      "on-secondary-container": "#616365",
+                      "on-background": "#1c1b1b",
+                      "canvas": "#FFFFFF",
+                      "primary-fixed": "#e5e2e1",
+                      "surface-container": "#f1edec",
+                      "secondary-fixed": "#e2e2e4",
+                      "on-error-container": "#93000a",
+                      "text-muted": "#8A8A8A",
+                      "rating-teaching": "#4F8BFF",
+                      "surface-bright": "#fdf8f8",
+                      "tertiary-container": "#1d1b1a",
+                      "rating-difficulty": "#FF6B35",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#c9c6c5",
+                      "error-container": "#ffdad6",
+                      "pop-yellow": "#FFE25C",
+                      "surface": "#fdf8f8",
+                      "on-surface": "#1c1b1b",
+                      "ink-soft": "#1F1F1F",
+                      "canvas-soft": "#FAFAFA",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#1c1b1b",
+                      "secondary-fixed-dim": "#c6c6c8",
+                      "primary": "#000000",
+                      "ink": "#0A0A0A",
+                      "surface-dim": "#ddd9d8",
+                      "primary-fixed-dim": "#c9c6c5",
+                      "rating-grading": "#4ADE80",
+                      "secondary": "#5d5e60",
+                      "inverse-surface": "#313030",
+                      "pop-red": "#FF4757",
+                      "pop-green": "#4ADE80",
+                      "on-error": "#ffffff",
+                      "background": "#fdf8f8",
+                      "outline": "#747878",
+                      "tertiary-fixed": "#e6e1df",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "pop-blue": "#4F8BFF",
+                      "on-primary-fixed-variant": "#474646",
+                      "canvas-cool": "#F4F6FA",
+                      "card-tinted": "#EEF1F8",
+                      "text": "#4A4A4A",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#dfdfe1",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "on-tertiary-container": "#868381",
+                      "border-card": "rgba(0, 0, 0, 0.04)",
+                      "on-secondary-fixed-variant": "#454749",
+                      "pop-orange": "#FF6B35",
+                      "primary-container": "#1c1b1b",
+                      "on-surface-variant": "#444748",
+                      "tertiary": "#000000",
+                      "card-base": "#F5F5F7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "nav-height-mobile": "56px",
+                      "card-padding": "24px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "nav-height-desktop": "64px"
+              },
+              "fontFamily": {
+                      "nav-link": [
+                              "Inter"
+                      ],
+                      "data-display": [
+                              "Inter"
+                      ],
+                      "hero-display": [
+                              "Inter"
+                      ],
+                      "h2-section": [
+                              "Inter"
+                      ],
+                      "card-title": [
+                              "Inter"
+                      ],
+                      "handwritten-note": [
+                              "Caveat"
+                      ],
+                      "h1-editorial": [
+                              "Inter"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ],
+                      "hero-display-mobile": [
+                              "Inter"
+                      ],
+                      "body-main": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "nav-link": [
+                              "15px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-display": [
+                              "72px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "hero-display": [
+                              "128px",
+                              {
+                                      "lineHeight": "0.95",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "h2-section": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "card-title": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.015em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "handwritten-note": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1-editorial": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "-0.035em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "hero-display-mobile": [
+                              "56px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "body-main": [
+                              "15px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "-0.005em",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shadow-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+        }
+        .shadow-float {
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+        }
+        .shadow-object {
+            box-shadow: 0 24px 32px rgba(0, 0, 0, 0.12);
+        }
+      </style>
+</head>
+<body class="bg-canvas text-text font-body-main antialiased min-h-screen relative pb-24 md:pb-0 overflow-x-hidden selection:bg-surface-dim">
+<!-- TopNavBar -->
+<nav class="hidden md:flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto bg-transparent docked full-width top-0 h-14 z-40 relative">
+<div class="font-hero-display-mobile text-h2-section text-primary dark:text-on-primary font-bold tracking-tight">Florence</div>
+<ul class="flex space-x-8">
+<li><a class="font-nav-link text-lg text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Corsi</a></li>
+<li><a class="font-nav-link text-lg text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Docenti</a></li>
+<li><a class="font-nav-link text-lg text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Profilo</a></li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-8 md:pt-12">
+<!-- Back Navigation (Mobile) -->
+<div class="md:hidden flex items-center mb-6">
+<button class="p-2 -ml-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-ink" data-icon="arrow_back">arrow_back</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Header Section (Bento Showcase Style) -->
+<header class="col-span-1 md:col-span-12 relative -rotate-1 z-10 mb-8 md:mb-16">
+<div class="flex justify-between items-start gap-4">
+<div>
+<span class="inline-block px-3 py-1 rounded-full bg-card-tinted text-rating-teaching font-nav-link text-caption font-semibold mb-4 border border-card-tinted/50 shadow-sm">Ingegneria Informatica</span>
+<h1 class="font-h1-editorial text-h1-editorial text-ink mb-4 max-w-4xl break-words leading-tight">Analisi Matematica I</h1>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-2 font-body-main text-body-main text-on-surface-variant">
+<a class="font-semibold text-ink hover:underline decoration-2 underline-offset-4 cursor-pointer transition-all" href="#">Prof. Marco Rossi</a>
+<span class="text-surface-tint opacity-50">•</span>
+<span>12 CFU</span>
+<span class="text-surface-tint opacity-50">•</span>
+<span>1° Semestre</span>
+</div>
+</div>
+<button class="p-3 rounded-full bg-surface hover:bg-surface-container-highest transition-colors shadow-sm flex-shrink-0 border border-border-card">
+<span class="material-symbols-outlined text-ink text-2xl" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Row -->
+<section class="col-span-1 md:col-span-12 relative rotate-1 z-20 mb-12">
+<div class="bg-canvas border border-border-card rounded-xl shadow-card p-card-padding flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-outline-variant/20">
+<!-- Difficoltà -->
+<div class="flex-1 w-full py-4 md:py-0 md:px-6 flex flex-col items-center justify-center text-center">
+<span class="font-nav-link text-caption text-text-muted uppercase tracking-widest mb-2 block">Difficoltà</span>
+<div class="font-data-display text-[48px] leading-none font-black text-ink mb-2">4.2</div>
+<div class="flex gap-1 text-pop-orange">
+<span class="material-symbols-outlined filled text-lg" data-icon="star">star</span>
+<span class="material-symbols-outlined filled text-lg" data-icon="star">star</span>
+<span class="material-symbols-outlined filled text-lg" data-icon="star">star</span>
+<span class="material-symbols-outlined filled text-lg" data-icon="star">star</span>
+<span class="material-symbols-outlined text-lg opacity-30" data-icon="star_half">star_half</span>
+</div>
+</div>
+<!-- Didattica -->
+<div class="flex-1 w-full py-4 md:py-0 md:px-6 flex flex-col items-center justify-center text-center">
+<span class="font-nav-link text-caption text-text-muted uppercase tracking-widest mb-2 block">Didattica</span>
+<div class="font-data-display text-[48px] leading-none font-black text-ink mb-2">3.8</div>
+<div class="flex gap-1 text-pop-blue">
+<span class="material-symbols-outlined filled text-lg" data-icon="star">star</span>
+<span class="material-symbols-outlined filled text-lg" data-icon="star">star</span>
+<span class="material-symbols-outlined filled text-lg" data-icon="star">star</span>
+<span class="material-symbols-outlined filled text-lg opacity-50" data-icon="star_half">star_half</span>
+<span class="material-symbols-outlined text-lg opacity-30" data-icon="star_border">star_border</span>
+</div>
+</div>
+<!-- Voto -->
+<div class="flex-1 w-full py-4 md:py-0 md:px-6 flex flex-col items-center justify-center text-center">
+<span class="font-nav-link text-caption text-text-muted uppercase tracking-widest mb-2 block">Voto Medio</span>
+<div class="font-data-display text-[48px] leading-none font-black text-ink mb-2">24.5</div>
+<div class="flex gap-1 text-pop-green">
+<span class="material-symbols-outlined filled text-lg" data-icon="school">school</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Tabs Navigation -->
+<div class="col-span-1 md:col-span-12 mb-8 relative z-10 flex justify-start">
+<div class="bg-card-base p-1 rounded-lg inline-flex items-center shadow-inner">
+<button class="px-6 py-2 rounded-md bg-canvas shadow-sm text-ink font-nav-link text-nav-link font-semibold transition-all">Recensioni</button>
+<button class="px-6 py-2 rounded-md text-text-muted hover:text-ink font-nav-link text-nav-link transition-all">Info</button>
+</div>
+</div>
+<!-- Content Area (Reviews) -->
+<div class="col-span-1 md:col-span-8 space-y-6 relative z-10 pb-32">
+<!-- Review Card 1 -->
+<article class="bg-card-base p-card-padding rounded-xl border border-border-card shadow-sm hover:-translate-y-0.5 hover:shadow-card transition-all duration-300 relative -rotate-1">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-dim flex items-center justify-center font-bold text-ink">
+                                MR
+                            </div>
+<div>
+<div class="font-card-title text-card-title text-ink">Matteo R.</div>
+<div class="font-nav-link text-caption text-text-muted">12 Ottobre 2023</div>
+</div>
+</div>
+</div>
+<p class="font-body-main text-body-main text-text leading-relaxed mb-6">
+                        Corso fondamentale ma molto impegnativo. Il professore spiega in modo molto teorico, quindi è necessario integrare con eserciziari esterni. L'esame scritto è complesso ma coerente con il programma svolto a lezione.
+                    </p>
+<div class="flex items-center gap-6 pt-4 border-t border-outline-variant/30 text-sm">
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-medium">Difficoltà</span>
+<span class="text-ink font-bold">5</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-medium">Didattica</span>
+<span class="text-ink font-bold">3</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-medium">Voto</span>
+<span class="text-ink font-bold">22</span>
+</div>
+</div>
+</article>
+<!-- Review Card 2 -->
+<article class="bg-card-base p-card-padding rounded-xl border border-border-card shadow-sm hover:-translate-y-0.5 hover:shadow-card transition-all duration-300 relative rotate-1">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-dim flex items-center justify-center font-bold text-ink">
+                                GL
+                            </div>
+<div>
+<div class="font-card-title text-card-title text-ink">Giulia L.</div>
+<div class="font-nav-link text-caption text-text-muted">5 Settembre 2023</div>
+</div>
+</div>
+</div>
+<p class="font-body-main text-body-main text-text leading-relaxed mb-6">
+                        Ho trovato le dispense fornite dal docente molto utili. Se si segue costantemente e si fanno gli esercizi assegnati, l'orale risulta quasi una formalità. Attenzione ai teoremi di Weierstrass e Rolle, li chiede sempre.
+                    </p>
+<div class="flex items-center gap-6 pt-4 border-t border-outline-variant/30 text-sm">
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-medium">Difficoltà</span>
+<span class="text-ink font-bold">4</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-medium">Didattica</span>
+<span class="text-ink font-bold">4</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-medium">Voto</span>
+<span class="text-ink font-bold">28</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Empty Column for Desktop Layout Balance -->
+<div class="hidden md:block col-span-4 relative">
+<!-- Sticker / 3D Object (Decorative) -->
+<div class="absolute top-10 right-10 -rotate-12 opacity-80 pointer-events-none drop-shadow-2xl">
+<span class="text-6xl" style="filter: drop-shadow(0 24px 32px rgba(0,0,0,0.15));">📚</span>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Writing Review -->
+<button class="fixed bottom-24 md:bottom-8 right-6 md:right-8 z-50 bg-ink hover:bg-ink-soft text-canvas px-6 py-4 rounded-full shadow-float flex items-center gap-3 transition-transform hover:scale-105 group font-nav-link font-semibold border border-ink/10">
+<span class="material-symbols-outlined text-canvas group-hover:-rotate-12 transition-transform" data-icon="edit">edit</span>
+        Scrivi recensione
+    </button>
+</body></html>
+
+<!-- Corsi — Florence Student -->
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Corsi - Florence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Caveat:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#1a1c1d",
+                        "surface-container-highest": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c4c7c7",
+                        "on-primary-container": "#858383",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "inverse-on-surface": "#f4f0ef",
+                        "text-faint": "#B8B8B8",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ebe7e6",
+                        "surface-container-low": "#f7f3f2",
+                        "surface-tint": "#5f5e5e",
+                        "on-secondary-container": "#616365",
+                        "on-background": "#1c1b1b",
+                        "canvas": "#FFFFFF",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-container": "#f1edec",
+                        "secondary-fixed": "#e2e2e4",
+                        "on-error-container": "#93000a",
+                        "text-muted": "#8A8A8A",
+                        "rating-teaching": "#4F8BFF",
+                        "surface-bright": "#fdf8f8",
+                        "tertiary-container": "#1d1b1a",
+                        "rating-difficulty": "#FF6B35",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#c9c6c5",
+                        "error-container": "#ffdad6",
+                        "pop-yellow": "#FFE25C",
+                        "surface": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "ink-soft": "#1F1F1F",
+                        "canvas-soft": "#FAFAFA",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#1c1b1b",
+                        "secondary-fixed-dim": "#c6c6c8",
+                        "primary": "#000000",
+                        "ink": "#0A0A0A",
+                        "surface-dim": "#ddd9d8",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "rating-grading": "#4ADE80",
+                        "secondary": "#5d5e60",
+                        "inverse-surface": "#313030",
+                        "pop-red": "#FF4757",
+                        "pop-green": "#4ADE80",
+                        "on-error": "#ffffff",
+                        "background": "#fdf8f8",
+                        "outline": "#747878",
+                        "tertiary-fixed": "#e6e1df",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "pop-blue": "#4F8BFF",
+                        "on-primary-fixed-variant": "#474646",
+                        "canvas-cool": "#F4F6FA",
+                        "card-tinted": "#EEF1F8",
+                        "text": "#4A4A4A",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dfdfe1",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "on-tertiary-container": "#868381",
+                        "border-card": "rgba(0, 0, 0, 0.04)",
+                        "on-secondary-fixed-variant": "#454749",
+                        "pop-orange": "#FF6B35",
+                        "primary-container": "#1c1b1b",
+                        "on-surface-variant": "#444748",
+                        "tertiary": "#000000",
+                        "card-base": "#F5F5F7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "nav-height-mobile": "56px",
+                        "card-padding": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "nav-height-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "nav-link": ["Inter"],
+                        "data-display": ["Inter"],
+                        "hero-display": ["Inter"],
+                        "h2-section": ["Inter"],
+                        "card-title": ["Inter"],
+                        "handwritten-note": ["Caveat"],
+                        "h1-editorial": ["Inter"],
+                        "caption": ["Inter"],
+                        "hero-display-mobile": ["Inter"],
+                        "body-main": ["Inter"]
+                    },
+                    "fontSize": {
+                        "nav-link": ["15px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "data-display": ["72px", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "hero-display": ["128px", { "lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "h2-section": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "card-title": ["18px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "handwritten-note": ["20px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h1-editorial": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.035em", "fontWeight": "800" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400" }],
+                        "hero-display-mobile": ["56px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-main": ["15px", { "lineHeight": "1.5", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+                    },
+                    "boxShadow": {
+                        "card": "0 4px 8px rgba(0, 0, 0, 0.04)",
+                        "float": "0 12px 48px rgba(0, 0, 0, 0.06)",
+                        "object": "0 16px 32px rgba(0, 0, 0, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-ink font-body-main antialiased min-h-screen relative pb-[80px] md:pb-0">
+<!-- Top Navigation (Desktop) -->
+<nav class="hidden md:flex justify-between items-center w-full px-margin-desktop max-w-7xl mx-auto bg-transparent docked full-width top-0 h-[56px] flat no shadows z-50 absolute">
+<div class="font-hero-display-mobile text-h2-section text-primary dark:text-on-primary font-bold tracking-tighter">Florence</div>
+<ul class="flex space-x-8 items-center">
+<li><a class="font-nav-link text-[18px] text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Home</a></li>
+<li>
+<a class="font-nav-link text-[18px] text-ink font-bold after:content-[''] after:block after:w-[6px] after:h-[6px] after:bg-primary after:mx-auto after:mt-[6px] hover:text-primary transition-all duration-200" href="#">
+                    Corsi
+                </a>
+</li>
+<li><a class="font-nav-link text-[18px] text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Docenti</a></li>
+<li><a class="font-nav-link text-[18px] text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Profilo</a></li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] md:pt-[120px] px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto pb-32">
+<!-- Header Section -->
+<header class="mb-16 relative z-10">
+<h1 class="font-h1-editorial text-h1-editorial text-ink mb-6">Corsi</h1>
+<!-- Controls Cluster -->
+<div class="flex flex-col md:flex-row gap-6 md:items-center w-full max-w-4xl relative z-20">
+<!-- Tab Switcher -->
+<div class="flex bg-card-base p-1 rounded-full w-max shadow-sm border border-border-card">
+<button class="px-6 py-2 rounded-full bg-canvas text-ink font-nav-link text-nav-link shadow-card transition-all">Insegnamenti</button>
+<button class="px-6 py-2 rounded-full text-text-muted font-nav-link text-nav-link hover:text-ink transition-all">Docenti</button>
+</div>
+<!-- Search -->
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-canvas border border-outline-variant rounded-full text-body-main font-body-main shadow-card focus:outline-none focus:ring-2 focus:ring-ink focus:border-transparent transition-all" placeholder="Cerca insegnamento o codice..." type="text"/>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex flex-wrap gap-2 mt-6 relative z-20">
+<button class="px-4 py-1.5 bg-ink text-canvas rounded-full font-caption text-caption font-medium shadow-card transition-transform hover:-translate-y-0.5">Tutti i Corsi</button>
+<button class="px-4 py-1.5 bg-card-base text-text-muted rounded-full font-caption text-caption border border-border-card hover:bg-outline-variant hover:text-ink transition-all">Triennale</button>
+<button class="px-4 py-1.5 bg-card-base text-text-muted rounded-full font-caption text-caption border border-border-card hover:bg-outline-variant hover:text-ink transition-all">Magistrale</button>
+<button class="px-4 py-1.5 bg-card-base text-text-muted rounded-full font-caption text-caption border border-border-card hover:bg-outline-variant hover:text-ink transition-all">Informatica</button>
+<button class="px-4 py-1.5 bg-card-base text-text-muted rounded-full font-caption text-caption border border-border-card hover:bg-outline-variant hover:text-ink transition-all">Ingegneria</button>
+</div>
+</header>
+<!-- Bento Grid Showcase (Insegnamenti) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<!-- Floating Sticker -->
+<div class="hidden md:block absolute -top-12 right-20 z-0 transform rotate-[-12deg] shadow-object bg-pop-yellow w-16 h-16 rounded-full flex items-center justify-center opacity-80">
+<span class="material-symbols-outlined text-ink text-3xl" data-icon="star">star</span>
+</div>
+<!-- Card 1 -->
+<article class="md:col-span-5 md:col-start-2 bg-card-base p-card-padding rounded-xl shadow-card hover:-translate-y-1 hover:shadow-float transition-all duration-300 transform rotate-[1deg] border border-border-card flex flex-col justify-between h-[280px]">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-canvas text-text-muted text-[10px] font-bold uppercase tracking-wider rounded-md border border-border-card shadow-sm">INF01</span>
+<div class="flex items-center space-x-1 bg-canvas px-2 py-1 rounded-md shadow-sm border border-border-card">
+<span class="material-symbols-outlined text-ink text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-card-title text-sm font-bold">4.8</span>
+</div>
+</div>
+<h3 class="font-h2-section text-h2-section text-ink leading-tight mb-2">Algoritmi e Strutture Dati</h3>
+<p class="font-body-main text-body-main text-text-muted">Prof. Rossi Mario</p>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">CFU</span>
+<span class="font-card-title text-card-title text-ink font-bold">12</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-caption text-caption text-text-muted">Semestre</span>
+<span class="font-card-title text-card-title text-ink font-bold">1°</span>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="md:col-span-4 md:col-start-8 bg-card-base p-card-padding rounded-xl shadow-card hover:-translate-y-1 hover:shadow-float transition-all duration-300 transform rotate-[-2deg] border border-border-card flex flex-col justify-between h-[280px] mt-8 md:mt-16">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-canvas text-text-muted text-[10px] font-bold uppercase tracking-wider rounded-md border border-border-card shadow-sm">MAT02</span>
+<div class="flex items-center space-x-1 bg-canvas px-2 py-1 rounded-md shadow-sm border border-border-card">
+<span class="material-symbols-outlined text-ink text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-card-title text-sm font-bold">4.2</span>
+</div>
+</div>
+<h3 class="font-h2-section text-h2-section text-ink leading-tight mb-2">Analisi Matematica I</h3>
+<p class="font-body-main text-body-main text-text-muted">Prof.ssa Bianchi Laura</p>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">CFU</span>
+<span class="font-card-title text-card-title text-ink font-bold">9</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-caption text-caption text-text-muted">Semestre</span>
+<span class="font-card-title text-card-title text-ink font-bold">1°</span>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="md:col-span-6 md:col-start-1 bg-card-base p-card-padding rounded-xl shadow-card hover:-translate-y-1 hover:shadow-float transition-all duration-300 transform rotate-[-1deg] border border-border-card flex flex-col justify-between h-[280px] mt-4 md:mt-[-40px]">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-canvas text-text-muted text-[10px] font-bold uppercase tracking-wider rounded-md border border-border-card shadow-sm">ING05</span>
+<div class="flex items-center space-x-1 bg-canvas px-2 py-1 rounded-md shadow-sm border border-border-card">
+<span class="material-symbols-outlined text-ink text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-card-title text-sm font-bold">4.9</span>
+</div>
+</div>
+<h3 class="font-h2-section text-h2-section text-ink leading-tight mb-2">Architettura degli Elaboratori</h3>
+<p class="font-body-main text-body-main text-text-muted">Prof. Verdi Giuseppe</p>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">CFU</span>
+<span class="font-card-title text-card-title text-ink font-bold">9</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-caption text-caption text-text-muted">Semestre</span>
+<span class="font-card-title text-card-title text-ink font-bold">2°</span>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="md:col-span-5 md:col-start-8 bg-card-base p-card-padding rounded-xl shadow-card hover:-translate-y-1 hover:shadow-float transition-all duration-300 transform rotate-[2deg] border border-border-card flex flex-col justify-between h-[280px] mt-4 md:mt-8">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-canvas text-text-muted text-[10px] font-bold uppercase tracking-wider rounded-md border border-border-card shadow-sm">INF03</span>
+<div class="flex items-center space-x-1 bg-canvas px-2 py-1 rounded-md shadow-sm border border-border-card">
+<span class="material-symbols-outlined text-ink text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-card-title text-sm font-bold">3.8</span>
+</div>
+</div>
+<h3 class="font-h2-section text-h2-section text-ink leading-tight mb-2">Basi di Dati</h3>
+<p class="font-body-main text-body-main text-text-muted">Prof. Neri Antonio</p>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">CFU</span>
+<span class="font-card-title text-card-title text-ink font-bold">6</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-caption text-caption text-text-muted">Semestre</span>
+<span class="font-card-title text-card-title text-ink font-bold">1°</span>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="md:hidden bg-surface-container-lowest/90 dark:bg-surface-container/90 fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md rounded-full border border-outline-variant backdrop-blur-md shadow-float h-[nav-height-mobile] z-50 flex justify-around items-center px-6">
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all p-2" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-nav-link text-caption">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-ink font-semibold scale-110 hover:bg-surface-container-low rounded-full transition-all p-2" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="school">school</span>
+<span class="font-nav-link text-caption font-semibold">Corsi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all p-2" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-nav-link text-caption">Profilo</span>
+</a>
+</nav>
+</body></html>
+
+<!-- Home — Florence Student (Sticker Style) -->
+<!DOCTYPE html>
+
+<html class="light" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Florence - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#1a1c1d",
+                        "surface-container-highest": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c4c7c7",
+                        "on-primary-container": "#858383",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "inverse-on-surface": "#f4f0ef",
+                        "text-faint": "#B8B8B8",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ebe7e6",
+                        "surface-container-low": "#f7f3f2",
+                        "surface-tint": "#5f5e5e",
+                        "on-secondary-container": "#616365",
+                        "on-background": "#1c1b1b",
+                        "canvas": "#FFFFFF",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-container": "#f1edec",
+                        "secondary-fixed": "#e2e2e4",
+                        "on-error-container": "#93000a",
+                        "text-muted": "#8A8A8A",
+                        "rating-teaching": "#4F8BFF",
+                        "surface-bright": "#fdf8f8",
+                        "tertiary-container": "#1d1b1a",
+                        "rating-difficulty": "#FF6B35",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#c9c6c5",
+                        "error-container": "#ffdad6",
+                        "pop-yellow": "#FFE25C",
+                        "surface": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "ink-soft": "#1F1F1F",
+                        "canvas-soft": "#FAFAFA",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#1c1b1b",
+                        "secondary-fixed-dim": "#c6c6c8",
+                        "primary": "#000000",
+                        "ink": "#0A0A0A",
+                        "surface-dim": "#ddd9d8",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "rating-grading": "#4ADE80",
+                        "secondary": "#5d5e60",
+                        "inverse-surface": "#313030",
+                        "pop-red": "#FF4757",
+                        "pop-green": "#4ADE80",
+                        "on-error": "#ffffff",
+                        "background": "#fdf8f8",
+                        "outline": "#747878",
+                        "tertiary-fixed": "#e6e1df",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "pop-blue": "#4F8BFF",
+                        "on-primary-fixed-variant": "#474646",
+                        "canvas-cool": "#F4F6FA",
+                        "card-tinted": "#EEF1F8",
+                        "text": "#4A4A4A",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dfdfe1",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "on-tertiary-container": "#868381",
+                        "border-card": "rgba(0, 0, 0, 0.04)",
+                        "on-secondary-fixed-variant": "#454749",
+                        "pop-orange": "#FF6B35",
+                        "primary-container": "#1c1b1b",
+                        "on-surface-variant": "#444748",
+                        "tertiary": "#000000",
+                        "card-base": "#F5F5F7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "nav-height-mobile": "56px",
+                        "card-padding": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "nav-height-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "nav-link": ["Inter"],
+                        "data-display": ["Inter"],
+                        "hero-display": ["Inter"],
+                        "h2-section": ["Inter"],
+                        "card-title": ["Inter"],
+                        "handwritten-note": ["Caveat"],
+                        "h1-editorial": ["Inter"],
+                        "caption": ["Inter"],
+                        "hero-display-mobile": ["Inter"],
+                        "body-main": ["Inter"]
+                    },
+                    "fontSize": {
+                        "nav-link": ["15px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "data-display": ["72px", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "hero-display": ["128px", { "lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "h2-section": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "card-title": ["18px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "handwritten-note": ["20px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h1-editorial": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.035em", "fontWeight": "800" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400" }],
+                        "hero-display-mobile": ["56px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-main": ["15px", { "lineHeight": "1.5", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+                    },
+                    "boxShadow": {
+                        "card": "0 4px 8px rgba(0, 0, 0, 0.04)",
+                        "float": "0 12px 48px rgba(0, 0, 0, 0.06)",
+                        "object": "0 24px 48px rgba(0, 0, 0, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-ink font-body-main antialiased min-h-screen selection:bg-primary selection:text-canvas">
+<!-- TopNavBar (Web Only) -->
+<header class="hidden md:flex bg-transparent font-nav-link text-lg w-full top-0 h-14 z-40 fixed">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-7xl mx-auto">
+<div class="font-hero-display-mobile text-h2-section text-primary">Florence</div>
+<nav class="flex gap-8 items-center">
+<a class="text-ink font-bold after:content-[''] after:block after:w-[6px] after:h-[6px] after:bg-primary after:mx-auto after:mt-[6px] hover:text-primary transition-all duration-200" href="#">Home</a>
+<a class="text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Corsi</a>
+<a class="text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Docenti</a>
+<a class="text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Profilo</a>
+</nav>
+</div>
+</header>
+<!-- TopAppBar (Mobile Only - Fallback for Brand) -->
+<header class="flex md:hidden bg-transparent w-full top-0 h-14 z-40 fixed px-margin-mobile items-center">
+<div class="font-hero-display-mobile text-h2-section text-primary tracking-tight">Florence</div>
+</header>
+<main class="pt-14 md:pt-[calc(56px+64px)] pb-32 md:pb-32 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto overflow-hidden pt-8 md:pt-16">
+<!-- Hero Section -->
+<section class="relative flex flex-col items-center justify-center text-center mt-12 md:mt-24 mt-4 md:mt-8">
+<h1 class="z-10 relative mb-8 text-primary bg-canvas px-12 py-4 rounded-full border border-border-card shadow-float inline-block" style="font-weight: 700; font-size: 4rem; letter-spacing: -0.02em; line-height: 1.1;">Trova il tuo corso</h1>
+<!-- Search Bar -->
+<div class="w-full max-w-xl z-20 relative mt-8 mb-24">
+<div class="relative bg-canvas rounded-full shadow-float border border-border-card p-2 flex items-center transition-transform hover:-translate-y-1 duration-300">
+<span class="material-symbols-outlined text-text-muted ml-4" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-body-main px-4 py-2 placeholder:text-text-faint" placeholder="Cerca un corso o docente..." type="text"/>
+<button class="bg-primary text-canvas px-6 py-2 rounded-full font-nav-link hover:bg-ink-soft transition-colors">Cerca</button>
+</div>
+</div>
+</section>
+<!-- Bento Grid / Cards Section -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<!-- Corsi di Laurea Section -->
+<section class="md:col-span-7 space-y-8 relative z-10">
+<div class="flex items-baseline justify-between mb-8 border-b border-border-card pb-4">
+<h2 class="font-h1-editorial text-primary">Corsi di Laurea</h2>
+<a class="font-nav-link text-text-muted hover:text-primary transition-colors flex items-center" href="#">
+                        Vedi tutti <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Card 1 -->
+<div class="bg-card-base p-card-padding rounded-xl shadow-card hover:shadow-float transition-all duration-300 hover:-translate-y-1 transform rotate-[-1deg] border border-border-card">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-caption text-text-muted font-bold tracking-wider mb-2 block uppercase">B046</span>
+<h3 class="font-card-title text-ink mb-1">Ingegneria Informatica</h3>
+<p class="text-body-main text-text">Triennale</p>
+</div>
+<div class="bg-canvas px-4 py-2 rounded-full shadow-sm flex items-center gap-2 border border-border-card">
+<span class="material-symbols-outlined text-rating-teaching text-xl" data-icon="school">school</span>
+<span class="font-nav-link font-bold">42</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-card-base p-card-padding rounded-xl shadow-card hover:shadow-float transition-all duration-300 hover:-translate-y-1 transform rotate-[1deg] border border-border-card ml-0 md:ml-12">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-caption text-text-muted font-bold tracking-wider mb-2 block uppercase">B045</span>
+<h3 class="font-card-title text-ink mb-1">Ingegneria Meccanica</h3>
+<p class="text-body-main text-text">Triennale</p>
+</div>
+<div class="bg-canvas px-4 py-2 rounded-full shadow-sm flex items-center gap-2 border border-border-card">
+<span class="material-symbols-outlined text-rating-teaching text-xl" data-icon="school">school</span>
+<span class="font-nav-link font-bold">38</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-card-base p-card-padding rounded-xl shadow-card hover:shadow-float transition-all duration-300 hover:-translate-y-1 transform rotate-[-0.5deg] border border-border-card">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-caption text-text-muted font-bold tracking-wider mb-2 block uppercase">B103</span>
+<h3 class="font-card-title text-ink mb-1">Fisica e Astrofisica</h3>
+<p class="text-body-main text-text">Magistrale</p>
+</div>
+<div class="bg-canvas px-4 py-2 rounded-full shadow-sm flex items-center gap-2 border border-border-card">
+<span class="material-symbols-outlined text-rating-teaching text-xl" data-icon="school">school</span>
+<span class="font-nav-link font-bold">24</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Più recensiti Section -->
+<section class="md:col-span-5 md:col-start-8 space-y-8 mt-16 md:mt-32 relative z-10">
+<div class="flex items-baseline justify-between mb-8">
+<h2 class="font-h2-section text-primary">Più recensiti</h2>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Course Card 1 -->
+<div class="bg-canvas p-card-padding rounded-xl shadow-card hover:shadow-float transition-all duration-300 hover:-translate-y-1 transform rotate-[1.5deg] border border-border-card">
+<h3 class="font-card-title text-ink mb-2">Analisi Matematica I</h3>
+<p class="text-caption text-text-muted mb-4">Ingegneria Informatica</p>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-caption text-text-muted uppercase tracking-wider">Difficoltà</span>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-bold text-pop-red">4.8</span>
+<span class="material-symbols-outlined text-pop-red text-sm" data-icon="local_fire_department">local_fire_department</span>
+</div>
+</div>
+<div class="w-[1px] bg-border-card"></div>
+<div class="flex flex-col">
+<span class="text-caption text-text-muted uppercase tracking-wider">Qualità</span>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-bold text-pop-blue">4.2</span>
+<span class="material-symbols-outlined text-pop-blue text-sm" data-icon="star">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-canvas p-card-padding rounded-xl shadow-card hover:shadow-float transition-all duration-300 hover:-translate-y-1 transform rotate-[-1deg] border border-border-card ml-0 md:ml-8">
+<h3 class="font-card-title text-ink mb-2">Fisica Generale I</h3>
+<p class="text-caption text-text-muted mb-4">Ingegneria Meccanica</p>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-caption text-text-muted uppercase tracking-wider">Difficoltà</span>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-bold text-pop-orange">4.5</span>
+<span class="material-symbols-outlined text-pop-orange text-sm" data-icon="local_fire_department">local_fire_department</span>
+</div>
+</div>
+<div class="w-[1px] bg-border-card"></div>
+<div class="flex flex-col">
+<span class="text-caption text-text-muted uppercase tracking-wider">Qualità</span>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-bold text-pop-blue">3.9</span>
+<span class="material-symbols-outlined text-pop-blue text-sm" data-icon="star">star</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md h-[nav-height-mobile] z-50 flex justify-around items-center px-6 bg-surface-container-lowest/90 dark:bg-surface-container/90 border border-outline-variant backdrop-blur-md shadow-float rounded-full">
+<a class="flex flex-col items-center justify-center text-ink font-semibold scale-110 hover:bg-surface-container-low rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill">home</span>
+<span class="font-nav-link text-caption mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-nav-link text-caption mt-1">Corsi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-nav-link text-caption mt-1">Profilo</span>
+</a>
+</nav>
+</body></html>
+
+<!-- Profilo — Florence Student -->
+<!DOCTYPE html>
+
+<html class="light" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Florence - Profilo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Caveat:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#1a1c1d",
+                      "surface-container-highest": "#e5e2e1",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c4c7c7",
+                      "on-primary-container": "#858383",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "inverse-on-surface": "#f4f0ef",
+                      "text-faint": "#B8B8B8",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#ebe7e6",
+                      "surface-container-low": "#f7f3f2",
+                      "surface-tint": "#5f5e5e",
+                      "on-secondary-container": "#616365",
+                      "on-background": "#1c1b1b",
+                      "canvas": "#FFFFFF",
+                      "primary-fixed": "#e5e2e1",
+                      "surface-container": "#f1edec",
+                      "secondary-fixed": "#e2e2e4",
+                      "on-error-container": "#93000a",
+                      "text-muted": "#8A8A8A",
+                      "rating-teaching": "#4F8BFF",
+                      "surface-bright": "#fdf8f8",
+                      "tertiary-container": "#1d1b1a",
+                      "rating-difficulty": "#FF6B35",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#c9c6c5",
+                      "error-container": "#ffdad6",
+                      "pop-yellow": "#FFE25C",
+                      "surface": "#fdf8f8",
+                      "on-surface": "#1c1b1b",
+                      "ink-soft": "#1F1F1F",
+                      "canvas-soft": "#FAFAFA",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#1c1b1b",
+                      "secondary-fixed-dim": "#c6c6c8",
+                      "primary": "#000000",
+                      "ink": "#0A0A0A",
+                      "surface-dim": "#ddd9d8",
+                      "primary-fixed-dim": "#c9c6c5",
+                      "rating-grading": "#4ADE80",
+                      "secondary": "#5d5e60",
+                      "inverse-surface": "#313030",
+                      "pop-red": "#FF4757",
+                      "pop-green": "#4ADE80",
+                      "on-error": "#ffffff",
+                      "background": "#fdf8f8",
+                      "outline": "#747878",
+                      "tertiary-fixed": "#e6e1df",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "pop-blue": "#4F8BFF",
+                      "on-primary-fixed-variant": "#474646",
+                      "canvas-cool": "#F4F6FA",
+                      "card-tinted": "#EEF1F8",
+                      "text": "#4A4A4A",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#dfdfe1",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "on-tertiary-container": "#868381",
+                      "border-card": "rgba(0, 0, 0, 0.04)",
+                      "on-secondary-fixed-variant": "#454749",
+                      "pop-orange": "#FF6B35",
+                      "primary-container": "#1c1b1b",
+                      "on-surface-variant": "#444748",
+                      "tertiary": "#000000",
+                      "card-base": "#F5F5F7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "nav-height-mobile": "56px",
+                      "card-padding": "24px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "nav-height-desktop": "64px"
+              },
+              "fontFamily": {
+                      "nav-link": [
+                              "Inter"
+                      ],
+                      "data-display": [
+                              "Inter"
+                      ],
+                      "hero-display": [
+                              "Inter"
+                      ],
+                      "h2-section": [
+                              "Inter"
+                      ],
+                      "card-title": [
+                              "Inter"
+                      ],
+                      "handwritten-note": [
+                              "Caveat"
+                      ],
+                      "h1-editorial": [
+                              "Inter"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ],
+                      "hero-display-mobile": [
+                              "Inter"
+                      ],
+                      "body-main": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "nav-link": [
+                              "15px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-display": [
+                              "72px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "hero-display": [
+                              "128px",
+                              {
+                                      "lineHeight": "0.95",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "h2-section": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "card-title": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.015em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "handwritten-note": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1-editorial": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "-0.035em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "hero-display-mobile": [
+                              "56px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "body-main": [
+                              "15px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "-0.005em",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.canvas');
+            color: theme('colors.ink');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shadow-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+        }
+        .shadow-float {
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+        }
+        .shadow-object {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-32 md:pb-0 overflow-x-hidden">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center w-full px-margin-desktop max-w-7xl mx-auto docked full-width top-0 h-14 bg-canvas">
+<a class="font-hero-display-mobile text-h2-section text-primary" href="#">Florence</a>
+<div class="flex gap-gutter items-center">
+<a class="font-nav-link text-card-title text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Corsi</a>
+<a class="font-nav-link text-card-title text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Docenti</a>
+<a class="font-nav-link text-card-title text-ink font-bold after:content-[''] after:block after:w-[6px] after:h-[6px] after:bg-primary after:mx-auto after:mt-[6px] hover:text-primary transition-all duration-200" href="#">Profilo</a>
+</div>
+</nav>
+<!-- TopNavBar (Mobile) -->
+<nav class="flex md:hidden justify-between items-center w-full px-margin-mobile docked full-width top-0 h-[nav-height-mobile] bg-canvas">
+<a class="font-hero-display-mobile text-h2-section text-primary" href="#">Florence</a>
+<img alt="User avatar" class="w-[32px] h-[32px] rounded-full object-cover" data-alt="A close up, high quality headshot portrait of a young professional with a neutral expression. The image should be styled in black and white with high contrast, resembling an editorial magazine shoot. The lighting is soft but directional, highlighting facial features cleanly against a bright white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWB3p4xr_QlIIcuB2ZXfoqV2_nSP_JSAcjiVsEkrvyKVEF8gLlp0H7abj6c9lNetV0QCMHqbuF9WQ1nrr48v1QIA6aNXwVjTRF2lrGUyGp6ulob6_B5oW9-SHs0URuHJ9PV-LVI-NJokEahlXMYvFS7RtaQg_Hx5UqJgRKXlC4S_UP1D00XtEHDppkukvWwsbNmzjf8bDqG6dsYGeE4hn2UgoPaDOidESQz5joG_PWFC5mlmupZhGQ0FKhbK7hwgwUZlIW7lounw"/>
+</nav>
+<main class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop mt-8 md:mt-16 grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<!-- Header Section: Editorial Showcase -->
+<header class="col-span-1 md:col-span-12 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-12 relative z-10 mb-12">
+<div class="relative group">
+<img alt="User Profile Picture" class="w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-full object-cover shadow-object transform -rotate-2 group-hover:rotate-0 transition-transform duration-300 border-4 border-canvas" data-alt="A close up, high quality headshot portrait of a young professional with a neutral expression. The image should be styled in black and white with high contrast, resembling an editorial magazine shoot. The lighting is soft but directional, highlighting facial features cleanly against a bright white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_StmV_Rdvki5qvGX0fkC03LRPO6Diy5UrBqMUAaYifL2eJD6d_RRicQlNt4EDcDyceIms2opTtiYNMnLRWjyGt_o1KotoXJNVZWmL-i8pRTnvrBWsO-TMojKgUilu8n6tdqdw2tbG4A7PD24UzOdlOZGvaO8Xba-IkRYeLR2MGIRrai30NXFuHn-qTwwug2zso3j90Ak3MRmXIBikDQTlYd5ZqSZkS_1V2mPtPLp8C-GVW7pCcQgiGNc3BQ48K9p4b7tbTck5zg"/>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left">
+<h1 class="font-h1-editorial text-h1-editorial text-ink tracking-tight mb-2">Giulia Bianchi</h1>
+<p class="font-card-title text-card-title text-text-muted mb-6">Lettere e Filosofia • 3° Anno</p>
+<button class="bg-card-base text-ink font-nav-link text-nav-link font-semibold py-3 px-6 rounded-full hover:-translate-y-0.5 shadow-card hover:shadow-float transition-all duration-200">
+                    Modifica profilo
+                </button>
+</div>
+</header>
+<!-- Activity Section -->
+<section class="col-span-1 md:col-span-12 grid grid-cols-2 gap-4 mb-16">
+<div class="bg-card-base p-card-padding rounded-xl shadow-card transform hover:-translate-y-0.5 hover:shadow-float transition-all duration-200 rotate-1 border border-border-card flex flex-col justify-between">
+<span class="material-symbols-outlined text-pop-blue mb-4 text-3xl" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<div>
+<p class="font-data-display text-h2-section text-ink mb-1">12</p>
+<p class="font-nav-link text-caption text-text-muted">Corsi Salvati</p>
+</div>
+</div>
+<div class="bg-card-base p-card-padding rounded-xl shadow-card transform hover:-translate-y-0.5 hover:shadow-float transition-all duration-200 -rotate-1 border border-border-card flex flex-col justify-between">
+<span class="material-symbols-outlined text-pop-yellow mb-4 text-3xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<div>
+<p class="font-data-display text-h2-section text-ink mb-1">5</p>
+<p class="font-nav-link text-caption text-text-muted">Mie Recensioni</p>
+</div>
+</div>
+</section>
+<!-- Recent Reviews -->
+<section class="col-span-1 md:col-span-8 md:col-start-1 mb-16 relative">
+<h2 class="font-h2-section text-h2-section text-ink mb-8 relative z-10">Recensioni Recenti</h2>
+<div class="flex flex-col gap-6">
+<!-- Review Card 1 -->
+<article class="bg-canvas p-card-padding rounded-xl shadow-card border border-border-card relative group hover:-translate-y-1 transition-all duration-200">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-card-title text-card-title text-ink">Letteratura Italiana Contemporanea</h3>
+<p class="font-nav-link text-caption text-text-muted">Prof. Rossi</p>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-muted hover:text-ink"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="text-text-muted hover:text-pop-red"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</div>
+<div class="flex gap-1 mb-3">
+<span class="material-symbols-outlined text-pop-yellow text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline text-sm">star</span>
+</div>
+<p class="font-body-main text-body-main text-text line-clamp-3">Corso molto interessante, il professore è appassionato e coinvolgente. Il carico di studio è impegnativo ma le lezioni aiutano molto la comprensione.</p>
+</article>
+<!-- Review Card 2 -->
+<article class="bg-canvas p-card-padding rounded-xl shadow-card border border-border-card relative group hover:-translate-y-1 transition-all duration-200 rotate-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-card-title text-card-title text-ink">Filologia Romanza</h3>
+<p class="font-nav-link text-caption text-text-muted">Prof.ssa Verdi</p>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-muted hover:text-ink"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="text-text-muted hover:text-pop-red"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</div>
+<div class="flex gap-1 mb-3">
+<span class="material-symbols-outlined text-pop-yellow text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-pop-yellow text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline text-sm">star</span>
+<span class="material-symbols-outlined text-outline text-sm">star</span>
+</div>
+<p class="font-body-main text-body-main text-text line-clamp-3">Esame complesso, richiede molta memoria. Le dispense fornite sono utili ma non bastano, consiglio di frequentare assiduamente.</p>
+</article>
+</div>
+</section>
+<!-- Settings Sidebar -->
+<section class="col-span-1 md:col-span-4 md:col-start-9 flex flex-col gap-2 relative">
+<h2 class="font-h2-section text-h2-section text-ink mb-4 md:mb-8">Impostazioni</h2>
+<div class="bg-card-base rounded-xl shadow-card p-4 flex flex-col gap-4 border border-border-card -rotate-1">
+<a class="flex justify-between items-center py-2 group" href="#">
+<span class="font-nav-link text-nav-link text-ink group-hover:text-primary transition-colors">Lingua</span>
+<span class="font-nav-link text-caption text-text-muted">Italiano <span class="material-symbols-outlined align-middle text-sm">chevron_right</span></span>
+</a>
+<hr class="border-border-card"/>
+<a class="flex justify-between items-center py-2 group" href="#">
+<span class="font-nav-link text-nav-link text-ink group-hover:text-primary transition-colors">Informazioni</span>
+<span class="material-symbols-outlined align-middle text-sm text-text-muted group-hover:text-ink transition-colors">chevron_right</span>
+</a>
+<hr class="border-border-card"/>
+<a class="flex justify-between items-center py-2 group" href="#">
+<span class="font-nav-link text-nav-link text-ink group-hover:text-primary transition-colors">Privacy Policy</span>
+<span class="material-symbols-outlined align-middle text-sm text-text-muted group-hover:text-ink transition-colors">chevron_right</span>
+</a>
+<hr class="border-border-card"/>
+<div class="flex justify-between items-center py-2">
+<span class="font-nav-link text-nav-link text-text-muted">Versione</span>
+<span class="font-nav-link text-caption text-text-muted">1.0.4</span>
+</div>
+</div>
+<button class="mt-8 font-nav-link text-nav-link text-pop-red font-semibold py-4 px-6 rounded-full hover:bg-surface-container-low transition-colors self-start flex items-center gap-2">
+<span class="material-symbols-outlined">logout</span>
+                Esci
+            </button>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden bg-surface-container-lowest/90 dark:bg-surface-container/90 fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md rounded-full border border-outline-variant backdrop-blur-md shadow-float fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md h-[nav-height-mobile] z-50 flex justify-around items-center px-6">
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-nav-link text-caption">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-nav-link text-caption">Corsi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-ink font-semibold scale-110 hover:bg-surface-container-low rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-nav-link text-caption">Profilo</span>
+</a>
+</nav>
+</body></html>
+
+<!-- Corsi Salvati — Florence Student -->
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I miei corsi salvati - Florence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Caveat:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#5f5e5e",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-highest": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "tertiary-fixed": "#e6e1df",
+                        "surface-container-lowest": "#ffffff",
+                        "card-base": "#F5F5F7",
+                        "primary": "#000000",
+                        "secondary-fixed-dim": "#c6c6c8",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "rating-teaching": "#4F8BFF",
+                        "rating-difficulty": "#FF6B35",
+                        "on-background": "#1c1b1b",
+                        "card-tinted": "#EEF1F8",
+                        "surface-bright": "#fdf8f8",
+                        "surface": "#fdf8f8",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "text-muted": "#8A8A8A",
+                        "outline": "#747878",
+                        "canvas-cool": "#F4F6FA",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "pop-orange": "#FF6B35",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#1a1c1d",
+                        "ink-soft": "#1F1F1F",
+                        "pop-yellow": "#FFE25C",
+                        "background": "#fdf8f8",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c7c7",
+                        "on-surface": "#1c1b1b",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#474646",
+                        "pop-red": "#FF4757",
+                        "on-surface-variant": "#444748",
+                        "primary-fixed": "#e5e2e1",
+                        "inverse-on-surface": "#f4f0ef",
+                        "canvas-soft": "#FAFAFA",
+                        "pop-green": "#4ADE80",
+                        "on-tertiary": "#ffffff",
+                        "canvas": "#FFFFFF",
+                        "surface-container": "#f1edec",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#454749",
+                        "border-card": "rgba(0, 0, 0, 0.04)",
+                        "on-primary": "#ffffff",
+                        "text": "#4A4A4A",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-low": "#f7f3f2",
+                        "secondary": "#5d5e60",
+                        "text-faint": "#B8B8B8",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#858383",
+                        "ink": "#0A0A0A",
+                        "on-tertiary-container": "#868381",
+                        "pop-blue": "#4F8BFF",
+                        "surface-container-high": "#ebe7e6",
+                        "on-secondary-container": "#616365",
+                        "primary-container": "#1c1b1b",
+                        "secondary-fixed": "#e2e2e4",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "tertiary": "#000000",
+                        "inverse-primary": "#c9c6c5",
+                        "tertiary-container": "#1d1b1a",
+                        "surface-dim": "#ddd9d8",
+                        "secondary-container": "#dfdfe1",
+                        "rating-grading": "#4ADE80"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "nav-height-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "card-padding": "24px",
+                        "nav-height-mobile": "56px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "card-title": ["Inter"],
+                        "handwritten-note": ["Caveat"],
+                        "h2-section": ["Inter"],
+                        "caption": ["Inter"],
+                        "hero-display-mobile": ["Inter"],
+                        "body-main": ["Inter"],
+                        "hero-display": ["Inter"],
+                        "h1-editorial": ["Inter"],
+                        "nav-link": ["Inter"],
+                        "data-display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "card-title": ["18px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "handwritten-note": ["20px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h2-section": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400" }],
+                        "hero-display-mobile": ["56px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-main": ["15px", { "lineHeight": "1.5", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+                        "hero-display": ["128px", { "lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "h1-editorial": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.035em", "fontWeight": "800" }],
+                        "nav-link": ["15px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "data-display": ["72px", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+                    },
+                    "boxShadow": {
+                        "card": "0 4px 8px rgba(0, 0, 0, 0.04)",
+                        "float": "0 12px 48px rgba(0, 0, 0, 0.06)",
+                        "object": "0 8px 24px rgba(0, 0, 0, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.canvas'); color: theme('colors.ink'); }
+    </style>
+</head>
+<body class="min-h-screen relative pb-[80px] md:pb-0 font-body-main text-body-main">
+<!-- Top Navigation (Desktop) -->
+<header class="hidden md:flex justify-between items-center w-full px-margin-desktop max-w-7xl mx-auto bg-transparent text-primary font-nav-link top-0 h-14 z-40 bg-canvas mt-4 mb-4">
+<div class="font-hero-display-mobile text-h2-section text-primary">Florence</div>
+<nav class="flex gap-gutter items-center text-card-title">
+<a class="text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Corsi</a>
+<a class="text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Docenti</a>
+<a class="text-ink font-bold after:content-[''] after:block after:w-[6px] after:h-[6px] after:bg-primary after:mx-auto after:mt-[4px] hover:text-primary transition-all duration-200" href="#">Profilo</a>
+</nav>
+<div class="w-[32px] h-[32px] rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="A close up portrait of a young professional in a modern, well lit environment. Editorial minimal style with stark black and white contrasts. Soft, flattering lighting on the subject's face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8WcUmMuq2-32bPaHC4YNpTIkPr0WBewyfuBS9DJC9Ooi8p8SXjpVHbuuX5bnHmeQB8K1bI0J-q8BfCYjqE0HMnSpfFcxxRPX_hF1y10llIm2txE5h5lukSptFr0t4UJRdEz3JjLocvmJQpWGxVLSCbsl4XwvCZWd3RV7U9g5QOB0ElxPlIqYC3CQUGMyMEBjWs3NFzbaqMBc7NQjih5tTLNTqTE8dYvD20Kn7uu0cNXfEsb2mpD1IpF4nO4R2xmT9Xj-k89AG5w"/>
+</div>
+</header>
+<!-- Top Navigation (Mobile) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-[nav-height-mobile] bg-transparent text-primary z-40 bg-canvas">
+<div class="font-hero-display-mobile text-h2-section text-primary">Florence</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-8 md:pt-16 pb-24">
+<header class="mb-16 md:mb-24 z-10 relative">
+<h1 class="font-h1-editorial text-h1-editorial text-ink transform -rotate-1 origin-bottom-left max-w-3xl">I miei corsi salvati</h1>
+</header>
+<!-- Bento Grid Showcase -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter relative z-0">
+<!-- Card 1 -->
+<div class="md:col-span-5 md:col-start-1 md:row-start-1 bg-card-base p-card-padding rounded-xl shadow-card border border-border-card transform rotate-1 hover:-translate-y-[2px] hover:shadow-float transition-all duration-300 relative group cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="inline-block px-3 py-1 bg-surface rounded-full text-caption text-text-muted mb-3 border border-outline-variant">Design</span>
+<h2 class="font-card-title text-card-title text-ink mb-1">Interaction Design</h2>
+<p class="text-text-muted text-sm">Prof. Andrea Rossi</p>
+</div>
+<button aria-label="Rimuovi dai salvati" class="w-10 h-10 rounded-full bg-canvas flex items-center justify-center shadow-card hover:bg-pop-red hover:text-on-primary transition-colors text-pop-red">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-caption text-text-muted">Difficoltà</span>
+<span class="font-card-title text-ink">3.8<span class="text-text-muted text-sm font-normal">/5</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-caption text-text-muted">Insegnamento</span>
+<span class="font-card-title text-ink">4.5<span class="text-text-muted text-sm font-normal">/5</span></span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="md:col-span-6 md:col-start-7 md:row-start-2 bg-card-base p-card-padding rounded-xl shadow-card border border-border-card transform -rotate-1 hover:-translate-y-[2px] hover:shadow-float transition-all duration-300 relative group cursor-pointer mt-8 md:mt-0">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="inline-block px-3 py-1 bg-surface rounded-full text-caption text-text-muted mb-3 border border-outline-variant">Informatica</span>
+<h2 class="font-card-title text-card-title text-ink mb-1">Sistemi Operativi</h2>
+<p class="text-text-muted text-sm">Prof.ssa Elena Bianchi</p>
+</div>
+<button aria-label="Rimuovi dai salvati" class="w-10 h-10 rounded-full bg-canvas flex items-center justify-center shadow-card hover:bg-pop-red hover:text-on-primary transition-colors text-pop-red">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-caption text-text-muted">Difficoltà</span>
+<span class="font-card-title text-ink">4.9<span class="text-text-muted text-sm font-normal">/5</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-caption text-text-muted">Voti</span>
+<span class="font-card-title text-ink">2.1<span class="text-text-muted text-sm font-normal">/5</span></span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="md:col-span-5 md:col-start-2 md:row-start-3 bg-card-base p-card-padding rounded-xl shadow-card border border-border-card transform rotate-2 hover:-translate-y-[2px] hover:shadow-float transition-all duration-300 relative group cursor-pointer mt-8 md:mt-16">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="inline-block px-3 py-1 bg-surface rounded-full text-caption text-text-muted mb-3 border border-outline-variant">Economia</span>
+<h2 class="font-card-title text-card-title text-ink mb-1">Microeconomia Avanzata</h2>
+<p class="text-text-muted text-sm">Prof. Marco Verdi</p>
+</div>
+<button aria-label="Rimuovi dai salvati" class="w-10 h-10 rounded-full bg-canvas flex items-center justify-center shadow-card hover:bg-pop-red hover:text-on-primary transition-colors text-pop-red">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-caption text-text-muted">Difficoltà</span>
+<span class="font-card-title text-ink">4.2<span class="text-text-muted text-sm font-normal">/5</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-caption text-text-muted">Insegnamento</span>
+<span class="font-card-title text-ink">3.9<span class="text-text-muted text-sm font-normal">/5</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State (Hidden in this view, uncomment to see)
+        <div class="flex flex-col items-center justify-center py-32 text-center">
+            <div class="text-[96px] leading-none mb-8 transform -rotate-12 shadow-object drop-shadow-xl inline-block" style="filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));">❤️</div>
+            <h2 class="font-h2-section text-h2-section text-ink mb-6">Nessun corso salvato</h2>
+            <button class="bg-ink text-on-primary px-8 py-4 rounded-full font-card-title text-card-title hover:-translate-y-1 hover:shadow-float transition-all duration-300 shadow-card">
+                Esplora corsi
+            </button>
+        </div>
+        -->
+</main>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md h-[nav-height-mobile] z-50 flex justify-around items-center px-6 bg-surface-container-lowest/90 dark:bg-surface-container/90 rounded-full border border-outline-variant backdrop-blur-md shadow-float">
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-nav-link text-caption mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-nav-link text-caption mt-1">Corsi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-ink font-semibold scale-110 hover:bg-surface-container-low rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-nav-link text-caption mt-1">Profilo</span>
+</a>
+</nav>
+</body></html>
+
+<!-- Dettaglio Corso di Laurea — Florence Student -->
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dettaglio Corso - Florence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Caveat:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#1a1c1d",
+                        "surface-container-highest": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c4c7c7",
+                        "on-primary-container": "#858383",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "inverse-on-surface": "#f4f0ef",
+                        "text-faint": "#B8B8B8",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ebe7e6",
+                        "surface-container-low": "#f7f3f2",
+                        "surface-tint": "#5f5e5e",
+                        "on-secondary-container": "#616365",
+                        "on-background": "#1c1b1b",
+                        "canvas": "#FFFFFF",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-container": "#f1edec",
+                        "secondary-fixed": "#e2e2e4",
+                        "on-error-container": "#93000a",
+                        "text-muted": "#8A8A8A",
+                        "rating-teaching": "#4F8BFF",
+                        "surface-bright": "#fdf8f8",
+                        "tertiary-container": "#1d1b1a",
+                        "rating-difficulty": "#FF6B35",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#c9c6c5",
+                        "error-container": "#ffdad6",
+                        "pop-yellow": "#FFE25C",
+                        "surface": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "ink-soft": "#1F1F1F",
+                        "canvas-soft": "#FAFAFA",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#1c1b1b",
+                        "secondary-fixed-dim": "#c6c6c8",
+                        "primary": "#000000",
+                        "ink": "#0A0A0A",
+                        "surface-dim": "#ddd9d8",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "rating-grading": "#4ADE80",
+                        "secondary": "#5d5e60",
+                        "inverse-surface": "#313030",
+                        "pop-red": "#FF4757",
+                        "pop-green": "#4ADE80",
+                        "on-error": "#ffffff",
+                        "background": "#fdf8f8",
+                        "outline": "#747878",
+                        "tertiary-fixed": "#e6e1df",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "pop-blue": "#4F8BFF",
+                        "on-primary-fixed-variant": "#474646",
+                        "canvas-cool": "#F4F6FA",
+                        "card-tinted": "#EEF1F8",
+                        "text": "#4A4A4A",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dfdfe1",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "on-tertiary-container": "#868381",
+                        "border-card": "rgba(0, 0, 0, 0.04)",
+                        "on-secondary-fixed-variant": "#454749",
+                        "pop-orange": "#FF6B35",
+                        "primary-container": "#1c1b1b",
+                        "on-surface-variant": "#444748",
+                        "tertiary": "#000000",
+                        "card-base": "#F5F5F7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "nav-height-mobile": "56px",
+                        "card-padding": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "nav-height-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "nav-link": ["Inter"],
+                        "data-display": ["Inter"],
+                        "hero-display": ["Inter"],
+                        "h2-section": ["Inter"],
+                        "card-title": ["Inter"],
+                        "handwritten-note": ["Caveat"],
+                        "h1-editorial": ["Inter"],
+                        "caption": ["Inter"],
+                        "hero-display-mobile": ["Inter"],
+                        "body-main": ["Inter"]
+                    },
+                    "fontSize": {
+                        "nav-link": ["15px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "data-display": ["72px", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "hero-display": ["128px", { "lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "h2-section": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "card-title": ["18px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "handwritten-note": ["20px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h1-editorial": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.035em", "fontWeight": "800" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400" }],
+                        "hero-display-mobile": ["56px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-main": ["15px", { "lineHeight": "1.5", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+                    },
+                    boxShadow: {
+                        'card': '0 4px 8px -2px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.02)',
+                        'float': '0 20px 48px -12px rgba(0, 0, 0, 0.06), 0 8px 16px -4px rgba(0, 0, 0, 0.03)',
+                        'object': '0 24px 32px -8px rgba(0, 0, 0, 0.12), 0 12px 16px -4px rgba(0, 0, 0, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #FFFFFF;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-text font-body-main antialiased selection:bg-primary selection:text-on-primary pb-[100px] md:pb-0">
+<!-- TopNavBar -->
+<header class="hidden md:flex justify-between items-center w-full px-margin-desktop max-w-7xl mx-auto bg-transparent docked full-width top-0 h-16 flat no shadows z-50">
+<div class="font-hero-display-mobile text-h2-section text-primary dark:text-on-primary">
+            Florence
+        </div>
+<nav class="flex gap-8">
+<a class="font-nav-link text-[18px] text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Corsi</a>
+<a class="font-nav-link text-[18px] text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Docenti</a>
+<a class="font-nav-link text-[18px] text-text-muted hover:text-ink transition-colors hover:text-primary transition-all duration-200" href="#">Profilo</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full bg-card-base flex items-center justify-center shadow-card hover:-translate-y-0.5 transition-transform">
+<span class="material-symbols-outlined text-ink" data-icon="search">search</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-card-base overflow-hidden shadow-card hover:-translate-y-0.5 transition-transform border border-border-card">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a young woman with a neutral, professional expression, set against a pristine, light-mode background. The lighting is soft and even, highlighting the clear, crisp tones typical of a modern minimalist editorial style. The overall color palette is restrained, focusing on natural skin tones and a clean white canvas." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHlrJ68rb-ZjV7N29qavP5gUIfp7d4xj1Fu8M3x2RdAJUWI1dtnRyL0wm4NnJoYEr_zG9396xhDNDozTEJv5w1yBQL8q5yShwV2r977NzXk10tcz5bThO4D2NqENVLcbMkm3Q3Fi0Rc2e4cX83b2Q2m6nNNeHQt_Q4-nmOisiujgeQQN8abd1H5SX-BmgczsNyIfERgYu_xGAw1YiNo_u81x5ikgKZPMpCdHfFdnTwlNTP390Y7nM6gpEbLxjP8L8MHKaXjYvbHw"/>
+</div>
+</div>
+</header>
+<main class="w-full px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto pt-8 md:pt-16">
+<!-- Hero Section -->
+<section class="mb-16 md:mb-24 relative">
+<div class="flex flex-col md:flex-row gap-gutter items-start bento-grid">
+<div class="col-span-12 md:col-span-8 md:col-start-2 relative z-10">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-ink text-on-primary rounded-full mb-6 shadow-object -rotate-1 md:rotate-1">
+<span class="material-symbols-outlined text-sm" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-nav-link text-nav-link text-on-primary">L-31</span>
+</div>
+<h1 class="font-hero-display-mobile md:font-hero-display text-hero-display-mobile md:text-hero-display text-ink mb-6 max-w-4xl tracking-tighter leading-none -rotate-1 relative z-20">
+                        Informatica
+                    </h1>
+<div class="font-h2-section text-h2-section text-text-muted max-w-2xl rotate-1">
+                        Dipartimento di Matematica e Informatica "Ulisse Dini"
+                        <div class="font-body-main text-body-main text-text mt-4">
+                            Coordinatore: Prof. Andrea Rossi
+                        </div>
+</div>
+</div>
+<!-- 3D Object Sticker -->
+<div class="hidden md:block absolute right-12 top-0 transform -rotate-12 hover:-rotate-6 transition-transform duration-500 z-30">
+<div class="w-32 h-32 bg-canvas rounded-xl shadow-object border border-border-card flex items-center justify-center p-4">
+<span class="material-symbols-outlined text-[80px] text-pop-blue" data-icon="computer" style="font-variation-settings: 'FILL' 1;">computer</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Dashboard -->
+<section class="mb-24">
+<div class="bento-grid">
+<div class="col-span-12 md:col-span-10 md:col-start-2">
+<div class="bg-card-base rounded-xl p-card-padding shadow-card border border-border-card rotate-1 hover:-translate-y-0.5 transition-transform duration-300">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-outline-variant/30">
+<div class="flex flex-col items-center md:items-start text-center md:text-left pt-4 md:pt-0">
+<span class="font-nav-link text-nav-link text-text-muted mb-2 uppercase tracking-widest">Totale Corsi</span>
+<span class="font-data-display text-data-display text-ink">36</span>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left md:pl-8 pt-4 md:pt-0">
+<span class="font-nav-link text-nav-link text-text-muted mb-2 uppercase tracking-widest">Corsi Obbligatori</span>
+<span class="font-data-display text-data-display text-pop-orange">24</span>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left md:pl-8 pt-4 md:pt-0">
+<span class="font-nav-link text-nav-link text-text-muted mb-2 uppercase tracking-widest">CFU Totali</span>
+<span class="font-data-display text-data-display text-pop-green">180</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Obbligatori List -->
+<section class="mb-24">
+<div class="bento-grid mb-12">
+<div class="col-span-12 md:col-span-8 md:col-start-2 border-b-2 border-ink pb-4">
+<h2 class="font-h1-editorial text-h1-editorial text-ink">Corsi Obbligatori</h2>
+<p class="font-body-main text-body-main text-text-muted mt-2">Fondamenti necessari per il completamento del programma.</p>
+</div>
+</div>
+<div class="bento-grid">
+<!-- Course Card 1 -->
+<div class="col-span-12 md:col-span-5 md:col-start-2">
+<div class="bg-canvas p-card-padding rounded-xl shadow-card border border-border-card -rotate-1 hover:-translate-y-0.5 hover:shadow-float transition-all duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-surface-container-high rounded-full font-caption text-caption text-text">
+<span class="material-symbols-outlined text-[14px]" data-icon="tag">tag</span>
+                                INF01
+                            </span>
+<span class="font-card-title text-card-title text-ink font-bold">12 CFU</span>
+</div>
+<h3 class="font-h2-section text-[24px] leading-tight text-ink mb-2 group-hover:text-pop-blue transition-colors">Programmazione I</h3>
+<p class="font-body-main text-body-main text-text-muted mb-6">Introduzione ai concetti fondamentali della programmazione procedurale e orientata agli oggetti.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border-card">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Docente</span>
+<span class="font-nav-link text-nav-link text-ink">Marco Bianchi</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-ink flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-primary text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="col-span-12 md:col-span-5 md:col-start-7 md:mt-12">
+<div class="bg-canvas p-card-padding rounded-xl shadow-card border border-border-card rotate-1 hover:-translate-y-0.5 hover:shadow-float transition-all duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-surface-container-high rounded-full font-caption text-caption text-text">
+<span class="material-symbols-outlined text-[14px]" data-icon="tag">tag</span>
+                                MAT01
+                            </span>
+<span class="font-card-title text-card-title text-ink font-bold">9 CFU</span>
+</div>
+<h3 class="font-h2-section text-[24px] leading-tight text-ink mb-2 group-hover:text-pop-blue transition-colors">Analisi Matematica</h3>
+<p class="font-body-main text-body-main text-text-muted mb-6">Studio delle funzioni reali, limiti, derivate e integrali per la computer science.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border-card">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Docente</span>
+<span class="font-nav-link text-nav-link text-ink">Laura Verdi</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-ink flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-primary text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- A Scelta List -->
+<section class="mb-24">
+<div class="bento-grid mb-12">
+<div class="col-span-12 md:col-span-8 md:col-start-3 border-b-2 border-outline-variant pb-4 text-right">
+<h2 class="font-h1-editorial text-h1-editorial text-ink">A Scelta</h2>
+<p class="font-body-main text-body-main text-text-muted mt-2">Personalizza il tuo percorso di studi.</p>
+</div>
+</div>
+<div class="bento-grid">
+<!-- Course Card 3 -->
+<div class="col-span-12 md:col-span-4 md:col-start-3">
+<div class="bg-card-base p-card-padding rounded-xl shadow-card border border-border-card -rotate-2 hover:-translate-y-0.5 hover:shadow-float transition-all duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-canvas rounded-full font-caption text-caption text-text">
+<span class="material-symbols-outlined text-[14px]" data-icon="tag">tag</span>
+                                INF08
+                            </span>
+<span class="font-card-title text-card-title text-ink font-bold">6 CFU</span>
+</div>
+<h3 class="font-h2-section text-[22px] leading-tight text-ink mb-2 group-hover:text-pop-orange transition-colors">Intelligenza Artificiale</h3>
+<p class="font-body-main text-[14px] text-text-muted mb-6">Fondamenti di machine learning e reti neurali.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border-card">
+<div class="flex flex-col">
+<span class="font-nav-link text-nav-link text-ink">Giuseppe Neri</span>
+</div>
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Course Card 4 -->
+<div class="col-span-12 md:col-span-4 md:col-start-7 mt-8 md:mt-0">
+<div class="bg-card-base p-card-padding rounded-xl shadow-card border border-border-card rotate-1 hover:-translate-y-0.5 hover:shadow-float transition-all duration-300 cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-canvas rounded-full font-caption text-caption text-text">
+<span class="material-symbols-outlined text-[14px]" data-icon="tag">tag</span>
+                                INF09
+                            </span>
+<span class="font-card-title text-card-title text-ink font-bold">6 CFU</span>
+</div>
+<h3 class="font-h2-section text-[22px] leading-tight text-ink mb-2 group-hover:text-pop-orange transition-colors">Sviluppo Web Avanzato</h3>
+<p class="font-body-main text-[14px] text-text-muted mb-6">Architetture moderne, framework frontend e backend.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border-card">
+<div class="flex flex-col">
+<span class="font-nav-link text-nav-link text-ink">Elena Gialli</span>
+</div>
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md h-[nav-height-mobile] z-50 flex justify-around items-center px-6 bg-surface-container-lowest/90 dark:bg-surface-container/90 border border-outline-variant backdrop-blur-md shadow-float rounded-full">
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all w-16 h-full" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-nav-link text-caption mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-ink font-semibold scale-110 hover:bg-surface-container-low rounded-full transition-all w-16 h-full relative" href="#">
+<span class="material-symbols-outlined" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-nav-link text-caption mt-1">Corsi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:bg-surface-container-low rounded-full transition-all w-16 h-full" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-nav-link text-caption mt-1">Profilo</span>
+</a>
+</nav>
+</body></html>
+
+<!-- Login — Florence Student -->
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Accedi - Florence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#5f5e5e",
+                        "text-faint": "#B8B8B8",
+                        "surface-container-low": "#f7f3f2",
+                        "surface-container-high": "#ebe7e6",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#e5e2e1",
+                        "canvas": "#FFFFFF",
+                        "surface-container": "#f1edec",
+                        "on-background": "#1c1b1b",
+                        "on-secondary-container": "#616365",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-fixed": "#1a1c1d",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "outline-variant": "#c4c7c7",
+                        "on-primary-container": "#858383",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "rating-difficulty": "#FF6B35",
+                        "inverse-primary": "#c9c6c5",
+                        "rating-teaching": "#4F8BFF",
+                        "text-muted": "#8A8A8A",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#e2e2e4",
+                        "tertiary-container": "#1d1b1a",
+                        "surface-bright": "#fdf8f8",
+                        "ink": "#0A0A0A",
+                        "surface-dim": "#ddd9d8",
+                        "primary": "#000000",
+                        "secondary-fixed-dim": "#c6c6c8",
+                        "on-primary-fixed": "#1c1b1b",
+                        "outline": "#747878",
+                        "background": "#fdf8f8",
+                        "secondary": "#5d5e60",
+                        "rating-grading": "#4ADE80",
+                        "inverse-surface": "#313030",
+                        "pop-red": "#FF4757",
+                        "pop-green": "#4ADE80",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "error-container": "#ffdad6",
+                        "canvas-soft": "#FAFAFA",
+                        "on-secondary": "#ffffff",
+                        "ink-soft": "#1F1F1F",
+                        "surface": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "pop-yellow": "#FFE25C",
+                        "on-surface-variant": "#444748",
+                        "pop-orange": "#FF6B35",
+                        "primary-container": "#1c1b1b",
+                        "card-base": "#F5F5F7",
+                        "tertiary": "#000000",
+                        "text": "#4A4A4A",
+                        "card-tinted": "#EEF1F8",
+                        "on-primary-fixed-variant": "#474646",
+                        "canvas-cool": "#F4F6FA",
+                        "pop-blue": "#4F8BFF",
+                        "tertiary-fixed": "#e6e1df",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "on-secondary-fixed-variant": "#454749",
+                        "on-tertiary-container": "#868381",
+                        "border-card": "rgba(0, 0, 0, 0.04)",
+                        "secondary-container": "#dfdfe1",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "nav-height-mobile": "56px",
+                        "margin-mobile": "16px",
+                        "nav-height-desktop": "64px",
+                        "card-padding": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "nav-link": ["Inter"],
+                        "data-display": ["Inter"],
+                        "hero-display": ["Inter"],
+                        "h2-section": ["Inter"],
+                        "card-title": ["Inter"],
+                        "handwritten-note": ["Caveat"],
+                        "h1-editorial": ["Inter"],
+                        "caption": ["Inter"],
+                        "hero-display-mobile": ["Inter"],
+                        "body-main": ["Inter"]
+                    },
+                    "fontSize": {
+                        "nav-link": ["15px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "data-display": ["72px", { "lineHeight": "1.0", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "hero-display": ["128px", { "lineHeight": "0.95", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "h2-section": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "card-title": ["18px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "handwritten-note": ["20px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h1-editorial": ["64px", { "lineHeight": "1.0", "letterSpacing": "-0.035em", "fontWeight": "800" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400" }],
+                        "hero-display-mobile": ["56px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-main": ["15px", { "lineHeight": "1.5", "letterSpacing": "-0.005em", "fontWeight": "400" }]
+                    },
+                    "boxShadow": {
+                        "card": "0 4px 8px rgba(0, 0, 0, 0.04)",
+                        "float": "0 12px 48px rgba(0, 0, 0, 0.06)",
+                        "object": "0 20px 40px rgba(0, 0, 0, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-on-surface min-h-screen flex items-center justify-center p-6 relative overflow-hidden font-body-main antialiased selection:bg-surface-dim selection:text-ink">
+<!-- Subtle Floating 3D Object -->
+<div class="absolute top-[15%] left-[15%] md:left-[25%] -rotate-[8deg] drop-shadow-[0_20px_40px_rgba(0,0,0,0.12)] text-[80px] select-none pointer-events-none opacity-90 z-10 hidden sm:block">
+        🎓
+    </div>
+<div class="absolute bottom-[20%] right-[10%] md:right-[20%] rotate-[12deg] drop-shadow-[0_20px_40px_rgba(0,0,0,0.12)] text-[72px] select-none pointer-events-none opacity-80 z-10 hidden sm:block">
+        📝
+    </div>
+<!-- Main Container -->
+<div class="w-full max-w-[640px] relative z-20 flex flex-col items-center">
+<!-- Header -->
+<div class="mb-12 text-center relative">
+<h1 class="font-h1-editorial text-h1-editorial text-ink mb-2 -rotate-[1deg]">Bentornato<br/>su Florence</h1>
+<p class="font-body-main text-body-main text-text-muted mt-4">Accedi per continuare la tua esperienza.</p>
+</div>
+<!-- Login Card -->
+<div class="w-full bg-card-base rounded-2xl p-8 md:p-12 shadow-card rotate-[1deg] hover:-translate-y-[2px] transition-transform duration-300 relative">
+<form action="#" class="space-y-6" method="POST">
+<!-- Email Input -->
+<div>
+<label class="sr-only" for="email">Email</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[24px]">mail</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-4 bg-canvas border border-outline-variant rounded-full text-ink placeholder:text-text-faint focus:ring-2 focus:ring-ink focus:border-ink transition-colors font-body-main text-body-main shadow-sm" id="email" name="email" placeholder="Email universitaria" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div>
+<label class="sr-only" for="password">Password</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[24px]">lock</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-4 bg-canvas border border-outline-variant rounded-full text-ink placeholder:text-text-faint focus:ring-2 focus:ring-ink focus:border-ink transition-colors font-body-main text-body-main shadow-sm" id="password" name="password" placeholder="Password" required="" type="password"/>
+</div>
+<div class="mt-3 text-right">
+<a class="font-nav-link text-caption text-text-muted hover:text-ink transition-colors" href="#">Hai dimenticato la password?</a>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-4 space-y-4">
+<button class="w-full flex justify-center py-4 px-4 border border-transparent rounded-full shadow-sm font-card-title text-card-title text-canvas bg-ink hover:bg-ink-soft focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ink transition-colors" type="submit">
+                        Accedi
+                    </button>
+<div class="relative flex items-center justify-center my-6">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative bg-card-base px-4 font-caption text-caption text-text-muted uppercase tracking-wider">
+                            Oppure
+                        </div>
+</div>
+<button class="w-full flex items-center justify-center py-4 px-4 border border-outline-variant rounded-full shadow-sm font-card-title text-card-title text-ink bg-canvas hover:bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ink transition-colors" type="button">
+<img alt="Google logo" class="w-6 h-6 mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1dkvEjDCaB8ID4Sad_6zZaQC9qmjnIgdtA7JosIw7avWfJpS9RhL2tFl06kSp65SDvNd_X5Ys6waMQAjFSTn-ZoFdXuHsg7wLql5qvh_W7kibI-lNwTdL3O2by5LfHNKnqsyOMVACqWTOCRLFdCUHeRmKk0I1xXodskvupFNaQkLozt1N_fwHFrKwHqW732MQA4pdoDgynQqbST2WbgIgsKrPynoPEGY-ff6gdBpCw2XnTmvsgBw0mMWCr4QkS1tRVON1BZY1cQ"/>
+                        Accedi con Google
+                    </button>
+</div>
+</form>
+<!-- Registration Link -->
+<div class="mt-10 text-center">
+<p class="font-body-main text-body-main text-text-muted">
+                    Non hai un account? 
+                    <a class="font-nav-link text-nav-link text-ink hover:underline decoration-2 underline-offset-4" href="#">Registrati</a>
+</p>
+</div>
+</div>
+</div>
+</body></html>

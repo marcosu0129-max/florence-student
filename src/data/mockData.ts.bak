@@ -1,0 +1,529 @@
+// Mock data for Florence Student app
+// In production, this data comes from Supabase
+
+export interface Program {
+  code: string;
+  name: string;
+  faculty: string;
+  totalCredits: number;
+  description: string;
+  president: string;
+  courseCount: number;
+  requiredCount: number;
+}
+
+export interface Course {
+  id: string;
+  name: string;
+  professorId: string;
+  professorName: string;
+  credits: number;
+  semester: string;
+  yearLevel: number;
+  isRequired: boolean;
+  programCode: string;
+  description: string;
+  rating?: number;
+  reviewCount?: number;
+  difficulty?: number;
+  teaching?: number;
+  grading?: number;
+}
+
+export interface Professor {
+  id: string;
+  name: string;
+  department: string;
+  faculty: string;
+  bio?: string;
+  email?: string;
+  office?: string;
+  rating: number;
+  programs: string[];
+  courseCount: number;
+}
+
+export interface Review {
+  id: string;
+  courseId: string;
+  author: string;
+  date: string;
+  ratingDifficulty: number;
+  ratingTeaching: number;
+  grade?: number;
+  content: string;
+  tip?: string;
+  tipType?: 'success' | 'warning';
+  helpfulCount: number;
+}
+
+export interface Resource {
+  id: string;
+  courseId: string;
+  title: string;
+  type: 'pdf' | 'audio' | 'video' | 'doc' | 'image';
+  uploader: string;
+  date: string;
+  size: string;
+  downloads: number;
+  description?: string;
+}
+
+// ===== Programs =====
+export const programs: Program[] = [
+  {
+    code: 'LM-92',
+    name: 'Pratiche, linguaggi e culture della comunicazione',
+    faculty: 'Scuola di Studi Umanistici e della Formazione',
+    totalCredits: 120,
+    description: 'Il corso di laurea in Pratiche, linguaggi e culture della comunicazione forma professionisti della comunicazione, del linguaggio e dei media.',
+    president: 'Prof. Roberto Barilari',
+    courseCount: 48,
+    requiredCount: 32,
+  },
+  {
+    code: 'LM-14',
+    name: 'Filologia moderna',
+    faculty: 'Scuola di Studi Umanistici e della Formazione',
+    totalCredits: 120,
+    description: 'Corso di laurea magistrale in Filologia moderna, con approfondimenti in linguistica, letteratura e filologia romanza.',
+    president: 'Prof.ssa Lucia Magnanensi',
+    courseCount: 36,
+    requiredCount: 24,
+  },
+  {
+    code: 'LM-2',
+    name: 'Archeologia',
+    faculty: 'Scuola di Scienze Politiche',
+    totalCredits: 120,
+    description: 'Laurea magistrale in Archeologia, con focus su metodologie di scavo, analisi dei materiali e valorizzazione del patrimonio.',
+    president: 'Prof. Marco Tognolini',
+    courseCount: 30,
+    requiredCount: 20,
+  },
+  {
+    code: 'L-11',
+    name: 'Lingue, letterature e studi interculturali',
+    faculty: 'Scuola di Studi Umanistici e della Formazione',
+    totalCredits: 180,
+    description: 'Corso di laurea triennale in Lingue, letterature e studi interculturali. Include studio di due lingue straniere.',
+    president: 'Prof.ssa Elena Mancini',
+    courseCount: 42,
+    requiredCount: 28,
+  },
+  {
+    code: 'L-10',
+    name: 'Lettere',
+    faculty: 'Scuola di Studi Umanistici e della Formazione',
+    totalCredits: 180,
+    description: 'Corso di laurea triennale in Lettere, con indirizzi in letteratura italiana, storia antica e moderna, e filologia.',
+    president: 'Prof. Giacomo Benvenuti',
+    courseCount: 38,
+    requiredCount: 26,
+  },
+];
+
+// ===== Professors =====
+export const professors: Professor[] = [
+  {
+    id: 'p1',
+    name: 'Prof. Alessandro Rossi',
+    department: 'Dipartimento di Linguistica',
+    faculty: 'Scuola di Studi Umanistici',
+    bio: 'Professore Ordinario di Linguistica Generale dal 2015. La sua ricerca si concentra su fonetica acustica, sintassi generativa e didattica delle lingue. Ha pubblicato oltre 80 articoli su riviste internazionali.',
+    email: 'a.rossi@unifi.it',
+    office: 'Plesso S. Marta, Stanza 302',
+    rating: 4.5,
+    programs: ['LM-92', 'L-10'],
+    courseCount: 5,
+  },
+  {
+    id: 'p2',
+    name: 'Prof.ssa Laura Bianchi',
+    department: 'Dipartimento di Scienze per l\'Economia',
+    faculty: 'Scuola di Economia e Management',
+    bio: 'Professoressa Associata di Microeconomia. Specialista in economia comportamentale e analisi dei mercati finanziari.',
+    email: 'l.bianchi@unifi.it',
+    office: 'Plesso delle Scienze, Stanza 118',
+    rating: 3.8,
+    programs: ['LM-92'],
+    courseCount: 3,
+  },
+  {
+    id: 'p3',
+    name: 'Prof. Giuseppe Verdi',
+    department: 'Dipartimento di Lettere e Filosofia',
+    faculty: 'Scuola di Studi Umanistici',
+    bio: 'Professore Ordinario di Letteratura Italiana. Esperto di letteratura del Novecento e poetica contemporanea. Ha curato edizioni critiche per i classici Einaudi.',
+    email: 'g.verdi@unifi.it',
+    office: 'Plesso Umanistico, Stanza 210',
+    rating: 4.9,
+    programs: ['LM-92', 'LM-14', 'L-10'],
+    courseCount: 8,
+  },
+  {
+    id: 'p4',
+    name: 'Prof.ssa Chiara Ferri',
+    department: 'Dipartimento di Scienze Storiche',
+    faculty: 'Scuola di Scienze Politiche',
+    bio: 'Ricercatrice in Storia Medievale. Si occupa di storia urbana e archivistica per il periodo comunale toscano.',
+    email: 'c.ferri@unifi.it',
+    office: 'Plesso S. Marta, Stanza 405',
+    rating: 4.2,
+    programs: ['LM-2', 'L-10'],
+    courseCount: 4,
+  },
+  {
+    id: 'p5',
+    name: 'Prof. Marco Esposito',
+    department: 'Dipartimento di Lingue e Letterature Straniere',
+    faculty: 'Scuola di Studi Umanistici',
+    bio: 'Professore Associato di Lingua e Traduzione Inglese. Specialista in linguistica computazionale e analisi del discorso accademico in inglese.',
+    email: 'm.esposito@unifi.it',
+    office: 'Plesso Linguistico, Stanza 22',
+    rating: 4.1,
+    programs: ['L-11'],
+    courseCount: 6,
+  },
+  {
+    id: 'p6',
+    name: 'Prof.ssa Giulia Martini',
+    department: 'Dipartimento di Filologia Classica',
+    faculty: 'Scuola di Studi Umanistici',
+    bio: 'Professoressa Ordinaria di Filologia Classica. Esperta di testi latini medievali e tradizione manoscritta. Direttrice del Centro di Studi Antichi.',
+    email: 'g.martini@unifi.it',
+    office: 'Plesso Umanistico, Stanza 88',
+    rating: 4.7,
+    programs: ['LM-14', 'L-10'],
+    courseCount: 5,
+  },
+];
+
+// ===== Courses =====
+export const courses: Course[] = [
+  {
+    id: 'c1',
+    name: 'Linguistica Generale',
+    professorId: 'p1',
+    professorName: 'Prof. Alessandro Rossi',
+    credits: 12,
+    semester: 'Annuale',
+    yearLevel: 1,
+    isRequired: true,
+    programCode: 'LM-92',
+    description: 'Il corso presenta i fondamenti della linguistica moderna: fonetica, fonologia, morfologia, sintassi e semantica. Particolare attenzione viene dedicata alla acquisizione del linguaggio e alla variazione linguistica.',
+    rating: 4.2,
+    reviewCount: 28,
+    difficulty: 3.5,
+    teaching: 4.8,
+    grading: 3.5,
+  },
+  {
+    id: 'c2',
+    name: 'Analisi Matematica I',
+    professorId: 'p1',
+    professorName: 'Prof. Alessandro Rossi',
+    credits: 12,
+    semester: 'I Semestre',
+    yearLevel: 1,
+    isRequired: true,
+    programCode: 'LM-92',
+    description: 'Introduzione ai concetti fondamentali del calcolo differenziale e integrale per funzioni di una variabile reale. Limiti, derivate, integrali definiti e indefiniti, serie numeriche.',
+    rating: 3.8,
+    reviewCount: 45,
+    difficulty: 4.5,
+    teaching: 3.5,
+    grading: 3.2,
+  },
+  {
+    id: 'c3',
+    name: 'Fisica Generale I',
+    professorId: 'p2',
+    professorName: 'Prof.ssa Laura Bianchi',
+    credits: 9,
+    semester: 'II Semestre',
+    yearLevel: 1,
+    isRequired: true,
+    programCode: 'LM-92',
+    description: 'Meccanica del punto materiale e del corpo rigido. Termodinamica classica e cenni di fluidodinamica. Cinematica, dinamica, lavoro ed energia, conservazione del momento.',
+    rating: 4.0,
+    reviewCount: 32,
+    difficulty: 4.0,
+    teaching: 4.2,
+    grading: 3.8,
+  },
+  {
+    id: 'c4',
+    name: 'Letteratura Italiana I',
+    professorId: 'p3',
+    professorName: 'Prof. Giuseppe Verdi',
+    credits: 12,
+    semester: 'Annuale',
+    yearLevel: 1,
+    isRequired: true,
+    programCode: 'L-10',
+    description: 'Dante, Petrarca, Boccaccio e la letteratura del Trecento. Il corso esplora le grandi opere della letteratura italiana medievale con attenzione al contesto storico-culturale.',
+    rating: 4.9,
+    reviewCount: 18,
+    difficulty: 3.0,
+    teaching: 5.0,
+    grading: 4.8,
+  },
+  {
+    id: 'c5',
+    name: 'Storia Medievale',
+    professorId: 'p4',
+    professorName: 'Prof.ssa Chiara Ferri',
+    credits: 9,
+    semester: 'I Semestre',
+    yearLevel: 2,
+    isRequired: true,
+    programCode: 'LM-2',
+    description: 'Dalla caduta dell\'Impero Romano d\'Occidente al Rinascimento. Urbanizzazione, signorie, commune, Chiesa e potere nel Medioevo italiano.',
+    rating: 4.3,
+    reviewCount: 22,
+    difficulty: 3.2,
+    teaching: 4.5,
+    grading: 4.0,
+  },
+  {
+    id: 'c6',
+    name: 'Inglese B2',
+    professorId: 'p5',
+    professorName: 'Prof. Marco Esposito',
+    credits: 6,
+    semester: 'II Semestre',
+    yearLevel: 1,
+    isRequired: true,
+    programCode: 'L-11',
+    description: 'Corso di lingua inglese di livello B2 del QCER. Comprensione e produzione scritta e orale, lessico accademico, fonetica e pronuncia.',
+    rating: 4.1,
+    reviewCount: 55,
+    difficulty: 2.5,
+    teaching: 4.3,
+    grading: 4.5,
+  },
+  {
+    id: 'c7',
+    name: 'Filologia Romanza',
+    professorId: 'p6',
+    professorName: 'Prof.ssa Giulia Martini',
+    credits: 12,
+    semester: 'Annuale',
+    yearLevel: 2,
+    isRequired: true,
+    programCode: 'LM-14',
+    description: 'Metodi e strumenti della filologia romanza. Lingue romanze antiche, tradizione manoscritta, critica testuale. Introduzione alla linguistica storica delle lingue romanze.',
+    rating: 4.7,
+    reviewCount: 15,
+    difficulty: 3.8,
+    teaching: 4.9,
+    grading: 4.5,
+  },
+  {
+    id: 'c8',
+    name: 'Semiotica del Testo',
+    professorId: 'p1',
+    professorName: 'Prof. Alessandro Rossi',
+    credits: 6,
+    semester: 'II Semestre',
+    yearLevel: 2,
+    isRequired: false,
+    programCode: 'LM-92',
+    description: 'Introduzione alla semiotica: segno, significato, interpretazione. Analisi semiotica di testi letterari, visivi e multimediali.',
+    rating: 4.0,
+    reviewCount: 12,
+    difficulty: 3.0,
+    teaching: 4.2,
+    grading: 4.0,
+  },
+];
+
+// ===== Reviews =====
+export const reviews: Review[] = [
+  {
+    id: 'r1',
+    courseId: 'c1',
+    author: 'Marco T.',
+    date: '12 Ottobre 2023',
+    ratingDifficulty: 3,
+    ratingTeaching: 5,
+    grade: 28,
+    content: 'Il corso è molto interessante e il prof. Rossi spiega in modo chiaro. Gli argomenti di fonetica all\'inizio possono sembrare complessi, ma con gli esercizi si capiscono. Fondamentale seguire le lezioni, spesso aggiunge concetti non presenti sul libro di testo.',
+    tip: 'All\'orale fa quasi sempre una domanda sull\'albero sintattico. Esercitatevi tanto su quelli! Non chiede quasi mai le date esatte dei vari linguisti.',
+    tipType: 'success',
+    helpfulCount: 12,
+  },
+  {
+    id: 'r2',
+    courseId: 'c1',
+    author: 'Giulia S.',
+    date: '5 Settembre 2023',
+    ratingDifficulty: 4,
+    ratingTeaching: 3,
+    grade: 24,
+    content: 'Corso tosto, c\'è tanto da studiare. Il materiale fornito non è sempre sufficiente per passare con un voto alto, ho dovuto integrare con altri appunti. Il professore è disponibile al ricevimento, ma a lezione va molto veloce.',
+    tip: 'Studiate benissimo la pragmatica, all\'ultimo appello ha fatto fare una strage su quell\'argomento. E occhio alla puntualità agli appelli, non fa entrare ritardatari.',
+    tipType: 'warning',
+    helpfulCount: 5,
+  },
+  {
+    id: 'r3',
+    courseId: 'c2',
+    author: 'Luca B.',
+    date: '20 Gennaio 2024',
+    ratingDifficulty: 5,
+    ratingTeaching: 3,
+    grade: 23,
+    content: 'Esame molto difficile, richiede molta pratica sugli esercizi. Il professore spiega bene a lezione ma all\'esame pretende precisione assoluta. Consiglio di fare tutti gli esercizi del libro.',
+    tip: 'All\'esame mette spesso esercizi molto simili a quelli delle lezioni. Fatevi gli appunti in classe!',
+    tipType: 'success',
+    helpfulCount: 8,
+  },
+  {
+    id: 'r4',
+    courseId: 'c4',
+    author: 'Sofia R.',
+    date: '15 Febbraio 2024',
+    ratingDifficulty: 2,
+    ratingTeaching: 5,
+    grade: 30,
+    content: 'Il prof. Verdi è semplicemente fantastico. Spiega con passione e trascina nel mondo della letteratura. Le lezioni sono sempre coinvolgenti e piene di aneddoti. L\'esame orale è stimolante, non memorizzazione.',
+    tip: 'All\'orale chiede sempre di collegare un autore a un altro. Preparate bene i parallelismi letterari!',
+    tipType: 'success',
+    helpfulCount: 15,
+  },
+  {
+    id: 'r5',
+    courseId: 'c6',
+    author: 'Andrea M.',
+    date: '8 Dicembre 2023',
+    ratingDifficulty: 2,
+    ratingTeaching: 4,
+    grade: 27,
+    content: 'Corso ben organizzato, materiali ottimi sulla piattaforma Moodle. Le prove in itinere sono abbastanza gestibili. Il prof. Esposito è molto preparato e disponibile.',
+    helpfulCount: 3,
+  },
+  {
+    id: 'r6',
+    courseId: 'c7',
+    author: 'Valentina P.',
+    date: '3 Marzo 2024',
+    ratingDifficulty: 4,
+    ratingTeaching: 5,
+    grade: 29,
+    content: 'La prof.ssa Martini è una vera esperta del settore. Il corso è molto stimolante anche se richiede impegno costante. La bibliografia è vasta ma fondamentale.',
+    tip: 'All\'esame vuole che sappiate giustificare ogni scelta testuale. Non bastano le risposte generiche.',
+    tipType: 'success',
+    helpfulCount: 7,
+  },
+];
+
+// ===== Resources =====
+export const resources: Resource[] = [
+  {
+    id: 'res1',
+    courseId: 'c1',
+    title: 'Slide Lezioni 1-10 (Fonetica e Fonologia)',
+    type: 'pdf',
+    uploader: 'Marco T.',
+    date: '12 Ottobre 2023',
+    size: '4.2 MB',
+    downloads: 124,
+    description: 'Slide delle prime dieci lezioni, coprono fonetica articolatoria e acustica.',
+  },
+  {
+    id: 'res2',
+    courseId: 'c1',
+    title: 'Esercizi di Analisi Sintattica',
+    type: 'pdf',
+    uploader: 'Giulia S.',
+    date: '5 Settembre 2023',
+    size: '1.8 MB',
+    downloads: 89,
+    description: '30 esercizi guidati per l\'analisi degli alberi sintattici.',
+  },
+  {
+    id: 'res3',
+    courseId: 'c4',
+    title: 'Appunti Completi - Letteratura Italiana I',
+    type: 'pdf',
+    uploader: 'Sofia R.',
+    date: '15 Febbraio 2024',
+    size: '12.5 MB',
+    downloads: 203,
+    description: 'Appunti dettagliati di tutte le lezioni, include citazioni e riferimenti bibliografici.',
+  },
+  {
+    id: 'res4',
+    courseId: 'c2',
+    title: 'Raccolta Temi d\'Esame 2020-2023',
+    type: 'pdf',
+    uploader: 'Admin',
+    date: '1 Settembre 2023',
+    size: '6.3 MB',
+    downloads: 456,
+    description: 'Tutti i temi d\'esame degli ultimi tre anni con soluzioni commentate.',
+  },
+  {
+    id: 'res5',
+    courseId: 'c6',
+    title: 'Dispense Grammatica Inglese B2',
+    type: 'pdf',
+    uploader: 'Prof. Marco Esposito',
+    date: '15 Ottobre 2023',
+    size: '3.1 MB',
+    downloads: 312,
+    description: 'Dispense ufficiali del corso, включая упражнения.',
+  },
+  {
+    id: 'res6',
+    courseId: 'c7',
+    title: 'Catalogo Manoscritti Medievali',
+    type: 'pdf',
+    uploader: 'Prof.ssa Giulia Martini',
+    date: '20 Gennaio 2024',
+    size: '15.7 MB',
+    downloads: 67,
+    description: 'Catalogo illustrato dei manoscritti latini discussi a lezione.',
+  },
+];
+
+// ===== Helper functions =====
+export function getCourseById(id: string): Course | undefined {
+  return courses.find((c) => c.id === id);
+}
+
+export function getProfessorById(id: string): Professor | undefined {
+  return professors.find((p) => p.id === id);
+}
+
+export function getReviewsByCourse(courseId: string): Review[] {
+  return reviews.filter((r) => r.courseId === courseId);
+}
+
+export function getResourcesByCourse(courseId: string): Resource[] {
+  return resources.filter((r) => r.courseId === courseId);
+}
+
+export function getCoursesByProgram(programCode: string): Course[] {
+  return courses.filter((c) => c.programCode === programCode);
+}
+
+export function getCoursesByProfessor(professorId: string): Course[] {
+  return courses.filter((c) => c.professorId === professorId);
+}
+
+export function getProfessorInitials(name: string): string {
+  return name
+    .replace(/^(Prof\.?|Prof\.ssa\.?)\s*/i, '')
+    .split(' ')
+    .filter((n) => n.length > 0)
+    .map((n) => n[0].toUpperCase())
+    .slice(0, 2)
+    .join('');
+}
+
+export function getUserReviews(author: string): Review[] {
+  return reviews.filter((r) => r.author === author);
+}

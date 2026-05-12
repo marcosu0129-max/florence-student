@@ -1,0 +1,31 @@
+.hts-wrapper {
+  position: relative;
+  display: inline-block;
+  height: 1.15em;
+  cursor: pointer;
+  line-height: 1.15;
+}
+
+.hts-label {
+  display: block;
+  line-height: 1.15;
+  transition: opacity 360ms cubic-bezier(.6, .05, .2, 1);
+}
+
+.hts-label--top {
+  opacity: 1;
+}
+
+.hts-label--bottom {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.hts-wrapper:hover .hts-label--top {
+  opacity: 0;
+}
+
+.hts-wrapper:hover .hts-label--bottom {
+  opacity: 1;
+}
