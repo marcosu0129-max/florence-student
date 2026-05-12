@@ -106,7 +106,7 @@ export default function CourseDetail() {
                   {course.programCode}
                 </span>
               )}
-              <h1 className="font-h1-editorial text-2xl sm:text-3xl md:font-h1-editorial md:text-h1-editorial lg:font-hero-display lg:text-hero-display text-ink leading-tight md:leading-none mb-3 md:mb-4">
+              <h1 className="font-h1-editorial text-h1-editorial md:font-h1-editorial md:text-h1-editorial lg:font-hero-display lg:text-hero-display text-ink leading-tight md:leading-none mb-3 md:mb-4">
                 {course.name}
               </h1>
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-body-main text-[12px] md:text-body-main text-on-surface-variant">

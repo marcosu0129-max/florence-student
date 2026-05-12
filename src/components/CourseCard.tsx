@@ -93,7 +93,7 @@ export default function CourseCard({
               {programCode}
             </span>
           )}
-          <h2 className={`font-semibold text-text group-hover:text-ink transition-colors duration-200 ${compact ? 'text-[16px]' : 'text-[18px]'} leading-snug`}>
+          <h2 className={`font-semibold text-text group-hover:text-ink transition-colors duration-200 ${compact ? 'text-[14px] sm:text-[15px]' : 'text-[15px] sm:text-[17px]'} leading-snug`}>
             {name}
           </h2>
         </div>

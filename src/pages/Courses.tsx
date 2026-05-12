@@ -105,7 +105,7 @@ export default function Courses() {
 
         {/* Header */}
         <div>
-          <h1 className="font-h1-editorial text-h1-editorial md:font-hero-display md:text-hero-display text-ink leading-none mb-4 -ml-1">
+          <h1 className="font-h1-editorial text-h1-editorial md:font-hero-display md:text-hero-display text-ink leading-none mb-4 -ml-1 text-xl sm:text-2xl md:text-h1-editorial">
             Insegnamenti
           </h1>
           <p className="font-body-main text-body-main text-text-muted">
