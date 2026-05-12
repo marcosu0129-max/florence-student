@@ -26,33 +26,55 @@ export default function Layout({ children, showBack = false, backTo }: LayoutPro
       {/* Mobile Header (<lg) */}
       {!noNav && (
         <header className="lg:hidden sticky top-0 z-50 bg-canvas">
-          <div className="flex items-center justify-between px-margin-mobile h-[56px]">
-            {/* Left */}
+          <div className="flex items-center justify-between px-margin-mobile h-[52px]">
+            {/* Left — back button only */}
             <div className="flex items-center">
               {showBack ? (
                 <Link
                   to={backTo || '/profile'}
-                  className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
+                  className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
                   aria-label="Torna indietro"
                 >
-                  <span className="material-symbols-outlined text-xl text-on-surface" style={{ fontVariationSettings: "'FILL' 0" }}>
+                  <span className="material-symbols-outlined text-base text-on-surface" style={{ fontVariationSettings: "'FILL' 0" }}>
                     arrow_back
                   </span>
                 </Link>
               ) : !isFirstLevel ? (
                 <button
                   onClick={() => window.history.back()}
-                  className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
+                  className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
                   aria-label="Torna indietro"
                 >
-                  <span className="material-symbols-outlined text-xl text-on-surface" style={{ fontVariationSettings: "'FILL' 0" }}>
+                  <span className="material-symbols-outlined text-base text-on-surface" style={{ fontVariationSettings: "'FILL' 0" }}>
                     arrow_back
                   </span>
                 </button>
               ) : (
-                <div className="w-9" />
+                <div className="w-8" />
               )}
             </div>
+
+            {/* Right — compact nav */}
+            <nav className="flex items-center gap-3">
+              <Link
+                to="/"
+                className="font-top-nav text-[10px] tracking-wider opacity-40 hover:opacity-70 transition-opacity"
+              >
+                CORSI
+              </Link>
+              <Link
+                to="/professors"
+                className="font-top-nav text-[10px] tracking-wider opacity-40 hover:opacity-70 transition-opacity"
+              >
+                DOCENTI
+              </Link>
+              <Link
+                to="/profile"
+                className="font-top-nav text-[10px] tracking-wider opacity-40 hover:opacity-70 transition-opacity"
+              >
+                PROFILO
+              </Link>
+            </nav>
           </div>
         </header>
       )}
