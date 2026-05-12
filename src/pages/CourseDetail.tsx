@@ -10,9 +10,9 @@ type Tab = 'reviews' | 'info';
 
 function RatingBar({ value, color, label }: { value: number; color: string; label: string }) {
   return (
-    <div className="flex flex-col items-center text-center px-1">
+    <div className="flex flex-col items-center text-center">
       <span className="font-body-main text-[10px] sm:text-[11px] text-text-muted uppercase tracking-widest mb-1">{label}</span>
-      <div className="font-data-display text-[28px] sm:text-xl md:text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
+      <div className="font-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
       <div className="mt-2 flex gap-0.5 md:gap-1">
         {[1, 2, 3, 4, 5].map((i) => (
           <span

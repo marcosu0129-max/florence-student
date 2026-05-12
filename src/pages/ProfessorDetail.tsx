@@ -8,13 +8,13 @@ import { fetchProfessorById, fetchCoursesByProfessor, fetchReviewsByProfessor, g
 function RatingBar({ value, color, label }: { value: number; color: string; label: string }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <span className="font-body-main text-[11px] md:text-body-main text-text-muted uppercase tracking-widest mb-1 md:mb-2">{label}</span>
-      <div className="font-data-display text-xl md:text-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
-      <div className="mt-2 md:mt-4 flex gap-0.5 md:gap-1">
+      <span className="font-body-main text-[10px] sm:text-[11px] text-text-muted uppercase tracking-widest mb-1">{label}</span>
+      <div className="font-data-display text-ink leading-none">{value > 0 ? value.toFixed(1) : '—'}</div>
+      <div className="mt-2 flex gap-0.5 md:gap-1">
         {[1, 2, 3, 4, 5].map((i) => (
           <span
             key={i}
-            className="w-5 h-1.5 md:w-8 md:h-2 rounded-full"
+            className="w-4 h-1.5 md:w-8 md:h-2 rounded-full"
             style={{ backgroundColor: i <= Math.round(value) ? color : '#e5e2e1' }}
           />
         ))}
@@ -128,14 +128,10 @@ export default function ProfessorDetail() {
 
         {/* Rating Dashboard */}
         <section className="relative z-10">
-          <h2 className="font-h2-section text-lg md:text-h2-section text-ink mb-4 md:mb-8">Valutazioni Medie</h2>
-          <div className="bg-canvas border border-surface-container rounded-2xl p-4 md:p-6 lg:p-12 shadow-float rotate-1 flex flex-col md:flex-row justify-around items-center gap-6 md:gap-8">
+          <h2 className="font-h2-section text-base sm:text-lg md:text-h2-section text-ink mb-4 md:mb-8">Valutazioni Medie</h2>
+          <div className="bg-canvas border border-surface-container rounded-2xl p-4 sm:p-5 md:p-6 lg:p-12 shadow-float md:rotate-1 grid grid-cols-3 md:flex md:flex-row justify-around items-center gap-4 sm:gap-5 md:gap-8">
             <RatingBar value={stats.chiarezza} color="#4F8BFF" label="Chiarezza" />
-            <div className="hidden md:block w-px h-24 bg-surface-container" />
-            <div className="md:hidden w-full h-px bg-surface-container" />
             <RatingBar value={stats.disponibilita} color="#4ADE80" label="Disponibilita" />
-            <div className="hidden md:block w-px h-24 bg-surface-container" />
-            <div className="md:hidden w-full h-px bg-surface-container" />
             <RatingBar value={stats.equita} color="#FF6B35" label="Equita" />
           </div>
         </section>

@@ -249,6 +249,12 @@ h1, h2, h3, h4, h5, h6 {
   font-variant-numeric: tabular-nums;
 }
 
+@media (max-width: 767px) {
+  .font-data-display {
+    --text-data-display: 28px;
+  }
+}
+
 /* Nav link */
 .font-nav-link {
   font-family: var(--font-nav-link);
