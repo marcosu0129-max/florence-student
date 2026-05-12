@@ -20,7 +20,9 @@ export default function Layout({ children, showBack = false, backTo }: LayoutPro
     <div className="min-h-screen bg-canvas flex flex-col relative overflow-x-hidden">
       {/* Desktop TopNav (lg+) */}
       {!noNav && (
-        <TopNav />
+        <div className="hidden lg:block">
+          <TopNav />
+        </div>
       )}
 
       {/* Mobile Header (<lg) */}
