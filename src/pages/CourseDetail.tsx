@@ -283,7 +283,7 @@ export default function CourseDetail() {
       {/* FAB */}
       <Link
         to={`/courses/${id}/review`}
-        className="fixed bottom-4 left-4 md:bottom-6 md:left-8 z-50 bg-ink/75 text-canvas w-10 h-10 rounded-full shadow-float flex items-center justify-center transition-transform hover:scale-105 hover:bg-ink group"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-8 z-50 bg-ink/75 text-canvas w-10 h-10 rounded-full shadow-float flex items-center justify-center transition-transform hover:scale-105 hover:bg-ink group"
         aria-label="Scrivi recensione"
       >
         <span className="material-symbols-outlined text-sm text-canvas group-hover:-rotate-12 transition-transform">edit</span>
