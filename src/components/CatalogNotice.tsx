@@ -1,39 +1,15 @@
 import { useId } from 'react';
 import { useCatalog } from '../contexts/CatalogContext';
+import SegmentedControl from './SegmentedControl';
 
 export function PlanYearSelect() {
   const id = useId();
   const { years, planYear, setPlanYear } = useCatalog();
   if (!years.length) return null;
-  const selectedIndex = Math.max(0, years.indexOf(planYear));
   return (
     <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
       <p id={`${id}-label`} className="text-sm font-medium leading-5 text-text">Piano di studi · anno di ingresso</p>
-      <fieldset aria-labelledby={`${id}-label`} className="relative isolate flex max-w-full min-w-0 gap-1 rounded-full border border-outline-variant bg-canvas-soft p-1">
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-y-1 left-1 rounded-full bg-ink transition-transform duration-200 ease-out motion-reduce:transition-none"
-          style={{
-            width: `calc((100% - 0.5rem - ${(years.length - 1) * 0.25}rem) / ${years.length})`,
-            transform: `translateX(calc(${selectedIndex * 100}% + ${selectedIndex * 0.25}rem))`,
-          }}
-        />
-        {years.map(year => (
-          <label key={year} className="relative z-10 min-w-0 flex-1 cursor-pointer rounded-full has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink">
-            <input
-              type="radio"
-              name={id}
-              value={year}
-              checked={planYear === year}
-              onChange={() => setPlanYear(year)}
-              className="peer sr-only"
-            />
-            <span className="flex min-h-11 items-center justify-center whitespace-nowrap rounded-full px-4 py-3 text-sm font-medium leading-5 text-text tabular-nums transition-colors duration-200 ease-out motion-reduce:transition-none peer-checked:text-canvas">
-              {year}
-            </span>
-          </label>
-        ))}
-      </fieldset>
+      <SegmentedControl label="Piano di studi · anno di ingresso" labelledBy={`${id}-label`} value={planYear} options={years.map(year => ({ value: year, label: year }))} onValueChange={setPlanYear} />
     </div>
   );
 }

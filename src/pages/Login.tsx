@@ -108,8 +108,9 @@ export default function Login() {
         if (!result.accepted) return;
         if (result.result.error) throw result.result.error;
         if (result.result.data.session) { navigate(returnTo, { replace: true, state: destinationState }); return; }
+        if (!result.result.data.user) throw new Error('Missing signup result');
         startCooldown(); changeMode('verify', false);
-        setMessage('Se la registrazione richiede conferma, riceverai un’email. Apri il link più recente nello stesso browser per completarla. Se hai già un account, torna all’accesso.');
+        setMessage('Richiesta ricevuta. Per una nuova registrazione, controlla l’email di conferma. Se avevi già confermato questo indirizzo, non viene inviata una nuova email: accedi con la password del tuo account.');
       } else if (isRecover) {
         const result = await run('email', () => supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: getAuthCallbackUrl(returnTo, planYear) }));
         if (!result.accepted) return;
@@ -130,7 +131,7 @@ export default function Login() {
     }
   }
 
-  const title = isRegister ? 'Crea il tuo account' : isRecover ? 'Recupera la password' : isVerify ? 'Conferma la tua email' : 'Bentornato su Florence';
+  const title = isRegister ? 'Crea il tuo account' : isRecover ? 'Recupera la password' : isVerify ? 'Controlla la tua email' : 'Bentornato su Florence';
   const submitLabel = isRegister ? 'Crea account' : isRecover ? 'Invia link di recupero' : isVerify ? 'Reinvia email di conferma' : 'Accedi';
 
   return (
@@ -140,7 +141,7 @@ export default function Login() {
       <div className="w-full max-w-md relative z-10">
         <header className="mb-8 text-center">
           <h1 className="font-h1-editorial text-3xl sm:text-4xl text-ink mb-3 leading-tight text-balance">{title}</h1>
-          <p className="text-text text-sm text-pretty">{isRecover ? 'Ti invieremo un link per reimpostare la password.' : isVerify ? 'Apri il link ricevuto via email. Se non è arrivato o è scaduto, richiedine uno nuovo.' : 'Puoi consultare i corsi anche senza un account.'}</p>
+          <p className="text-text text-sm text-pretty">{isRecover ? 'Ti invieremo un link per reimpostare la password.' : isVerify ? 'L’invio della richiesta non conferma la consegna dell’email. Qui puoi richiedere un nuovo link oppure accedere.' : 'Puoi consultare i corsi anche senza un account.'}</p>
         </header>
         <div className="bg-card-base rounded-xl p-6 shadow-card relative">
           {!isSupabaseConfigured && <p role="alert" className="mb-5 text-sm text-error">Accesso non disponibile: il collegamento al servizio account non è configurato. Puoi continuare a consultare i corsi.</p>}
@@ -163,7 +164,17 @@ export default function Login() {
             {(mode === 'login' || isRegister) && googleAvailable === false && <p className="text-xs text-text">L’accesso con Google non è attivo. Usa email e password.</p>}
             {(mode === 'login' || isRegister) && providerError && <div className="text-xs text-text" role="status">Verifica dell’accesso con Google non riuscita. Puoi usare email e password.<button type="button" onClick={() => setProviderAttempt(value => value + 1)} className="block min-h-11 underline">Riprova verifica Google</button></div>}
           </form>
-          <div className="mt-5 text-center"><button type="button" disabled={!!pending} onClick={() => changeMode(mode === 'login' ? 'register' : 'login')} className="min-h-11 text-sm font-semibold text-ink underline underline-offset-4 disabled:opacity-60">{mode === 'login' ? 'Non hai un account? Registrati' : isVerify ? 'Ho già confermato: accedi' : 'Torna all’accesso'}</button></div>
+          {isVerify && <div className="mt-5 rounded-xl border border-outline-variant bg-canvas p-4 text-sm text-text space-y-3">
+            <p className="font-semibold text-ink">Non trovi l’email?</p>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li>Controlla che l’indirizzo qui sopra sia corretto e cerca anche in spam o posta indesiderata.</li>
+              <li>Apri il link più recente nello stesso browser usato per registrarti.</li>
+              <li>Se hai già un account confermato, accedi: registrarti di nuovo non invia un’altra conferma.</li>
+            </ol>
+            <p>Se l’email continua a non arrivare, il servizio di invio potrebbe essere limitato. Puoi continuare senza account.</p>
+            <button type="button" disabled={!!pending} onClick={() => changeMode('recover')} className="min-h-11 underline underline-offset-4 font-medium text-ink disabled:opacity-60">Hai dimenticato la password?</button>
+          </div>}
+          <div className="mt-5 text-center"><button type="button" disabled={!!pending} onClick={() => changeMode(mode === 'login' ? 'register' : 'login')} className="min-h-11 text-sm font-semibold text-ink underline underline-offset-4 disabled:opacity-60">{mode === 'login' ? 'Non hai un account? Registrati' : isVerify ? 'Hai già un account? Accedi' : 'Torna all’accesso'}</button></div>
           {mode === 'login' && <div className="text-center"><button type="button" disabled={!!pending} onClick={() => changeMode('verify')} className="min-h-11 text-sm text-text underline underline-offset-4 disabled:opacity-60">Non hai ricevuto l’email di conferma?</button></div>}
           <div className="mt-2 text-center"><Link to={searchParams.has('next') ? returnTo : catalogLink('/', planYear)} state={searchParams.has('next') ? destinationState : undefined} className="inline-flex min-h-11 items-center gap-2 text-sm text-text hover:text-ink transition-colors duration-150"><Icon name="arrow_back" size={20} /><span className="min-w-0">Continua senza account</span></Link></div>
         </div>

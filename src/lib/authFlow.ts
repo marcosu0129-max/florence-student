@@ -62,10 +62,14 @@ export function createAuthActionGate() {
 export function authErrorMessage(error: unknown): string {
   if (error instanceof AuthRequestTimeout) return 'Esito non confermato: la richiesta sta impiegando troppo tempo. Controlla email e account. Non inviare una seconda richiesta mentre la prima è ancora in corso.';
   const code = typeof error === 'object' && error && 'code' in error ? String(error.code) : '';
-  const message = error instanceof Error ? error.message.toLowerCase() : '';
+  const message = typeof error === 'object' && error && 'message' in error ? String(error.message).toLowerCase() : '';
   if (code === 'invalid_credentials' || message.includes('invalid login credentials')) return 'Email o password non corretti. Riprova.';
   if (code === 'email_not_confirmed' || message.includes('email not confirmed')) return 'Conferma il tuo indirizzo tramite l’email ricevuta. Puoi richiedere un nuovo link qui sotto.';
   if (code === 'user_already_exists' || message.includes('already registered')) return 'Questo indirizzo è già registrato. Accedi o recupera la password.';
+  if (code === 'email_address_not_authorized' || message.includes('email address not authorized') || message.includes('not authorized to send emails')) return 'Il servizio email non può inviare a questo indirizzo. È necessaria una configurazione del servizio da parte di Florence Student. Puoi continuare senza account.';
+  if (code === 'over_email_send_rate_limit' || message.includes('email rate limit')) return 'Il servizio ha raggiunto il limite di invio email. Attendi prima di riprovare: richieste ripetute non accelerano la consegna. Se hai già confermato l’account, accedi.';
+  if (message.includes('error sending confirmation email') || message.includes('error sending recovery email') || message.includes('smtp')) return 'Il servizio non è riuscito a inviare l’email. Riprova più tardi. Se il problema continua, serve una verifica del servizio email da parte di Florence Student.';
+  if (code === 'signup_disabled' || code === 'email_provider_disabled') return 'Le nuove registrazioni via email non sono disponibili al momento. Puoi continuare a consultare i corsi senza account.';
   if (code.includes('rate_limit') || message.includes('rate limit') || message.includes('too many')) return 'Troppe richieste. Attendi qualche minuto prima di riprovare.';
   if (code === 'same_password' || message.includes('same password')) return 'Scegli una password diversa da quella attuale.';
   if (code === 'weak_password' || message.includes('weak password')) return 'Questa password non soddisfa i requisiti del servizio. Scegli una password più lunga, con lettere, numeri e simboli.';

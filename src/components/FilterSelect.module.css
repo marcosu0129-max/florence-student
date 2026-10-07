@@ -35,6 +35,7 @@
 .value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .icon, .indicator { display: flex; flex: 0 0 20px; width: 20px; height: 20px; align-items: center; justify-content: center; }
 .icon svg, .indicator svg { display: block; flex-shrink: 0; }
+.icon { transition: transform 200ms ease-out; }
 .icon[data-popup-open] { transform: rotate(180deg); }
 .positioner { z-index: 50; max-width: var(--available-width); }
 .popup {
@@ -46,7 +47,10 @@
   color: var(--color-ink);
   box-shadow: var(--shadow-float);
   overflow: hidden;
+  transform-origin: var(--transform-origin);
+  transition: opacity 160ms ease-out, transform 200ms ease-out;
 }
+.popup[data-starting-style], .popup[data-ending-style] { opacity: 0; transform: translateY(-4px) scale(.98); }
 .list {
   max-height: min(320px, calc(var(--available-height) - 2px));
   overflow-y: auto;
@@ -71,3 +75,9 @@
 .item[data-highlighted] { background: var(--color-ink); color: var(--color-canvas); }
 
 .item:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+
+.item { transition: color 150ms ease-out, background-color 150ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .popup, .icon, .item { transition: none; }
+  .popup[data-starting-style], .popup[data-ending-style] { transform: none; }
+}

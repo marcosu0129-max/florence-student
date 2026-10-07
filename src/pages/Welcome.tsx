@@ -69,7 +69,7 @@ export default function Welcome({ onDismiss }: { onDismiss?: () => void }) {
           </div>
           <p role="status" className="text-center text-sm tabular-nums text-text mt-2">{currentSlide + 1} di {SLIDES.length} · {slide.title}</p>
           <div className="flex justify-center gap-1 mb-5 mt-2" aria-label="Pagine dell’introduzione">
-            {SLIDES.map((item, index) => <button key={item.title} onClick={() => goTo(index)} aria-current={index === currentSlide ? 'step' : undefined} aria-label={`Pagina ${index + 1}: ${item.title}`} className="size-11 flex items-center justify-center rounded-full"><span className={index === currentSlide ? 'size-3 rounded-full bg-ink' : 'size-2.5 rounded-full bg-outline'} /></button>)}
+            {SLIDES.map((item, index) => <button key={item.title} onClick={() => goTo(index)} aria-current={index === currentSlide ? 'step' : undefined} aria-label={`Pagina ${index + 1}: ${item.title}`} className="size-11 flex items-center justify-center rounded-full"><span className="welcome-dot size-3 rounded-full bg-outline" style={{ transform: index === currentSlide ? 'scale(1)' : 'scale(.83)', backgroundColor: index === currentSlide ? 'var(--color-ink)' : undefined }} /></button>)}
           </div>
           <div className="flex items-center gap-3">
             <button onClick={() => goTo(currentSlide - 1)} disabled={currentSlide === 0} className="size-12 rounded-full bg-canvas border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors duration-150 shrink-0 disabled:opacity-30" aria-label="Pagina precedente"><Icon name="arrow_back" size={20} className="text-ink" /></button>

@@ -1,4 +1,5 @@
 import Icon from '../components/Icon';
+import PreferenceSwitch from '../components/PreferenceSwitch';
 import { catalogLink, useCatalog } from '../contexts/CatalogContext';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -64,7 +65,7 @@ export default function Settings() {
           <h2 className="font-h2-section text-xl text-ink text-balance">Preferenze</h2>
           <label className="flex items-center justify-between gap-4 p-5 bg-card-base rounded-xl border border-border-card cursor-pointer">
             <span><span className="block font-semibold text-ink">Recensioni anonime per impostazione predefinita</span><span id="anonymous-help" className="block text-sm text-text mt-1 text-pretty">Valore iniziale per le nuove recensioni. Puoi cambiarlo prima di pubblicare.</span></span>
-            <input type="checkbox" className="size-5 shrink-0 accent-ink" checked={preferences.anonymousReviews} disabled={!account.ready || account.saving} onChange={(e) => changePreference('anonymousReviews', e.target.checked)} aria-describedby="anonymous-help" />
+            <PreferenceSwitch label="Recensioni anonime per impostazione predefinita" describedBy="anonymous-help" checked={preferences.anonymousReviews} disabled={!account.ready || account.saving} onCheckedChange={value => changePreference('anonymousReviews', value)} />
           </label>
           <p role="status" className="min-h-5 text-sm text-text">{message}</p>
         </section>
@@ -72,7 +73,7 @@ export default function Settings() {
         <section className="flex flex-col gap-4">
           <h2 className="font-h2-section text-xl text-ink text-balance">Notifiche</h2>
           <p className="text-sm leading-relaxed text-text">Ricevi aggiornamenti in Florence Student sui corsi salvati. {account.cloud ? 'Le preferenze sono sincronizzate con il tuo account.' : 'Accedi per attivare le notifiche.'}</p>
-          {([{ key: 'notifyReviews', title: 'Nuove recensioni', help: 'Quando viene pubblicata una recensione per un corso salvato.' }, { key: 'notifyMaterials', title: 'Nuovi materiali', help: 'Quando viene approvato un materiale per un corso salvato.' }] as const).map(item => <label key={item.key} className="flex items-center justify-between gap-4 rounded-xl border border-border-card bg-card-base p-5"><span className="min-w-0"><span className="block font-semibold text-ink">{item.title}</span><span id={`${item.key}-help`} className="mt-1 block text-sm text-text">{item.help}</span></span><input type="checkbox" className="size-5 shrink-0 accent-ink" aria-describedby={`${item.key}-help`} checked={preferences[item.key]} disabled={!account.cloud || !account.ready || account.saving} onChange={event => changePreference(item.key, event.target.checked)} /></label>)}
+          {([{ key: 'notifyReviews', title: 'Nuove recensioni', help: 'Quando viene pubblicata una recensione per un corso salvato.' }, { key: 'notifyMaterials', title: 'Nuovi materiali', help: 'Quando viene approvato un materiale per un corso salvato.' }] as const).map(item => <label key={item.key} className="flex items-center justify-between gap-4 rounded-xl border border-border-card bg-card-base p-5"><span className="min-w-0"><span className="block font-semibold text-ink">{item.title}</span><span id={`${item.key}-help`} className="mt-1 block text-sm text-text">{item.help}</span></span><PreferenceSwitch label={item.title} describedBy={`${item.key}-help`} checked={preferences[item.key]} disabled={!account.cloud || !account.ready || account.saving} onCheckedChange={value => changePreference(item.key, value)} /></label>)}
           {account.cloud && <Link to={catalogLink('/notifications', planYear)} className="self-start text-sm font-semibold underline underline-offset-4">Apri notifiche</Link>}
 
         </section>

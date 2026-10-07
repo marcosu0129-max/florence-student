@@ -422,3 +422,37 @@ input[type="search"]::-webkit-search-cancel-button {
 button:enabled { cursor: pointer; }
 button:disabled { cursor: not-allowed; }
 input, textarea, select { scroll-margin-block: 80px; }
+
+/* Shared feedback: individual scale leaves translated icons and anchors intact. */
+:where(button, a.rounded-full, nav a) {
+  transition: color 160ms ease-out, background-color 160ms ease-out, border-color 160ms ease-out, opacity 160ms ease-out, scale 160ms ease-out;
+}
+:where(button, a.rounded-full, nav a):not(:disabled):not([aria-disabled="true"]):not([data-disabled]):not([aria-busy="true"]):not([role="combobox"]):active { scale: .97; }
+button[aria-pressed] svg { transition: fill 160ms ease-out, stroke 160ms ease-out, scale 160ms ease-out; }
+button[aria-pressed="true"] svg { scale: 1.06; }
+.preference-switch {
+  position: relative; display: inline-flex; flex-shrink: 0; width: 48px; height: 44px;
+  border-radius: 9999px; cursor: pointer; background: transparent;
+}
+.preference-switch::before {
+  content: ''; position: absolute; inset: 8px 0; border-radius: inherit;
+  background: var(--color-outline); transition: background-color 160ms ease-out;
+}
+.preference-switch[data-checked]::before { background: var(--color-ink); }
+.preference-switch-thumb {
+  position: absolute; left: 4px; top: 12px; width: 20px; height: 20px;
+  border-radius: inherit; background: var(--color-canvas); transform: translateX(0);
+  transition: transform 200ms ease-out;
+}
+.preference-switch[data-checked] .preference-switch-thumb { transform: translateX(20px); }
+.preference-switch[data-disabled] { cursor: not-allowed; opacity: .5; }
+.preference-switch:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+.accordion-summary { list-style: none; }
+.accordion-summary::-webkit-details-marker { display: none; }
+.accordion-chevron { transition: transform 200ms ease-out; }
+details[open] > .accordion-summary .accordion-chevron { transform: rotate(180deg); }
+.welcome-dot { transition: transform 200ms ease-out, background-color 160ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  :where(button, a.rounded-full, nav a):active { scale: 1 !important; }
+  .preference-switch-thumb, .preference-switch::before, .accordion-chevron, .welcome-dot { transition: none; }
+}

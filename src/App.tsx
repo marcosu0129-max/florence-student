@@ -1,3 +1,4 @@
+import { LayoutGroup, MotionConfig } from 'motion/react';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -69,7 +70,7 @@ function AppRoutes() {
 export default function App() {
   return (
     <PageErrorBoundary><BrowserRouter>
-      <CatalogProvider><Suspense fallback={<p role="status" className="p-8 text-text">Caricamento pagina…</p>}><AppRoutes /></Suspense></CatalogProvider>
+      <CatalogProvider><MotionConfig reducedMotion="user" transition={{ duration: 0.2, ease: "easeOut" }}><LayoutGroup><Suspense fallback={<p role="status" className="p-8 text-text">Caricamento pagina…</p>}><AppRoutes /></Suspense></LayoutGroup></MotionConfig></CatalogProvider>
     </BrowserRouter></PageErrorBoundary>
   );
 }
