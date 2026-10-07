@@ -1,27 +1,40 @@
-import { ReactNode } from 'react';
+import { ReactNode, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Icon from './Icon';
 import TopNav from './TopNav';
+import BottomNav from './BottomNav';
+import CatalogNotice from './CatalogNotice';
+import { catalogLink, useCatalog } from '../contexts/CatalogContext';
 
-const FIRST_LEVEL = ['/', '/courses', '/professors', '/profile'];
+import { firstLevelPaths, safeReturnPath, returnNavigationState } from '../lib/navigation';
+import { usePageScroll } from '../lib/usePageScroll';
 
 interface LayoutProps {
   children?: ReactNode;
   showBack?: boolean;
   backTo?: string;
+  catalogNotice?: boolean;
 }
 
-export default function Layout({ children, showBack = false, backTo }: LayoutProps) {
+export default function Layout({ children, showBack = false, backTo, catalogNotice = true }: LayoutProps) {
   const location = useLocation();
+  const { planYear, programKey } = useCatalog();
+  const parentPath = location.pathname.startsWith('/courses/') ? '/courses' : location.pathname.startsWith('/professors/') ? '/professors' : location.pathname.startsWith('/programs/') ? '/' : '/profile';
+  const main = useRef<HTMLElement>(null);
+  usePageScroll(main);
+  useEffect(() => { if (!location.state?.restoreScroll) main.current?.focus({ preventScroll: true }); }, [location.pathname]);
+  const returnTo = safeReturnPath(location.state?.from) || catalogLink(backTo || parentPath, planYear, programKey);
+  const backState = returnNavigationState(location.state);
   const noNav = location.pathname === '/login' || location.pathname === '/auth/callback';
-  const isFirstLevel = FIRST_LEVEL.includes(location.pathname);
+  const isFirstLevel = firstLevelPaths.includes(location.pathname);
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col relative overflow-x-hidden">
+    <div className="min-h-dvh bg-canvas flex flex-col relative overflow-x-clip">
       {/* Desktop TopNav (lg+) */}
       {!noNav && (
         <div className="hidden lg:block">
-          <TopNav />
+          <TopNav backTo={returnTo} backState={backState} showBack={showBack || !isFirstLevel} />
         </div>
       )}
 
@@ -29,62 +42,43 @@ export default function Layout({ children, showBack = false, backTo }: LayoutPro
       {!noNav && (
         <header className="lg:hidden sticky top-0 z-50 bg-canvas">
           <div className="flex items-center justify-between px-margin-mobile h-[52px]">
-            {/* Left — back button only */}
+            {/* Left — back button or spacer */}
             <div className="flex items-center">
               {showBack ? (
                 <Link
-                  to={backTo || '/profile'}
-                  className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
+                  to={returnTo} state={backState}
+                  className="size-11 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
                   aria-label="Torna indietro"
                 >
-                  <span className="material-symbols-outlined text-base text-on-surface" style={{ fontVariationSettings: "'FILL' 0" }}>
-                    arrow_back
-                  </span>
+                  <Icon name="arrow_back" size={20} className="text-on-surface" />
                 </Link>
               ) : !isFirstLevel ? (
-                <button
-                  onClick={() => window.history.back()}
-                  className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
+                <Link
+                  to={returnTo} state={backState}
+                  className="size-11 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
                   aria-label="Torna indietro"
                 >
-                  <span className="material-symbols-outlined text-base text-on-surface" style={{ fontVariationSettings: "'FILL' 0" }}>
-                    arrow_back
-                  </span>
-                </button>
+                  <Icon name="arrow_back" size={20} className="text-on-surface" />
+                </Link>
               ) : (
                 <div className="w-8" />
               )}
             </div>
 
-            {/* Right — compact nav */}
-            <nav className="flex items-center gap-3">
-              <Link
-                to="/"
-                className="font-top-nav text-[10px] tracking-wider opacity-40 hover:opacity-70 transition-opacity"
-              >
-                CORSI
-              </Link>
-              <Link
-                to="/professors"
-                className="font-top-nav text-[10px] tracking-wider opacity-40 hover:opacity-70 transition-opacity"
-              >
-                DOCENTI
-              </Link>
-              <Link
-                to="/profile"
-                className="font-top-nav text-[10px] tracking-wider opacity-40 hover:opacity-70 transition-opacity"
-              >
-                PROFILO
-              </Link>
-            </nav>
+            {/* Right — spacer to balance layout */}
+            <div className="w-8" />
           </div>
         </header>
       )}
 
       {/* Main Content */}
-      <main className="flex-grow w-full max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop pb-12 pt-6 lg:pt-16">
-        {children}
+      <main ref={main} tabIndex={-1} id="main-content" className="flex-grow w-full max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop pb-[calc(3rem+64px+env(safe-area-inset-bottom,0px))] lg:pb-12 pt-6 lg:pt-16">
+        {catalogNotice && (/^\/(courses|professors|programs)(\/|$)/.test(location.pathname) || location.pathname === '/') && <CatalogNotice />}
+        <div className="page-content">{children}</div>
       </main>
+
+      {/* BottomNav — mobile only */}
+      {!noNav && <BottomNav />}
     </div>
   );
 }

@@ -1,163 +1,40 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { fetchCourseById, createReview } from '../lib/dataService';
+import SchoolSubjectResolver from '../components/SchoolSubjectResolver';
+import SchoolSubjectReview from '../components/SchoolSubjectReview';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import Layout from '../components/Layout';
+import SubjectReviewForm from '../components/SubjectReviewForm';
+import { CatalogError, CatalogLoading, PlanYearSelect } from '../components/CatalogNotice';
+import { fetchCourseById, type Course } from '../lib/dataService';
+import { catalogLink, useCatalog, useCatalogData } from '../contexts/CatalogContext';
 
-function StarRatingInput({
-  label, icon, value, onChange, activeColor,
-}: {
-  label: string; icon?: string; value: number; onChange: (v: number) => void; activeColor: string;
-}) {
-  return (
-    <div className="bg-canvas border border-surface-container rounded-xl px-5 py-4 shadow-card flex items-center justify-between gap-4">
-      <div className="flex items-center gap-3">
-        {icon && (
-          <span className="material-symbols-outlined" style={{ color: activeColor, fontVariationSettings: "'FILL' 1" }}>
-            {icon}
-          </span>
-        )}
-        <span className="font-card-title text-card-title text-ink">{label}</span>
-      </div>
-      <div className="flex items-center gap-1">
-        {Array.from({ length: 5 }, (_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => onChange(i + 1)}
-            className="material-symbols-outlined text-[22px] transition-all duration-150 cursor-pointer p-0.5 hover:scale-110"
-            style={{
-              fontVariationSettings: `'FILL' ${i < value ? 1 : 0}`,
-              color: i < value ? activeColor : '#d8c2bb',
-            }}
-          >
-            star
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+const ratingFields = [
+  { key: 'difficulty', label: 'Difficoltà', icon: 'trending_up', descriptions: ['Molto facile', 'Facile', 'Media', 'Difficile', 'Molto difficile'] },
+  { key: 'teaching', label: 'Didattica', icon: 'school', descriptions: ['Molto scarsa', 'Scarsa', 'Discreta', 'Buona', 'Ottima'] },
+  { key: 'grading', label: 'Equità dei voti', icon: 'balance', descriptions: ['Molto scarsa', 'Scarsa', 'Discreta', 'Buona', 'Ottima'] },
+];
 
 export default function AddReview() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const [course, setCourse] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [ratingDifficulty, setRatingDifficulty] = useState(3);
-  const [ratingTeaching, setRatingTeaching] = useState(3);
-  const [ratingGrading, setRatingGrading] = useState(3);
-  const [content, setContent] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [params] = useSearchParams();
+  return params.has('program') ? <SchoolSubjectReview subject="course" fields={ratingFields} /> : <SchoolSubjectResolver subject="course" fallback={<LegacyAddReview />} />;
+}
 
-  useEffect(() => {
-    if (!id) return;
-    fetchCourseById(id).then((data) => {
-      setCourse(data);
-      setLoading(false);
-    });
-  }, [id]);
+function LegacyAddReview() {
+  const { id = '' } = useParams<{ id: string }>();
+  const { planYear } = useCatalog();
+  const { data: course, loading, error, reload } = useCatalogData(() => fetchCourseById(id, planYear), [id, planYear], null as Course | null);
+  const backTo = catalogLink(`/courses/${course?.id || id}`, planYear);
 
-  const canSubmit = content.length >= 20;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!canSubmit || !id) return;
-    setIsSubmitting(true);
-    setError('');
-    const result = await createReview({
-      courseId: id,
-      professorId: course?.professorId,
-      difficultyScore: ratingDifficulty,
-      teachingScore: ratingTeaching,
-      gradingScore: ratingGrading,
-      content,
-      isAnonymous: true,
-    });
-    setIsSubmitting(false);
-    if (!result.success) {
-      setError(result.error || 'Errore di connessione. Riprova.');
-      return;
-    }
-    navigate(`/courses/${id}`);
-  };
-
-  return (
-    <div className="min-h-screen bg-canvas flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Decorative */}
-      <div className="absolute top-[15%] right-[10%] -rotate-12 opacity-60 pointer-events-none hidden sm:block">
-        <span className="text-6xl">&#9733;</span>
-      </div>
-
-      <div className="w-full max-w-lg relative z-10">
-        <div className="bg-card-base rounded-xl p-card-padding shadow-card -rotate-1">
-          <div className="text-center mb-8">
-            <h1 className="font-h1-editorial text-3xl sm:text-4xl md:text-5xl text-ink mb-2">La tua<br/>recensione</h1>
-            {course && (
-              <p className="font-body-main text-body-main text-text-muted mt-2">
-                per <span className="font-semibold text-ink">{course.name}</span>
-              </p>
-            )}
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="bg-canvas rounded-2xl p-6 shadow-card space-y-3">
-              <h2 className="font-h2-section text-h2-section text-ink mb-2 flex items-center gap-2">
-                <span className="material-symbols-outlined text-pop-yellow" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
-                Valuta il Corso
-              </h2>
-              <StarRatingInput label="Difficolta" icon="trending_up" value={ratingDifficulty} onChange={setRatingDifficulty} activeColor="#FF6B35" />
-              <StarRatingInput label="Voto" icon="grade" value={ratingGrading} onChange={setRatingGrading} activeColor="#FFE25C" />
-              <StarRatingInput label="Didattica" icon="school" value={ratingTeaching} onChange={setRatingTeaching} activeColor="#4F8BFF" />
-            </div>
-
-            <div>
-              <h2 className="font-h2-section text-h2-section text-ink mb-3">
-                Descrizione dell&apos;esperienza
-              </h2>
-              <textarea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Racconta la tua esperienza con questo corso..."
-                rows={5}
-                className="w-full bg-canvas border border-outline-variant rounded-xl p-4 font-body-main text-body-main text-ink placeholder:text-text-faint focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/20 transition-all resize-none shadow-card"
-              />
-              <p className={`text-[12px] mt-2 font-semibold ${content.length < 20 ? 'text-error' : 'text-pop-green'}`}>
-                {content.length < 20 ? `Almeno 20 caratteri (${content.length}/20)` : '\u2713 Requisito raggiunto'}
-              </p>
-            </div>
-
-            {error && (
-              <div className="bg-error/10 border border-error/20 rounded-xl p-4">
-                <p className="text-[14px] text-error font-semibold text-center">{error}</p>
-              </div>
-            )}
-
-            <div className="flex justify-between items-center pt-2">
-              <button
-                type="button"
-                onClick={() => navigate(-1)}
-                className="bg-surface-container hover:bg-surface-container-high text-ink font-card-title text-card-title py-3 px-6 rounded-full transition-colors"
-              >
-                Annulla
-              </button>
-              <button
-                type="submit"
-                disabled={!canSubmit || isSubmitting}
-                className={`bg-ink text-canvas font-card-title text-card-title py-3 px-8 rounded-full shadow-card transition-all ${
-                  !canSubmit || isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-ink-soft'
-                }`}
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <span className="material-symbols-outlined animate-spin text-lg">sync</span>
-                    Invio...
-                  </span>
-                ) : 'Invia'}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+  return <Layout showBack backTo={backTo}>
+    <div className="mx-auto w-full max-w-xl">
+      {loading && (!course || course.planYear !== planYear) ? <CatalogLoading /> : error && !course ? <CatalogError message={error} retry={reload} /> : !course ? <section className="space-y-5 py-10">
+        <h1 className="text-3xl font-semibold text-ink text-balance">Corso non disponibile</h1>
+        <p className="text-sm leading-relaxed text-text text-pretty">Questo corso non è presente nel piano selezionato. Scegli un altro anno o torna al catalogo.</p>
+        <PlanYearSelect /><Link to={catalogLink('/courses', planYear)} className="inline-block underline underline-offset-4">Torna ai corsi</Link>
+      </section> : <>
+        <header className="mb-7"><p className="mb-2 text-sm text-text">Piano {planYear} · {course.officialCode}</p><h1 className="text-3xl font-semibold leading-tight text-ink text-balance sm:text-4xl">La tua recensione</h1><p className="mt-3 text-base leading-relaxed text-text text-pretty">{course.name}</p></header>
+        {error && <div className="mb-6"><CatalogError message={error} retry={reload} /></div>}
+        <SubjectReviewForm subject="course" subjectId={course.id} name={course.name} professorId={course.professorRealIds?.length === 1 ? course.professorRealIds[0] : undefined} disabled={loading || Boolean(error)} fields={ratingFields} backTo={backTo} />
+      </>}
     </div>
-  );
+  </Layout>;
 }

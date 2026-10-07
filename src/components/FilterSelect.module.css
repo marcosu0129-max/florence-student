@@ -1,0 +1,73 @@
+.field { min-width: 0; }
+.label {
+  margin-bottom: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-2xl);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  cursor: pointer;
+}
+.trigger:disabled { cursor: not-allowed; opacity: .55; }
+.trigger:hover { background: var(--color-canvas-soft); }
+.trigger[data-popup-open] { border-color: var(--color-ink); }
+.trigger:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+.value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.icon, .indicator { display: flex; flex: 0 0 20px; width: 20px; height: 20px; align-items: center; justify-content: center; }
+.icon svg, .indicator svg { display: block; flex-shrink: 0; }
+.icon[data-popup-open] { transform: rotate(180deg); }
+.positioner { z-index: 50; max-width: var(--available-width); }
+.popup {
+  width: var(--anchor-width);
+  max-width: var(--available-width);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-2xl);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+}
+.list {
+  max-height: min(320px, calc(var(--available-height) - 2px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px;
+  scroll-padding: 4px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: var(--radius-xl);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.itemText { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+.item[data-selected] { background: var(--color-card-base); font-weight: 600; }
+.item[data-highlighted] { background: var(--color-ink); color: var(--color-canvas); }
+
+.item:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }

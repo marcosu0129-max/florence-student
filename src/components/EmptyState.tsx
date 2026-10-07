@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import Icon from './Icon';
 
 interface EmptyStateProps {
   icon?: string;
@@ -48,9 +49,7 @@ export default function EmptyState({
           transition={{ duration: 0.3 }}
           className={`w-16 h-16 rounded-full ${c.bg} border border-${accentColor === 'coral' ? 'coral/30' : accentColor === 'mint' ? 'mint-deep/30' : 'amber/30'} flex items-center justify-center`}
         >
-          <span className={`material-symbols-outlined text-3xl ${c.icon}`} style={{ fontVariationSettings: "'FILL' 0" }}>
-            {icon}
-          </span>
+          <Icon name={icon} size={30} className={c.icon} />
         </motion.div>
       )}
       <div className="text-center">

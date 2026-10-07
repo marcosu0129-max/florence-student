@@ -1,176 +1,85 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import Icon from '../components/Icon';
+import { catalogLink, useCatalog } from '../contexts/CatalogContext';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
+import { useStudentProfile } from '../lib/useStudentProfile';
+import { supabase } from '../lib/supabase';
+import { useAuthAction } from '../lib/useAuthAction';
+import { AuthRequestTimeout } from '../lib/authFlow';
 
 export default function Settings() {
-  const [pushNotifications, setPushNotifications] = useState(true);
-  const [emailNotifications, setEmailNotifications] = useState(true);
-  const [anonymousMode, setAnonymousMode] = useState(false);
+  const navigate = useNavigate();
+  const { planYear } = useCatalog();
+  const account = useStudentProfile();
+  const { session, checking, profile, preferences } = account;
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const logoutAction = useAuthAction();
+  const loggingOut = Boolean(logoutAction.pending);
+  const versionRef = useRef(account.version); versionRef.current = account.version;
+  useEffect(() => { setError(''); setMessage(''); }, [account.version]);
+
+  async function changePreference(key: keyof typeof preferences, value: boolean) {
+    const version = account.version;
+    setError(''); setMessage('');
+    try {
+      await account.save(profile, { ...preferences, [key]: value });
+      if (versionRef.current !== version) return;
+      setMessage(account.cloud ? 'Preferenza sincronizzata con il tuo account.' : 'Preferenza salvata su questo dispositivo.');
+    } catch (reason) { if (versionRef.current === version) setError(reason instanceof Error ? reason.message : 'Salvataggio non riuscito. Riprova.'); }
+  }
+
+  async function logout() {
+    if (loggingOut) return;
+    setError(''); setMessage('');
+    try {
+      await logoutAction.run('logout', async () => {
+        const { error: signOutError } = await supabase.auth.signOut({ scope: 'local' });
+        if (!logoutAction.isMounted()) return;
+        if (signOutError) { setError('Uscita non riuscita. Controlla la connessione e riprova.'); return; }
+        // Handle the real completion even after the feedback deadline elapsed.
+        navigate(catalogLink('/login', planYear), { replace: true });
+      });
+    } catch (reason) {
+      if (logoutAction.isMounted()) setError(reason instanceof AuthRequestTimeout
+        ? 'Uscita non ancora confermata. Il servizio sta impiegando più tempo del previsto: la richiesta è ancora in corso. Attendi l’esito prima di lasciare il dispositivo.'
+        : 'Uscita non riuscita. Controlla la connessione e riprova.');
+    }
+  }
 
   return (
-    <Layout showBack={true} backTo="/profile">
-      <div className="page-container flex flex-col gap-8">
-        {/* Page Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="font-handwritten text-text-primary text-3xl md:text-4xl"
-        >
-          Impostazioni
-        </motion.h1>
-
-        {/* Account Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-surface-soft rounded-[20px] p-6 shadow-[0_4px_16px_rgba(42,37,32,0.04)] border border-outline-variant/30"
-        >
-          {/* Avatar + Info Row */}
-          <div className="flex items-center gap-4 mb-4">
-            {/* Avatar Circle */}
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#2e5ea2] to-[#5a8fd4] flex items-center justify-center shrink-0 shadow-[0_4px_12px_rgba(46,94,162,0.2)]">
-              <span className="h-hero text-white text-3xl font-bold">U</span>
-            </div>
-
-            <div className="flex-1 min-w-0">
-              <h2 className="font-handwritten text-text-primary text-xl">
-                Utente Demo
-              </h2>
-              <p className="text-text-muted t-body text-sm">
-                modalita demo
-              </p>
-            </div>
+    <Layout showBack backTo={catalogLink('/profile', planYear)}>
+      <div className="flex flex-col gap-8">
+        <h1 className="font-h1-editorial text-3xl sm:text-4xl md:text-5xl text-ink text-balance">Impostazioni</h1>
+        <section aria-label="Profilo" className="bg-card-base rounded-xl p-6 shadow-card border border-border-card">
+          <div className="flex items-center gap-4 mb-5">
+            <div className="size-16 rounded-full bg-surface-container flex items-center justify-center shrink-0" aria-hidden="true"><span className="text-3xl font-bold text-ink">{profile.name.charAt(0).toUpperCase()}</span></div>
+            <div className="min-w-0"><h2 className="font-card-title text-xl text-ink break-words text-balance">{profile.name}</h2><p className="text-text text-sm mt-1">{account.cloud ? 'Profilo sincronizzato con il tuo account' : 'Profilo su questo dispositivo'}</p></div>
           </div>
+          <Link to={catalogLink('/profile?edit=1', planYear)} className="flex min-h-11 items-center justify-center w-full py-3 px-4 bg-ink text-canvas text-sm font-semibold rounded-full hover:bg-ink-soft transition-colors duration-150">Modifica profilo</Link>
+        </section>
 
-          {/* Edit Profile Button */}
-          <button className="w-full py-3 px-4 bg-coral text-white h-card text-sm font-medium rounded-full hover:bg-[#d14a3b] transition-colors shadow-[0_4px_12px_rgba(229,91,76,0.2)]">
-            Modifica Profilo
-          </button>
-        </motion.section>
+        <section className="flex flex-col gap-4">
+          <h2 className="font-h2-section text-xl text-ink text-balance">Preferenze</h2>
+          <label className="flex items-center justify-between gap-4 p-5 bg-card-base rounded-xl border border-border-card cursor-pointer">
+            <span><span className="block font-semibold text-ink">Recensioni anonime per impostazione predefinita</span><span id="anonymous-help" className="block text-sm text-text mt-1 text-pretty">Valore iniziale per le nuove recensioni. Puoi cambiarlo prima di pubblicare.</span></span>
+            <input type="checkbox" className="size-5 shrink-0 accent-ink" checked={preferences.anonymousReviews} disabled={!account.ready || account.saving} onChange={(e) => changePreference('anonymousReviews', e.target.checked)} aria-describedby="anonymous-help" />
+          </label>
+          <p role="status" className="min-h-5 text-sm text-text">{message}</p>
+        </section>
 
-        {/* Preferenze Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="flex flex-col gap-3"
-        >
-          <h2 className="h-section text-text-primary text-lg">
-            Preferenze
-          </h2>
+        <section className="flex flex-col gap-4">
+          <h2 className="font-h2-section text-xl text-ink text-balance">Notifiche</h2>
+          <p className="text-sm leading-relaxed text-text">Ricevi aggiornamenti in Florence Student sui corsi salvati. {account.cloud ? 'Le preferenze sono sincronizzate con il tuo account.' : 'Accedi per attivare le notifiche.'}</p>
+          {([{ key: 'notifyReviews', title: 'Nuove recensioni', help: 'Quando viene pubblicata una recensione per un corso salvato.' }, { key: 'notifyMaterials', title: 'Nuovi materiali', help: 'Quando viene approvato un materiale per un corso salvato.' }] as const).map(item => <label key={item.key} className="flex items-center justify-between gap-4 rounded-xl border border-border-card bg-card-base p-5"><span className="min-w-0"><span className="block font-semibold text-ink">{item.title}</span><span id={`${item.key}-help`} className="mt-1 block text-sm text-text">{item.help}</span></span><input type="checkbox" className="size-5 shrink-0 accent-ink" aria-describedby={`${item.key}-help`} checked={preferences[item.key]} disabled={!account.cloud || !account.ready || account.saving} onChange={event => changePreference(item.key, event.target.checked)} /></label>)}
+          {account.cloud && <Link to={catalogLink('/notifications', planYear)} className="self-start text-sm font-semibold underline underline-offset-4">Apri notifiche</Link>}
 
-          <div className="bg-surface-soft rounded-[20px] shadow-[0_4px_16px_rgba(42,37,32,0.04)] border border-outline-variant/30 overflow-hidden divide-y divide-outline-variant/30">
-            {/* Push Notifications */}
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-rose-500/15 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-rose-500" style={{ fontVariationSettings: "'FILL' 0" }}>
-                    notifications
-                  </span>
-                </div>
-                <span className="h-card text-text-primary">Notifiche Push</span>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={pushNotifications}
-                  onChange={() => setPushNotifications(!pushNotifications)}
-                />
-                <span className="toggle-slider" />
-              </label>
-            </div>
+        </section>
 
-            {/* Email Notifications */}
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#2e5ea2]/15 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[#2e5ea2]" style={{ fontVariationSettings: "'FILL' 0" }}>
-                    mail
-                  </span>
-                </div>
-                <span className="h-card text-text-primary">Notifiche Email</span>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={emailNotifications}
-                  onChange={() => setEmailNotifications(!emailNotifications)}
-                />
-                <span className="toggle-slider" />
-              </label>
-            </div>
-
-            {/* Anonymous Mode */}
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-slate-400/15 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-slate-400" style={{ fontVariationSettings: "'FILL' 0" }}>
-                    visibility_off
-                  </span>
-                </div>
-                <span className="h-card text-text-primary">Modalita Anonima</span>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={anonymousMode}
-                  onChange={() => setAnonymousMode(!anonymousMode)}
-                />
-                <span className="toggle-slider" />
-              </label>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Info Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col gap-3"
-        >
-          <h2 className="h-section text-text-primary text-lg">
-            Info
-          </h2>
-
-          <div className="bg-surface-soft rounded-[20px] shadow-[0_4px_16px_rgba(42,37,32,0.04)] border border-outline-variant/30 overflow-hidden">
-            <Link
-              to="/about"
-              className="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-brand/15 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-brand" style={{ fontVariationSettings: "'FILL' 0" }}>
-                    info
-                  </span>
-                </div>
-                <div>
-                  <span className="h-card text-text-primary">Info su Florence Student</span>
-                  <p className="text-text-muted t-label text-[10px] mt-0.5">v1.0.0</p>
-                </div>
-              </div>
-              <span className="material-symbols-outlined text-text-muted">chevron_right</span>
-            </Link>
-          </div>
-        </motion.section>
-
-        {/* Logout Button */}
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={() => (window.location.href = '/login')}
-          className="flex items-center justify-center gap-2 py-4 bg-surface-soft text-coral h-card font-medium rounded-full border border-coral/30 hover:bg-coral/5 transition-colors shadow-[0_4px_16px_rgba(229,91,76,0.1)]"
-        >
-          <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>
-            logout
-          </span>
-          Esci dall&apos;account
-        </motion.button>
+        <Link to={catalogLink('/profile/about', planYear)} className="flex items-center justify-between gap-4 p-5 bg-card-base rounded-xl border border-border-card hover:bg-surface-container transition-colors duration-150"><span className="min-w-0 font-semibold text-ink">Info su Florence Student</span><Icon name="chevron_right" size={20} className="text-ink" /></Link>
+        {checking ? <p role="status" className="text-sm text-text">Verifica accesso…</p> : session ? <button onClick={logout} disabled={loggingOut} className="min-h-11 py-4 px-5 bg-card-base text-ink font-semibold rounded-full border border-outline-variant hover:bg-surface-container transition-colors duration-150 disabled:opacity-60">{loggingOut ? 'Uscita in corso…' : 'Esci su questo dispositivo'}</button> : <Link to={catalogLink('/login', planYear)} className="min-h-11 py-4 px-5 bg-ink text-canvas text-center font-semibold rounded-full hover:bg-ink-soft transition-colors duration-150">Accedi / Registrati</Link>}
+        {account.loading && <p role="status" className="text-sm text-text">Caricamento preferenze…</p>}{account.saving && <p role="status" className="text-sm text-text">Salvataggio preferenza…</p>}{(error || account.error) && <div role="alert" className="text-error text-sm"><p>{error || account.error}</p>{account.error && <button type="button" onClick={account.retry} className="mt-3 min-h-11 rounded-full border border-outline-variant px-4 font-semibold text-ink">Riprova caricamento</button>}</div>}
       </div>
     </Layout>
   );

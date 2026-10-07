@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 interface ReviewCardProps {
   id: string;
   author: string;
@@ -12,76 +10,33 @@ interface ReviewCardProps {
   helpfulCount?: number;
   onHelpful?: () => void;
   courseName?: string;
-}
-
-function StarRating({ value, max = 5 }: { value: number; max?: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: max }, (_, i) => (
-        <span
-          key={i}
-          className="material-symbols-outlined text-[14px]"
-          style={{
-            fontVariationSettings: `'FILL' ${i < value ? 1 : 0}`,
-            color: i < value ? '#FFE25C' : '#d8c2bb',
-          }}
-        >
-          star
-        </span>
-      ))}
-    </div>
-  );
+  tip?: string;
+  tipType?: 'success' | 'warning';
+  subjectType?: 'course' | 'professor';
+  chiarezzaScore?: number;
+  disponibilitaScore?: number;
+  equitaScore?: number;
+  isDemo?: boolean;
+  planYear?: string;
 }
 
 export default function ReviewCard({
-  author,
-  authorInitial,
-  date,
-  ratingDifficulty,
-  ratingTeaching,
-  grade,
-  content,
+  id, author, authorInitial, date, ratingDifficulty, ratingTeaching, grade, content, tip,
+  courseName, subjectType = 'course', chiarezzaScore, disponibilitaScore, equitaScore, isDemo, planYear,
 }: ReviewCardProps) {
-  return (
-    <motion.article
-      className="bg-card-base border border-border-card p-4 sm:p-card-padding shadow-card hover:shadow-float transition-all duration-300 rounded-xl -rotate-1"
-    >
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-semibold text-ink text-[16px]">
-            {authorInitial}
-          </div>
-          <div>
-            <div className="font-card-title text-card-title text-ink">{author}</div>
-            <div className="font-caption text-caption text-text-muted">{date}</div>
-          </div>
-        </div>
-        <div className="flex gap-1">
-          <span className="material-symbols-outlined text-pop-yellow text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-          <span className="material-symbols-outlined text-pop-yellow text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-          <span className="material-symbols-outlined text-pop-yellow text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-          <span className="material-symbols-outlined text-pop-yellow text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-          <span className="material-symbols-outlined text-pop-yellow text-sm" style={{ fontVariationSettings: "'FILL' 0" }}>star</span>
-        </div>
-      </div>
-
-      <p className="font-body-main text-body-main text-text leading-relaxed mb-4">
-        &ldquo;{content}&rdquo;
-      </p>
-
-      <div className="flex gap-4">
-        <span className="bg-canvas border border-outline-variant px-2 py-1 rounded text-caption text-text-muted">
-          Chiarezza: {ratingDifficulty}
-        </span>
-        <span className="bg-canvas border border-outline-variant px-2 py-1 rounded text-caption text-text-muted">
-          Didattica: {ratingTeaching}
-        </span>
-        {grade !== undefined && (
-          <span className="bg-canvas border border-outline-variant px-2 py-1 rounded text-caption text-text-muted">
-            Voto: {grade}
-          </span>
-        )}
-      </div>
-    </motion.article>
-  );
+  const scores: Array<[string, number | undefined]> = subjectType === 'professor'
+    ? [['Chiarezza', chiarezzaScore ?? ratingTeaching], ['Disponibilità', disponibilitaScore], ['Equità', equitaScore ?? ratingDifficulty]]
+    : [['Difficoltà', ratingDifficulty], ['Didattica', ratingTeaching], ['Equità dei voti', grade]];
+  return <article className="min-w-0 rounded-xl border border-border-card bg-card-base p-4 shadow-card sm:p-card-padding">
+    <div className="mb-4 flex items-start gap-3">
+      <div aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-container text-base font-semibold text-ink">{authorInitial || 'S'}</div>
+      <div className="min-w-0 flex-1"><p className="break-words text-base font-semibold text-ink">{author || 'Studente'}</p><p className="mt-1 text-xs text-text">{date}</p></div>
+      {(isDemo || id.startsWith('demo-')) && <span className="shrink-0 rounded-full border border-outline-variant px-2 py-1 text-xs text-text">Bozza privata</span>}
+    </div>
+    {courseName && <h2 className="mb-3 break-words text-base font-semibold leading-snug text-ink text-balance">{courseName}</h2>}
+    {planYear && <p className="mb-3 text-xs text-text">Piano {planYear}</p>}
+    <p className="mb-4 whitespace-pre-wrap break-words text-base leading-relaxed text-text text-pretty">{content}</p>
+    {tip && <p className="mb-4 whitespace-pre-wrap break-words text-sm leading-relaxed text-text text-pretty"><strong>Consiglio:</strong> {tip}</p>}
+    <dl className="flex flex-wrap gap-2">{scores.filter(([, score]) => typeof score === 'number' && Number.isFinite(score) && score >= 1 && score <= 5).map(([label, score]) => <div key={label} className="flex gap-1 rounded-md border border-outline-variant bg-canvas px-2 py-1 text-xs text-text"><dt>{label}:</dt><dd className="font-semibold tabular-nums">{score}/5</dd></div>)}</dl>
+  </article>;
 }

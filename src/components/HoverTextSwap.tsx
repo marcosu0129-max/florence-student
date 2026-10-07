@@ -20,7 +20,7 @@ export default function HoverTextSwap({
         className="hts-label--visible"
         style={{
           opacity: hovered ? 0 : 1,
-          transition: 'opacity 360ms cubic-bezier(.6,.05,.2,1)',
+          transition: 'opacity 160ms ease-out',
           lineHeight: 1.15,
           color: '#0A0A0A',
           whiteSpace: 'nowrap',
@@ -33,7 +33,7 @@ export default function HoverTextSwap({
         aria-hidden={true}
         style={{
           opacity: hovered ? 1 : 0,
-          transition: 'opacity 360ms cubic-bezier(.6,.05,.2,1)',
+          transition: 'opacity 160ms ease-out',
           lineHeight: 1.15,
           color: '#8A8A8A',
           whiteSpace: 'nowrap',

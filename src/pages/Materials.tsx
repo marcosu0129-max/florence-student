@@ -1,209 +1,141 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';
+import Icon from '../components/Icon';
+import FilterSelect from '../components/FilterSelect';
 import SearchBar from '../components/SearchBar';
-import { resources } from '../data/mockData';
-
-const RESOURCE_TYPES = [
-  { label: 'Tutti', value: 'all' },
-  { label: 'PDF', value: 'pdf' },
-  { label: 'DOC', value: 'doc' },
-  { label: 'AUDIO', value: 'audio' },
-];
-
-const TYPE_ICONS: Record<string, string> = {
-  pdf: 'picture_as_pdf',
-  doc: 'description',
-  audio: 'audio_file',
-  video: 'video_file',
-  image: 'image',
-};
-
-const TYPE_COLORS: Record<string, { bg: string; icon: string }> = {
-  pdf: { bg: 'bg-amber/20', icon: 'text-amber' },
-  doc: { bg: 'bg-primary/10', icon: 'text-primary' },
-  audio: { bg: 'bg-coral/10', icon: 'text-coral' },
-  video: { bg: 'bg-purple/20', icon: 'text-purple' },
-  image: { bg: 'bg-pink/20', icon: 'text-pink' },
-};
-
-const CATEGORY_LABELS: Record<string, string> = {
-  pdf: 'APPUNTI',
-  doc: 'SLIDE',
-  audio: 'AUDIO',
-  video: 'VIDEO',
-  image: 'IMMAGINE',
-};
+import BottomSheet from '../components/BottomSheet';
+import MaterialUploadForm from '../components/MaterialUploadForm';
+import { CatalogError, PlanYearSelect } from '../components/CatalogNotice';
+import { catalogLink, useCatalog } from '../contexts/CatalogContext';
+import { schoolCatalog } from '../lib/schoolCatalog';
+import { schoolCommunityIdentity } from '../lib/schoolCommunityIdentity';
+import { useSchoolData } from '../lib/useSchoolData';
+import { useAccountSession } from '../lib/useAccountSession';
+import { authPageUrl } from '../lib/authFlow';
+import { createCommunityRequestScope } from '../lib/communityRequestScope';
+import { createProfileRequestScope } from '../lib/profileRequestScope';
+import { mergeMaterialRows } from '../lib/materialPagination';
+import { fetchMaterialPage, type ListingCursor } from '../lib/materialListingApi';
+import { materialCourseChoices } from '../lib/materialCourseChoices';
+import { downloadMaterial, finalizeMaterial, materialSize, materialStatus, withdrawMaterial, type MaterialRecord } from '../lib/materialsApi';
 
 export default function Materials() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeType, setActiveType] = useState('all');
+  const { planYear } = useCatalog();
+  const location = useLocation();
+  const [params, setParams] = useSearchParams();
+  const mine = params.get('mine') === '1';
+  const courseFilter = params.get('course') || '';
+  const query = params.get('q') || '';
+  const type = params.get('type') || '';
+  const { session, checking, sessionError, retrySession } = useAccountSession();
+  const userId = session?.user.id || '';
+  const accountScope = useRef(createProfileRequestScope()).current;
+  const accountVersion = accountScope.update(userId, checking || Boolean(sessionError));
 
-  const filtered = resources.filter((r) => {
-    const matchesSearch =
-      r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      r.uploader.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType =
-      activeType === 'all' || r.type === activeType;
-    return matchesSearch && matchesType;
-  });
+  const { data: catalogue, loading: coursesLoading, error: coursesError, reload: reloadCourses } = useSchoolData('materials-school-search', retry => schoolCatalog.search({ retry }));
+  const courses = useMemo(() => (catalogue?.courses || []).filter(course => course.contexts.some(context => context.cohort_year === Number(planYear.slice(0, 4)))).map(course => ({ id: course.id, name: course.name, officialCode: course.official_code })), [catalogue, planYear]);
+  const courseScopeKey = `${userId}:${mine}:${courseFilter}:${planYear}`;
+  const scopeKey = JSON.stringify([userId, mine, courseFilter, planYear, query.trim(), type]);
+  const requests = useRef(createCommunityRequestScope()).current;
+  const scopeVersion = requests.update(scopeKey, checking || Boolean(sessionError));
+  const mounted = useRef(true);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; requests.dispose(); }; }, [requests]);
+  const acceptsCallback = () => mounted.current && requests.isCurrent(scopeVersion);
+  const [courseSearch, setCourseSearch] = useState({ key: '', query: '' });
+  const courseQuery = courseSearch.key === courseScopeKey ? courseSearch.query : '';
+  const searchCourses = (value: string) => setCourseSearch({ key: courseScopeKey, query: value });
+  const [listing, setListing] = useState<{ key: string; items: MaterialRecord[]; nextCursor: ListingCursor | null }>({ key: '', items: [], nextCursor: null });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [revision, setRevision] = useState(0);
+  const [pagination, setPagination] = useState<{ key: string; cursor: ListingCursor | null }>({ key: '', cursor: null });
+  const cursor = pagination.key === scopeKey ? pagination.cursor : null;
+  const setCursor = (value: ListingCursor | null) => setPagination({ key: scopeKey, cursor: value });
+  const [hasMore, setHasMore] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [action, setAction] = useState('');
 
-  return (
-    <Layout>
-      <div className="min-h-screen flex flex-col gap-6 pb-32 md:pb-12">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <h1 className="h-hero text-3xl text-text-primary">
-            Centro Materiali
-          </h1>
-          <p className="text-text-muted t-label text-xs mt-2">
-            Scarica appunti, esercizi e temi d&apos;esame condivisi dagli studenti.
-          </p>
-        </motion.div>
+  const [withdrawal, setWithdrawal] = useState<MaterialRecord | null>(null);
+  const [actionError, setActionError] = useState('');
+  const [refreshingDraft, setRefreshingDraft] = useState('');
+  const changeParams = (patch: Record<string, string>) => {
+    if (Object.hasOwn(patch, 'course')) searchCourses('');
+    const next = new URLSearchParams(params);
+    for (const [key, value] of Object.entries(patch)) { if (value) next.set(key, value); else next.delete(key); }
+    next.set('year', planYear); setParams(next, { replace: true });
+  };
+  const refresh = () => { requests.invalidateReads(); setCursor(null); setRevision(value => value + 1); };
 
-        {/* Search Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.4 }}
-        >
-          <SearchBar
-            placeholder="Cerca materiali..."
-            value={searchQuery}
-            onChange={setSearchQuery}
-          />
-        </motion.div>
+  useEffect(() => { setAction(''); setRefreshingDraft(''); setUploading(false); }, [scopeVersion]);
+  // Upload completion changes filters; its confirmation belongs to the account, not that view.
+  useEffect(() => { setMessage(''); }, [accountVersion]);
+  useEffect(() => { setCursor(null); setCourseSearch({ key: courseScopeKey, query: '' }); setShowUpload(false); setActionError(''); setWithdrawal(null); }, [userId, mine, courseFilter, planYear]);
+  useEffect(() => {
+    if (checking || !userId || sessionError) return;
+    let active = true; const ticket = requests.beginRead(); const accepts = () => active && requests.acceptsRead(ticket);
+    setLoading(true); setError('');
+    const timer = setTimeout(() => { void (async () => {
+      const cloudId = courseFilter ? (await schoolCommunityIdentity.requireCourse(courseFilter)).identity.communityId : null;
+      return fetchMaterialPage({ courseId: cloudId, mine, query, fileType: type, planYear: mine ? null : planYear }, cursor);
+    })().then(page => {
+      if (!accepts()) return;
+      setListing(current => ({ key: scopeKey, items: mergeMaterialRows(cursor && current.key === scopeKey ? current.items : [], page.items), nextCursor: page.nextCursor }));
+      setHasMore(page.hasMore);
+    }).catch(reason => { if (accepts()) setError(reason instanceof Error ? reason.message : 'Impossibile caricare i materiali.'); })
+      .finally(() => { if (accepts()) setLoading(false); }); }, 250);
+    return () => { active = false; clearTimeout(timer); };
+  }, [checking, userId, sessionError, courseFilter, mine, revision, cursor, scopeKey, scopeVersion]);
+  const materials = listing.key === scopeKey ? listing.items : [];
+  const visible = materials;
+  const courseChoices = useMemo(() => materialCourseChoices(courses, courseQuery, courseFilter, materials[0]?.course_name || 'Corso del collegamento'), [courses, courseQuery, courseFilter, materials[0]?.course_name]);
 
-        {/* Filter Pills */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
-          className="flex gap-2 overflow-x-auto no-scrollbar pb-1"
-        >
-          {RESOURCE_TYPES.map((type) => (
-            <motion.button
-              key={type.value}
-              onClick={() => setActiveType(type.value)}
-              whileTap={{ scale: 0.95 }}
-              className={`
-                px-4 py-2 text-[13px] h-card font-medium rounded-full border transition-all flex-shrink-0
-                ${activeType === type.value
-                  ? 'bg-coral text-white border-coral shadow-[0_2px_8px_rgba(229,91,76,0.3)]'
-                  : 'bg-surface-soft text-text-secondary border-surface-variant hover:border-outline-variant'
-                }
-              `}
-            >
-              {type.label}
-            </motion.button>
-          ))}
-        </motion.div>
+  async function runAction(id: string, work: () => Promise<unknown>, success: string, reload = false) {
+    const ticket = requests.beginOperation(); if (!ticket) return;
+    setAction(id); setActionError(''); setMessage('');
+    try { await work(); if (requests.acceptsOperation(ticket)) { setMessage(success); setWithdrawal(null); if (reload) refresh(); } }
+    catch (reason) { if (requests.acceptsOperation(ticket)) setActionError(reason instanceof Error ? reason.message : 'Operazione non riuscita. Riprova.'); }
+    finally { if (requests.finishOperation(ticket)) { setAction(''); setRefreshingDraft(''); } }
+  }
 
-        {/* Materials Grid */}
-        {filtered.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex flex-col items-center justify-center py-20 gap-4"
-          >
-            <div className="w-20 h-20 rounded-full bg-surface-cream flex items-center justify-center">
-              <span className="material-symbols-outlined text-4xl text-text-muted" style={{ fontVariationSettings: "'FILL' 1" }}>
-                folder_open
-              </span>
-            </div>
-            <div className="text-center">
-              <h3 className="h-card font-semibold text-lg text-text-primary mb-1">
-                Nessun materiale
-              </h3>
-              <p className="text-text-muted t-label text-xs max-w-xs">
-                Prova a cercare con altre parole chiave o contribuisci caricando tu!
-              </p>
-            </div>
-          </motion.div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((resource, index) => {
-              const typeColor = TYPE_COLORS[resource.type] || TYPE_COLORS.pdf;
-              const typeIcon = TYPE_ICONS[resource.type] || TYPE_ICONS.pdf;
-              const categoryLabel = CATEGORY_LABELS[resource.type] || resource.type.toUpperCase();
-
-              return (
-                <motion.article
-                  key={resource.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="bg-surface-soft rounded-[20px] p-5 shadow-[0_4px_16px_rgba(42,37,32,0.04)] hover:shadow-[0_8px_24px_rgba(42,37,32,0.08)] transition-all duration-300"
-                >
-                  {/* Type Icon & Badge */}
-                  <div className="flex justify-between items-start mb-4">
-                    <div className={`w-12 h-12 rounded-full ${typeColor.bg} flex items-center justify-center`}>
-                      <span className={`material-symbols-outlined text-[24px] ${typeColor.icon}`} style={{ fontVariationSettings: "'FILL' 1" }}>
-                        {typeIcon}
-                      </span>
-                    </div>
-                    <span className="text-[10px] h-card font-semibold px-2.5 py-1 rounded-full bg-surface-container text-text-secondary uppercase tracking-wide">
-                      {categoryLabel}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="h-card font-semibold text-[15px] text-text-primary mb-2 line-clamp-2">
-                    {resource.title}
-                  </h3>
-
-                  {/* Description */}
-                  {resource.description && (
-                    <p className="text-[13px] text-text-muted t-label mb-4 line-clamp-2">
-                      {resource.description}
-                    </p>
-                  )}
-
-                  {/* Meta Info */}
-                  <div className="flex items-center gap-4 text-[12px] text-text-muted t-label mb-4 pt-3 border-t border-surface-variant">
-                    <span className="flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[14px]">person</span>
-                      {resource.uploader}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[14px]">download</span>
-                      {resource.downloads}
-                    </span>
-                  </div>
-
-                  {/* Download Button */}
-                  <motion.button
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-coral text-white h-card font-medium text-[14px] rounded-[20px] hover:bg-danger transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-[16px]">download</span>
-                    Scarica
-                  </motion.button>
-                </motion.article>
-              );
-            })}
-          </div>
-        )}
-
-        {/* FAB */}
-        <motion.button
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.5, type: 'spring', stiffness: 300 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="fixed bottom-24 md:bottom-8 right-4 w-14 h-14 bg-coral text-white rounded-full shadow-[0_4px_16px_rgba(229,91,76,0.4)] flex items-center justify-center hover:bg-danger transition-colors z-40"
-          aria-label="Carica materiale"
-        >
-          <span className="material-symbols-outlined text-3xl">add</span>
-        </motion.button>
+  return <Layout showBack catalogNotice={false} backTo="/profile"><div className="flex flex-col gap-6">
+    <header><h1 className="text-3xl font-semibold text-ink text-balance sm:text-4xl lg:text-6xl">Centro materiali</h1><p className="mt-4 max-w-2xl text-sm leading-relaxed text-text text-pretty">Appunti e materiali condivisi dagli studenti, verificati prima della pubblicazione. I file sono disponibili agli utenti connessi.</p></header>
+    {checking ? <p role="status" className="py-8 text-sm text-text">Verifica dell’accesso…</p> : sessionError ? <CatalogError message={sessionError} retry={retrySession} /> : !session ? <section className="rounded-2xl border border-outline-variant bg-card-base p-6"><h2 className="text-xl font-semibold text-balance">Accedi per consultare e condividere i materiali</h2><p className="mt-3 text-sm leading-relaxed text-text">Il catalogo dei corsi e le fonti ufficiali sono consultabili anche senza account.</p><div className="mt-6 flex flex-wrap gap-3"><Link className="inline-flex min-h-11 items-center rounded-full bg-ink px-5 py-3 text-sm font-semibold text-canvas" to={authPageUrl('/login', location.pathname + location.search, planYear)}>Accedi</Link><Link className="inline-flex min-h-11 items-center px-3 text-sm underline underline-offset-4" to={catalogLink('/courses', planYear)}>Esplora i corsi</Link></div></section> : <>
+      <fieldset disabled={uploading}><PlanYearSelect /></fieldset>
+      <div className="flex flex-wrap items-center justify-between gap-3"><div className="flex flex-wrap gap-2"><button type="button" aria-pressed={!mine} disabled={uploading} onClick={() => changeParams({ mine: '' })} className={`min-h-11 rounded-full border px-4 py-2 text-sm font-semibold ${!mine ? 'border-ink bg-ink text-canvas' : 'border-outline-variant'}`}>Pubblicati</button><button type="button" aria-pressed={mine} disabled={uploading} onClick={() => changeParams({ mine: '1' })} className={`min-h-11 rounded-full border px-4 py-2 text-sm font-semibold ${mine ? 'border-ink bg-ink text-canvas' : 'border-outline-variant'}`}>I miei materiali</button></div><button type="button" onClick={() => { setMessage(''); setShowUpload(value => !value); }} disabled={uploading || coursesLoading || Boolean(coursesError)} aria-expanded={showUpload} className="min-h-11 rounded-full border border-outline-variant px-5 py-3 text-sm font-semibold disabled:opacity-60">{showUpload ? 'Chiudi modulo' : 'Condividi materiale'}</button></div>
+      {coursesError && <CatalogError message={coursesError} retry={reloadCourses} />}
+      {showUpload && <MaterialUploadForm key={`${scopeVersion}:${userId}:${planYear}`} courses={courses} userId={userId} planYear={planYear} initialCourse={courseFilter} onBusyChange={value => { if (acceptsCallback()) setUploading(value); }} onClose={() => { if (acceptsCallback()) setShowUpload(false); }} onComplete={() => { if (!acceptsCallback()) return; setShowUpload(false); setMessage('Materiale caricato e inviato alla moderazione. Lo trovi nei tuoi materiali.'); changeParams({ mine: '1', course: '', q: '', type: '' }); refresh(); }} onDraft={() => { if (!acceptsCallback()) return; setMessage('Caricamento non confermato. Controlla i tuoi materiali prima di inviare di nuovo: puoi confermare un file già caricato oppure ritirare una bozza. Se l’elenco è vuoto dopo averlo aggiornato, riprova il caricamento.'); changeParams({ mine: '1', course: '', q: '', type: '' }); refresh(); }} />}
+      {message && <p role="status" className="rounded-xl border border-outline-variant bg-canvas-soft p-4 text-sm text-text">{message}</p>}
+      {actionError && !withdrawal && <p role="alert" className="rounded-xl border border-error/30 p-4 text-sm text-error">{actionError}</p>}
+      <fieldset disabled={uploading} className="space-y-4"><SearchBar placeholder="Cerca titolo, corso o autore…" value={query} onChange={value => changeParams({ q: value.slice(0, 200) })} onSubmit={value => changeParams({ q: value.slice(0, 200) })} />
+      <p className="text-xs leading-relaxed text-text">La ricerca considera tutti i materiali della selezione, anche quelli non ancora caricati. Massimo 200 caratteri.</p>
+      <div className="grid items-start gap-4 md:grid-cols-2">
+        <div className="min-w-0 space-y-3">
+          <label htmlFor="material-filter-course-search" className="block text-sm font-semibold">Cerca un corso nella scuola</label>
+          <input id="material-filter-course-search" type="search" value={courseQuery} onChange={event => searchCourses(event.target.value)} disabled={coursesLoading || Boolean(coursesError)} aria-describedby="material-filter-course-help material-filter-course-results" placeholder="Nome o codice dell’insegnamento" className="w-full min-w-0 rounded-xl border border-outline-variant bg-canvas px-4 py-3 text-base text-ink disabled:opacity-60" />
+          <p id="material-filter-course-help" className="text-xs leading-relaxed text-text">Cerca e scegli un corso per filtrare i materiali.</p>
+          <FilterSelect label="Corso" value={courseFilter} disabled={uploading || coursesLoading} onValueChange={value => changeParams({ course: value })} options={courseChoices.options} />
+          <p id="material-filter-course-results" role="status" className="text-xs leading-relaxed text-text tabular-nums">{coursesLoading ? 'Caricamento dei corsi…' : coursesError ? 'Elenco corsi non disponibile. Riprova il caricamento sopra.' : <>{courseChoices.matchCount === 0 ? 'Nessun corso trovato.' : courseChoices.shownMatchCount < courseChoices.matchCount ? `Mostrati ${courseChoices.shownMatchCount} di ${courseChoices.matchCount} corsi. Scrivi un nome o codice più preciso.` : `${courseChoices.matchCount} ${courseChoices.matchCount === 1 ? 'corso trovato' : 'corsi trovati'}.`}{courseChoices.selectionOutsideMatches && ' Il corso selezionato resta disponibile nell’elenco.'}</>}</p>
+          {courseQuery && <button type="button" onClick={() => searchCourses('')} className="min-h-11 text-sm underline underline-offset-4">Azzera ricerca corsi</button>}
+        </div>
+        <FilterSelect label="Formato" value={type} onValueChange={value => changeParams({ type: value })} options={[{ value: '', label: 'Tutti i formati' }, { value: 'pdf', label: 'PDF' }, { value: 'doc', label: 'Documenti e slide' }, { value: 'image', label: 'Immagini' }, { value: 'audio', label: 'Audio' }]} />
+      </div></fieldset>
+      {mine && <p className="text-sm text-text">I tuoi caricamenti di tutti i piani, compresi quelli in attesa di approvazione. Puoi completare o ritirare una bozza.</p>}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p role="status" className="text-sm text-text tabular-nums">{loading ? visible.length ? 'Aggiornamento materiali… I risultati precedenti restano visibili.' : 'Caricamento materiali…' : `${visible.length} ${visible.length === 1 ? 'materiale caricato' : 'materiali caricati'}${hasMore && listing.key === scopeKey ? ' · altri disponibili' : ''}`}</p>
+        <button type="button" disabled={loading || uploading || Boolean(action)} onClick={() => { setMessage(''); setActionError(''); refresh(); }} className="min-h-11 rounded-full border border-outline-variant px-5 py-2 text-sm font-semibold disabled:opacity-60">Aggiorna elenco</button>
       </div>
-    </Layout>
-  );
+      {error && <CatalogError message={error} retry={refresh} />}
+      {loading && !visible.length ? null : !visible.length ? <section className="rounded-2xl border border-outline-variant p-6 text-center"><Icon name="folder_open" size={28} className="mx-auto" /><h2 className="mt-4 text-xl font-semibold text-balance">{error ? 'Materiali non disponibili' : 'Nessun materiale da mostrare'}</h2><p className="mt-3 text-sm leading-relaxed text-text">{error ? 'Riprova il caricamento per verificare i tuoi materiali.' : mine ? 'I file che condividi compariranno qui con il loro stato.' : 'Non sono presenti materiali pubblicati per questa selezione.'}</p>{(query || type || courseFilter) && <button type="button" onClick={() => changeParams({ q: '', type: '', course: '' })} className="mt-5 min-h-11 rounded-full border border-outline-variant px-5 py-2 text-sm font-semibold">Azzera filtri</button>}</section> : <ul aria-busy={loading} className="grid gap-4 md:grid-cols-2">{visible.map(item => <li key={item.id} className="flex min-w-0 flex-col rounded-2xl border border-border-card bg-card-base p-5">
+        <div className="flex flex-wrap items-center gap-2 text-xs text-text"><span className="rounded-full border border-outline-variant px-3 py-1 uppercase">{item.file_type}</span><span className="tabular-nums">{materialSize(item.file_size)}</span>{mine && <span className="rounded-full bg-canvas px-3 py-1 font-medium">{materialStatus(item.status)}</span>}</div>
+        <h2 className="mt-4 break-words text-lg font-semibold text-balance">{item.title}</h2><Link to={catalogLink(`/courses/${item.course_id}`, item.plan_year || planYear)} className="mt-2 self-start text-sm text-text underline underline-offset-4">{item.course_name}</Link>{item.description && <p className="mt-3 whitespace-pre-line break-words text-sm leading-relaxed text-text">{item.description}</p>}
+        <p className="mt-4 text-xs leading-relaxed text-text">{item.uploader} · {new Date(item.created_at).toLocaleDateString('it-IT')}{item.plan_year ? ` · Piano ${item.plan_year}` : ''}</p>{item.moderation_note && <p className="mt-3 rounded-xl bg-canvas p-3 text-sm leading-relaxed text-text">Nota della moderazione: {item.moderation_note}</p>}
+        <div className="mt-5 flex flex-wrap gap-2">{item.storage_path && !['withdrawn', 'draft', 'legacy'].includes(item.status) && <button type="button" disabled={Boolean(action)} onClick={() => void runAction(item.id, () => downloadMaterial(item, userId), 'Il file è stato preparato per il download.')} className="min-h-11 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-canvas disabled:opacity-60">{action === item.id && refreshingDraft !== item.id ? 'Attendi…' : 'Scarica'}</button>}{mine && item.status === 'draft' && <button type="button" disabled={Boolean(action)} onClick={() => { setRefreshingDraft(item.id); void runAction(item.id, () => finalizeMaterial(item.id, userId), 'Caricamento confermato e inviato alla moderazione.', true); }} className="min-h-11 rounded-full border border-outline-variant px-4 py-2 text-sm font-semibold disabled:opacity-60">Conferma caricamento</button>}{mine && item.status !== 'withdrawn' && <button type="button" disabled={Boolean(action)} onClick={() => { setActionError(''); setWithdrawal(item); }} className="min-h-11 rounded-full border border-outline-variant px-4 py-2 text-sm font-semibold disabled:opacity-60">Ritira</button>}</div>
+      </li>)}</ul>}
+      {listing.key === scopeKey && hasMore && <button type="button" onClick={() => { setCursor(listing.nextCursor); setRevision(value => value + 1); }} disabled={loading} className="min-h-11 self-center rounded-full border border-outline-variant px-5 py-3 text-sm font-semibold disabled:opacity-60">{loading ? 'Caricamento…' : error ? 'Riprova caricamento' : 'Carica altri materiali'}</button>}
+    </>}
+    <BottomSheet open={Boolean(withdrawal)} onClose={() => { if (!action) setWithdrawal(null); }} role="alertdialog" title="Ritirare il materiale?" description="Il materiale non sarà più disponibile agli altri studenti. Il caricamento resterà nel tuo elenco con lo stato Ritirato.">{withdrawal && <><p className="mb-4 break-words text-sm font-semibold">{withdrawal.title}</p>{actionError && <p role="alert" className="mb-4 text-sm text-error">{actionError}</p>}<div className="flex flex-wrap gap-3"><button type="button" disabled={Boolean(action)} onClick={() => setWithdrawal(null)} className="min-h-11 rounded-full border border-outline-variant px-5 py-3 text-sm font-semibold disabled:opacity-60">Annulla</button><button type="button" disabled={Boolean(action)} onClick={() => void runAction(withdrawal.id, () => withdrawMaterial(withdrawal.id, userId), 'Materiale ritirato. Non è più disponibile agli altri studenti.', true)} className="min-h-11 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-canvas disabled:opacity-60">{action ? 'Ritiro…' : 'Ritira materiale'}</button></div></>}</BottomSheet>
+  </div></Layout>;
 }

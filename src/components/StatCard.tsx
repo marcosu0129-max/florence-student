@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Icon from './Icon';
 
 interface StatCardProps {
   icon: string;
@@ -59,9 +60,7 @@ export default function StatCard({
         ${href ? 'cursor-pointer' : ''}
       `}>
       <div className={`w-14 h-14 rounded-full ${colors.bg} flex items-center justify-center mb-1`}>
-        <span className={`material-symbols-outlined text-[28px] ${colors.icon}`} style={{ fontVariationSettings: "'FILL' 1" }}>
-          {icon}
-        </span>
+        <Icon name={icon} size={28} filled className={colors.icon} />
       </div>
       <span className={`font-bold text-[36px] leading-none ${colors.value} t-stat`}>
         {value}

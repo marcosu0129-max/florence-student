@@ -144,7 +144,7 @@
   --text-h2-section: 32px;
   --text-card-title: 18px;
   --text-handwritten-note: 20px;
-  --text-h1-editorial: 32px;
+  --text-h1-editorial: 64px;
   --text-caption: 12px;
   --text-hero-display-mobile: 56px;
   --text-body-main: 15px;
@@ -158,7 +158,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -198,7 +198,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Editorial hero — desktop giant */
 .font-h1-editorial {
   font-family: var(--font-h1-editorial);
-  font-size: var(--text-h1-editorial);
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.0;
@@ -224,7 +223,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Section heading */
 .font-h2-section {
   font-family: var(--font-h2-section);
-  font-size: var(--text-h2-section);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.1;
@@ -316,18 +314,11 @@ h1, h2, h3, h4, h5, h6 {
 .rotate-object { transform: rotate(-12deg); }
 .-rotate-object { transform: rotate(12deg); }
 
-/* ==============================
-   MATERIAL SYMBOLS
-   ============================== */
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  line-height: 1;
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.material-symbols-outlined.filled {
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+/* Icons are local SVGs with explicit dimensions; text fonts cannot resize them. */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 /* ==============================
@@ -371,7 +362,19 @@ h1, h2, h3, h4, h5, h6 {
 /* ==============================
    FOCUS
    ============================== */
-/* Global focus-visible styles removed to prevent unwanted outlines on components */
+/* Keep keyboard focus visible while preserving pointer interactions. */
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* ==============================
    LINE CLAMP
@@ -396,3 +399,15 @@ h1, h2, h3, h4, h5, h6 {
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* Short, content-only feedback keeps fixed navigation stable. */
+@keyframes sheet-enter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.page-content { min-width: 0; }
+#main-content:focus { outline: none; }
+.bottom-sheet[open] { animation: sheet-enter 180ms ease-out; }
+.bottom-sheet::backdrop { background: rgb(0 0 0 / 40%); }
+.course-card { transition: border-color 160ms ease-out; }
+@media (hover: hover) { .course-card:hover { border-color: var(--color-outline-variant); } }
+button:enabled { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+input, textarea, select { scroll-margin-block: 80px; }

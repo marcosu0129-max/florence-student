@@ -1,98 +1,44 @@
+import Icon from '../components/Icon';
+import { catalogLink, useCatalog } from '../contexts/CatalogContext';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
-
-function getOAuthError(): string {
-  const searchParams = new URLSearchParams(window.location.search);
-  const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
-  return (
-    searchParams.get('error_description') ||
-    searchParams.get('error') ||
-    hashParams.get('error_description') ||
-    hashParams.get('error') ||
-    ''
-  );
-}
+import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { authErrorMessage, authPageUrl, authRequest, cleanAuthCallbackPath, completeAuthCallback, parseAuthCallback, recordPasswordRecovery, safeAuthReturnTo } from '../lib/authFlow';
 
 export default function AuthCallback() {
   const navigate = useNavigate();
-  const [status, setStatus] = useState<'checking' | 'error'>('checking');
-  const [errorMsg, setErrorMsg] = useState('');
-  const providerError = useMemo(() => getOAuthError(), []);
+  const { planYear } = useCatalog();
+  const [error, setError] = useState('');
+  const initialUrl = useMemo(() => new URL(window.location.href), []);
+  const details = useMemo(() => parseAuthCallback(initialUrl), [initialUrl]);
+  const returnTo = safeAuthReturnTo(initialUrl.searchParams.get('next'), catalogLink('/profile', planYear));
 
   useEffect(() => {
-    if (providerError) {
-      setErrorMsg(providerError);
-      setStatus('error');
-      return;
-    }
-
-    let isMounted = true;
-    const timeoutId = window.setTimeout(() => {
-      if (!isMounted) return;
-      setErrorMsg('Accesso non completato. Riprova o controlla le impostazioni Google/Supabase.');
-      setStatus('error');
-    }, 9000);
-
-    supabase.auth.getSession().then(({ data, error: sessionError }) => {
-      if (!isMounted) return;
-
-      if (sessionError) {
-        window.clearTimeout(timeoutId);
-        setErrorMsg(sessionError.message);
-        setStatus('error');
-        return;
-      }
-
-      if (data.session) {
-        window.clearTimeout(timeoutId);
-        navigate('/profile', { replace: true });
-      }
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!isMounted || !session) return;
-      window.clearTimeout(timeoutId);
-      navigate('/profile', { replace: true });
-    });
-
-    return () => {
-      isMounted = false;
-      window.clearTimeout(timeoutId);
-      subscription.unsubscribe();
-    };
-  }, [navigate, providerError]);
+    // Remove one-use credentials before rendering links or making further requests.
+    window.history.replaceState(window.history.state, '', cleanAuthCallbackPath(initialUrl));
+    if (!isSupabaseConfigured) { setError('Il servizio account non è configurato. Puoi continuare a consultare i corsi.'); return; }
+    if (details.kind === 'error') { setError('Il collegamento non è valido, è scaduto oppure l’accesso è stato annullato. Richiedi una nuova email o riprova ad accedere.'); return; }
+    if (details.kind === 'legacy') { setError('Questo collegamento usa un formato precedente. Richiedi un nuovo link di conferma o recupero da questo browser.'); return; }
+    if (details.kind === 'missing') { setError('Nessun collegamento da verificare. Un accesso già attivo non conferma una nuova email o una richiesta di recupero.'); return; }
+    let active = true;
+    authRequest(completeAuthCallback(supabase.auth, details)).then(({ session, recovery }) => {
+      if (!active) return;
+      if (recovery) recordPasswordRecovery(session);
+      navigate(recovery ? authPageUrl('/reset-password', returnTo, planYear) : returnTo, { replace: true });
+    }).catch(requestError => { if (active) setError(authErrorMessage(requestError)); });
+    return () => { active = false; };
+  }, [details, initialUrl, navigate, planYear, returnTo]);
 
   return (
-    <div className="min-h-screen bg-surface-main flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-surface-soft rounded-[28px] p-8 shadow-lg text-center">
-        {status === 'checking' ? (
-          <>
-            <div className="w-12 h-12 rounded-full border-4 border-surface-variant border-t-coral animate-spin mx-auto mb-4" />
-            <h1 className="h-hero text-3xl text-text-primary mb-3">Accesso in corso</h1>
-            <p className="t-body text-body-main text-text-muted">
-              Stiamo completando il login con Google e preparando il tuo profilo.
-            </p>
-          </>
-        ) : (
-          <>
-            <div className="w-12 h-12 rounded-full bg-error-container flex items-center justify-center mx-auto mb-4">
-              <span className="material-symbols-outlined text-[48px] text-danger">error</span>
-            </div>
-            <h1 className="h-hero text-3xl text-text-primary mb-3">Login non completato</h1>
-            <div className="bg-error-container rounded-xl p-3 mb-5 text-left">
-              <p className="t-body text-body-main text-on-error-container">{errorMsg}</p>
-            </div>
-            <Link
-              to="/login"
-              className="inline-flex items-center gap-2 bg-coral text-white h-card font-semibold px-6 py-3 rounded-full hover:bg-danger transition-colors"
-            >
-              <span className="material-symbols-outlined text-xl">arrow_back</span>
-              Torna al login
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
+    <main className="min-h-dvh bg-canvas flex items-center justify-center p-4">
+      <section className="w-full max-w-md bg-card-base rounded-xl p-6 sm:p-8 shadow-card text-center" aria-busy={!error}>
+        <div className="mb-4 flex justify-center"><Icon name={error ? 'error_outline' : 'lock'} size={32} className="text-ink" /></div>
+        <h1 className="font-h1-editorial text-3xl text-ink mb-4 text-balance">{error ? 'Accesso non completato' : 'Verifica in corso'}</h1>
+        {error ? <p role="alert" className="text-sm text-text leading-relaxed mb-6">{error}</p> : <p role="status" className="text-sm text-text leading-relaxed mb-6">Stiamo verificando il collegamento al tuo account…</p>}
+        <Link to={authPageUrl('/login', returnTo, planYear)} replace className="inline-flex min-h-11 items-center justify-center bg-ink text-canvas font-semibold px-6 py-3 rounded-full hover:bg-ink-soft transition-colors duration-150">{error ? 'Torna all’accesso' : 'Annulla e torna all’accesso'}</Link>
+        {error && <div className="mt-3 flex flex-col"><Link to={authPageUrl('/login', returnTo, planYear, 'recover')} replace className="inline-flex min-h-11 items-center justify-center text-sm text-text underline underline-offset-4">Richiedi un nuovo link di recupero</Link><Link to={authPageUrl('/login', returnTo, planYear, 'verify')} replace className="inline-flex min-h-11 items-center justify-center text-sm text-text underline underline-offset-4">Reinvia email di conferma</Link></div>}
+        <Link to={catalogLink('/', planYear)} className="flex min-h-11 items-center justify-center mt-3 text-sm text-text underline underline-offset-4">Continua senza account</Link>
+      </section>
+    </main>
   );
 }

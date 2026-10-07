@@ -4,13 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
+    "dev": "vite --port=3000 --host=127.0.0.1",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test:catalog": "node --import tsx --test tests/catalog-service.test.ts",
+    "catalog:scrape": "python3 scripts/catalog/scrape_lm92.py",
+    "catalog:validate": "python3 scripts/catalog/validate_catalog.py",
+    "catalog:import": "node scripts/catalog/import-catalog.mjs",
+    "test": "node --import tsx --test tests/*.test.ts"
   },
   "dependencies": {
+    "@base-ui/react": "1.8.0",
     "@google/genai": "^1.29.0",
     "@supabase/supabase-js": "^2.105.4",
     "@tailwindcss/vite": "^4.1.14",
@@ -30,6 +37,8 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.21",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",

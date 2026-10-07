@@ -1,3 +1,5 @@
+import Icon from './Icon';
+
 interface StarRatingDisplayProps {
   value: number;
   max?: number;
@@ -12,25 +14,22 @@ export default function StarRatingDisplay({
   showValue = false,
 }: StarRatingDisplayProps) {
   const sizeMap = {
-    sm: 'text-[14px]',
-    md: 'text-[18px]',
-    lg: 'text-[24px]',
+    sm: 14,
+    md: 18,
+    lg: 24,
   };
 
   return (
     <div className="flex items-center gap-1">
-      <div className={`flex gap-0.5 ${sizeMap[size]}`}>
+      <div className="flex gap-0.5">
         {Array.from({ length: max }, (_, i) => (
-          <span
+          <Icon
             key={i}
-            className="material-symbols-outlined"
-            style={{
-              fontVariationSettings: `'FILL' ${i < Math.round(value) ? 1 : 0}`,
-              color: i < Math.round(value) ? '#FFE25C' : '#d8c2bb',
-            }}
-          >
-            star
-          </span>
+            name="star"
+            size={sizeMap[size]}
+            filled={i < Math.round(value)}
+            className={i < Math.round(value) ? 'text-[#FFE25C]' : 'text-[#d8c2bb]'}
+          />
         ))}
       </div>
       {showValue && (
