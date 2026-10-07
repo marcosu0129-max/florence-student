@@ -41,7 +41,7 @@ export default function Home() {
       <p className="max-w-xl text-sm sm:text-base text-text text-pretty">Corsi di laurea della Scuola di Studi Umanistici e della Formazione. Esplora i piani di studi, gli insegnamenti e i docenti.</p>
       <div className="w-full max-w-xl mt-2">
         <label htmlFor="program-search" className="sr-only">Cerca un corso di laurea, codice o classe</label>
-        <div className="flex items-center gap-3 rounded-full border border-outline-variant bg-canvas px-4 sm:px-5 focus-within:ring-2 focus-within:ring-ink focus-within:ring-offset-2">
+        <div className="program-search-field flex items-center gap-3 rounded-full border border-outline-variant bg-canvas px-4 sm:px-5">
           <Icon name="search" size={20} className="text-text" />
           <input id="program-search" type="search" value={query} onChange={event => change('q', event.target.value)} placeholder="Cerca un corso di laurea…" className="min-w-0 flex-1 bg-transparent py-4 text-base text-ink outline-none" />
         </div>
